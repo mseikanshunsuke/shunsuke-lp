@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHUNSUKE｜東京M性感 正規キャスト｜守秘義務・顔出しNG・開発特化</title>
-  <meta name="description" content="東京M性感・正規キャスト SHUNSUKEの公式ページ。業界歴4年・1,500件以上の実績。守秘義務厳守、完全顔出しNG。経営者・夜職の方・初めての方も安心してご利用いただけます。東京都内出張対応。">
+  <meta name="description" content="東京M性感・正規キャスト SHUNSUKEの公式ページ。業界歴4年・1,500件以上の実績。守秘義務厳守、完全顔出しNG。経営者・夜職の方・初めての方も安心してご利用いただけます。東京を拠点に活動中。">
   <meta name="keywords" content="SHUNSUKE,シュンスケ,東京M性感,女性用風俗,女風,M性感,東京,守秘義務,顔出しなし,開発,正規キャスト">
   <link rel="canonical" href="https://tokyo-m-seikan.com/honten/therapist/48/">
 
@@ -704,7 +704,8 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-right { display: none; }
+      .hero-right { display: flex; justify-content: center; }
+      .hero-photo-wrap { max-width: 280px; }
       .reasons-grid { grid-template-columns: 1fr; }
       .reason-item { border-right: none; border-bottom: 1px solid var(--border); }
       .reason-item:last-child { border-bottom: none; }
@@ -715,6 +716,91 @@
       nav .nav-links { display: none; }
       .btn-secondary { margin-left: 0; margin-top: 0.8rem; }
       footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+
+    /* ─── GUIDE ─── */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .guide-step {
+      padding: 2rem 1.8rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .guide-step:nth-child(3n) { border-right: none; }
+    .guide-step:nth-last-child(-n+3) { border-bottom: none; }
+    .guide-step-num {
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .guide-step-title {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--offwhite);
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    .guide-step-body {
+      font-size: 0.8rem;
+      color: rgba(240,237,230,0.6);
+      line-height: 1.9;
+    }
+    @media (max-width: 768px) {
+      .guide-grid { grid-template-columns: 1fr; }
+      .guide-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .guide-step:last-child { border-bottom: none; }
+    }
+
+    /* ─── HERO PHOTO ─── */
+    .hero-photo-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      margin-left: auto;
+    }
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .hero-photo-stats {
+      display: flex;
+      border: 1px solid var(--border);
+      border-top: none;
+      background: rgba(10,15,30,0.95);
+    }
+    .hero-photo-stat {
+      flex: 1;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .hero-photo-stat:last-child { border-right: none; }
+    .hero-photo-num {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      font-feature-settings: "tnum";
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-photo-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--grey-light);
     }
 
     /* ─── DM MODAL ─── */
@@ -795,6 +881,7 @@
     <ul class="nav-links">
       <li><a href="#reasons">選ばれる理由</a></li>
       <li><a href="#for-you">こんな方へ</a></li>
+      <li><a href="#guide">はじめてガイド</a></li>
       <li><a href="#faq">よくある質問</a></li>
       <li><a href="#reviews">お客様の声</a></li>
       <li><a href="#contact">ご予約</a></li>
@@ -829,25 +916,13 @@
         </div>
       </div>
       <div class="hero-right">
-        <div class="stat-card">
-          <div class="stat-number">1,500<span style="font-size:1.2rem; color:var(--gold);">+</span></div>
-          <div class="stat-label">TOTAL SESSIONS</div>
-          <div class="stat-note">これまでの性感プレイ総数</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">274</div>
-          <div class="stat-label">REVIEWS</div>
-          <div class="stat-note">お客様口コミ件数（全て★5）</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">#15</div>
-          <div class="stat-label">NATIONAL RANKING 2024</div>
-          <div class="stat-note">全国1,500人中・同グループ内1位</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">4<span style="font-size:1.2rem; color:var(--grey-light);">年目</span></div>
-          <div class="stat-label">EXPERIENCE</div>
-          <div class="stat-note">入店2023年4月 · 月間最高26本指名</div>
+        <div class="hero-photo-wrap">
+          <img src="shunsuke_profile.png" alt="SHUNSUKE 東京M性感 正規キャスト" class="hero-photo">
+          <div class="hero-photo-stats">
+            <div class="hero-photo-stat"><span class="hero-photo-num">1,500+</span><span class="hero-photo-label">実績件数</span></div>
+            <div class="hero-photo-stat"><span class="hero-photo-num">274</span><span class="hero-photo-label">口コミ★5</span></div>
+            <div class="hero-photo-stat"><span class="hero-photo-num">#15</span><span class="hero-photo-label">全国2024</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -902,22 +977,22 @@
       </p>
       <div class="targets-grid">
         <div class="target-card">
-          <span class="target-icon">💼</span>
-          <div class="target-type">For Business Owners</div>
-          <div class="target-title">経営者・士業の方</div>
+          <span class="target-icon">✨</span>
+          <div class="target-type">For Those Who Want The Real Thing</div>
+          <div class="target-title">プロのプレイを体感したい方</div>
           <div class="target-body">
-            「誰かに知られることが怖い」——その懸念に向き合います。守秘義務の徹底、完全顔出しNG、予約の取り扱いに至るまで、情報管理を最優先にしています。自分も事業経営者だからこそわかる、その緊張感を理解した上でお会いします。
+            業界4年・1,500件以上の経験から磨かれた技術は、「なんとなく気持ちいい」ではなく「これがプロか」と感じさせるものを目指しています。初めての方でも、経験豊富な方でも、必ず新しい感覚をお届けします。
           </div>
-          <div class="target-quote">「安心して選べるかどうか」が、一番大事だと思っています。</div>
+          <div class="target-quote">一度体感すると、基準が変わります。</div>
         </div>
         <div class="target-card">
-          <span class="target-icon">🌙</span>
-          <div class="target-type">For Night Workers</div>
-          <div class="target-title">夜職・水商売の方</div>
+          <span class="target-icon">🌸</span>
+          <div class="target-type">For Those Who Want To Feel Complete</div>
+          <div class="target-title">満たされたい方</div>
           <div class="target-body">
-            普段「与える側」でいることが多い方に、完全に「受け取る側」になれる時間を。非日常の中で、日頃の緊張をほぐし、深いリラクゼーションと快楽を体験してください。
+            セックスレス、イケない、非日常を味わいたい——そんな「何か足りない」という感覚に、正面から向き合います。快楽だけでなく、心ごと満たされる時間をつくります。
           </div>
-          <div class="target-quote">お客様側の気持ちを、改めて感じてみてください。</div>
+          <div class="target-quote">足りなかったものが、ここにあります。</div>
         </div>
         <div class="target-card">
           <span class="target-icon">🌿</span>
@@ -932,6 +1007,50 @@
     </div>
   </section>
 
+  <!-- SECTION 3.5: 女風初めてガイド -->
+  <section id="guide" style="background: var(--black);">
+    <div class="section-inner">
+      <span class="section-label">Beginner's Guide</span>
+      <h2>女風、<em>はじめてガイド</em></h2>
+      <p class="section-lead">「興味はあるけど、よくわからない」という方へ。基本的な流れと疑問をまとめました。</p>
+      <div class="guide-grid">
+        <div class="guide-step">
+          <div class="guide-step-num">01</div>
+          <div class="guide-step-title">女性用風俗（女風）とは？</div>
+          <div class="guide-step-body">女性が性的なサービスを受けられる風俗の総称です。男性キャストが女性のお客様に施術を行います。マッサージ・性感帯開発・SM系プレイなどコースはお店によってさまざま。シュンスケが在籍するのは「技術特化店」で、技術の高いキャストが多く、そのレベル基準別にランク分けもされています。</div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">02</div>
+          <div class="guide-step-title">予約から当日までの流れ</div>
+          <div class="guide-step-body">① X（Twitter）またはInstagramのDMでご連絡 → ② 希望日時・コース・場所（ホテルなど）を相談 → ③ 予約確定の連絡 → ④ 当日、指定場所でお待ちいただく → ⑤ キャストが訪問しプレイ開始。カウンセリングで不安・NGをしっかり確認します。</div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">03</div>
+          <div class="guide-step-title">何を伝えればいい？</div>
+          <div class="guide-step-body">「初めてです」の一言だけでOKです。希望のプレイ、NGなこと、不安なことを教えていただければ、それに合わせてプランを組みます。何も決めていなくても、カウンセリングで相談しながら一緒に決められます。</div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">04</div>
+          <div class="guide-step-title">バレる心配はない？</div>
+          <div class="guide-step-body">お客様の個人情報は第三者に一切漏洩しません。支払いは現金のみのお店がほとんどで、クレジットカードの明細に残りません。ホテルでの施術のため、生活圏外のエリアを指定してキャストを呼ぶことができます。</div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">05</div>
+          <div class="guide-step-title">料金の目安は？</div>
+          <div class="guide-step-body">一般的に2〜3時間で3万円〜が相場です。好みによって様々なオプションを付けることもできます。詳しい料金はDMまたはお店の公式サイトでご確認ください。</div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">06</div>
+          <div class="guide-step-title">怖くない？痛くない？</div>
+          <div class="guide-step-body">プレイ前に必ずNGと希望を確認します。嫌なことは断れますし、途中でのストップも自由です。シュンスケは毎回お客様のM度・ペースを丁寧に確認しながら進めるスタイルです。「怖い」という気持ちごと、まずはDMで話してみてください。</div>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:3rem;">
+        <a href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" class="btn-primary">まずはDMで相談する</a>
+      </p>
+    </div>
+  </section>
+
   <!-- SECTION 4: FAQ / AEO -->
   <section id="faq">
     <div class="section-inner spine-section">
@@ -941,11 +1060,11 @@
       <div class="faq-list">
         <div class="faq-item">
           <div class="faq-q">顔写真がないのですが、安心して利用できますか？</div>
-          <div class="faq-a">はい。完全兼業のため顔出しNGで活動していますが、274件を超えるお客様口コミ（全て★5）と、業界歴4年・1,500件以上の実績が「安心の証明」です。顔よりも「対応力」「完成度」「守秘義務」で選んでいただけると嬉しいです。まずはXのDMで雰囲気を確認してみてください。</div>
+          <div class="faq-a">はい。完全兼業のため顔出しNGで活動していますが、274件を超えるお客様口コミ（全て★5）と、業界歴4年・1,500件以上の実績が「安心の証明」です。顔よりも「対応力」「完成度」「秘密厳守」で選んでいただけると嬉しいです。まずはXのDMで雰囲気を確認してみてください。</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">守秘義務はありますか？職業や名前が漏れませんか？</div>
-          <div class="faq-a">ご予約中・DM等にてお客様より開示された個人情報（お名前・ご職業・ご住所・ご年齢・ご家族構成等）は、第三者へ一切漏洩しません。経営者・士業・夜職の方にも多くご利用いただいています。</div>
+          <div class="faq-q">利用していることがバレませんか？職業や名前が漏れませんか？</div>
+          <div class="faq-a">ご予約中・DM等にてお客様より開示された個人情報（お名前・ご職業・ご住所・ご年齢・ご家族構成等）は、第三者へ一切漏洩しません。どんなご職業の方でも安心してご利用いただけます。</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">初めてで怖いのですが、大丈夫ですか？</div>
@@ -953,7 +1072,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-q">どんなプレイが得意ですか？</div>
-          <div class="faq-a">快楽責め・開発・言葉責め・拘束・蝋燭・首締め・パドル遣いを得意としています。毎回お客様のM度を丁寧に探りながら「ちょうど良いところ」を見つけていくスタイルです。中イキ・潮吹きの開発も実績が豊富です。</div>
+          <div class="faq-a">快楽責め・開発・言葉責め・拘束・蝋燭・首締め・スパンキングパドルを得意としています。毎回お客様のM度を丁寧に探りながら「ちょうど良いところ」を見つけていくスタイルです。中イキ・潮吹きの開発も実績が豊富です。</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">予約はどうすれば良いですか？</div>
@@ -1008,7 +1127,7 @@
         </div>
       </div>
       <p style="text-align:center; margin-top:2.5rem;">
-        <a href="https://tokyo-m-seikan.com/honten/therapist/48/" target="_blank" class="btn-secondary" style="margin-left:0;">全ての口コミを見る →</a>
+        <a href="https://tokyo-m-seikan.com/honten/review/therapist/48/" target="_blank" class="btn-secondary" style="margin-left:0;">全ての口コミを見る →</a>
       </p>
     </div>
   </section>
@@ -1022,7 +1141,6 @@
       <div class="profile-grid">
         <div class="profile-photo-wrap">
           <img src="shunsuke_profile.png" alt="SHUNSUKE シュンスケ 東京M性感 正規キャスト" class="profile-photo">
-          <div class="profile-photo-label">SHUNSUKE · 顔出しNG</div>
         </div>
         <div class="profile-left">
           <div class="profile-rank-badge">☕ 正規キャスト認定</div>
@@ -1073,7 +1191,7 @@
             <span class="play-tag">拘束</span>
             <span class="play-tag">蝋燭</span>
             <span class="play-tag">首締め</span>
-            <span class="play-tag">パドル遣い</span>
+            <span class="play-tag">スパンキングパドル</span>
             <span class="play-tag">目隠し</span>
             <span class="play-tag">中イキ開発</span>
             <span class="play-tag">潮吹き開発</span>
@@ -1085,8 +1203,6 @@
             <div class="ranking-item"><span>2026年 全国ランキング</span><span>第58位</span></div>
             <div class="ranking-item"><span>M性感グループ内</span><span>第1位</span></div>
             <div class="ranking-item"><span>月間最高本指名</span><span>26名</span></div>
-            <div class="ranking-item"><span>月間最高売上</span><span>400万円超</span></div>
-            <div class="ranking-item"><span>2024年間売上</span><span>3,000万円超</span></div>
           </div>
         </div>
       </div>
@@ -1130,7 +1246,7 @@
         </a>
       </div>
       <p class="contact-note">
-        守秘義務厳守 · 完全顔出しNG · 東京都内出張対応<br>
+        守秘義務厳守 · 完全顔出しNG · 東京を拠点に活動中<br>
         スケジュールのご確認もDMにてお気軽にどうぞ。
       </p>
     </div>

@@ -643,7 +643,7 @@
       transition: background 0.2s, border-color 0.2s;
     }
     .contact-method:hover { background: rgba(184,150,62,0.08); border-color: var(--gold); }
-    .contact-method-icon { font-size: 1.2rem; }
+    .contact-method-icon { font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center; color: var(--gold-light); width: 24px; }
     .contact-method-label { flex: 1; text-align: left; }
     .contact-method-sub {
       font-size: 0.6rem;
@@ -803,6 +803,55 @@
       color: var(--grey-light);
     }
 
+    /* ─── SNS FOLLOW ─── */
+    .sns-follow {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .sns-follow-label {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .sns-follow-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .sns-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.6rem;
+      min-width: 130px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .sns-icon:hover { background: rgba(184,150,62,0.08); border-color: var(--gold); }
+    .sns-icon-mark {
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 22px;
+    }
+    .sns-icon-handle {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      color: var(--grey-light);
+    }
+
     /* ─── DM MODAL ─── */
     .dm-modal-overlay {
       display: none;
@@ -853,7 +902,7 @@
     }
     .dm-modal-btn:last-of-type { margin-bottom: 0; }
     .dm-modal-btn:hover { background: rgba(184,150,62,0.1); border-color: var(--gold); }
-    .dm-modal-btn-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .dm-modal-btn-icon { font-size: 1.3rem; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; color: var(--gold-light); width: 24px; }
     .dm-modal-btn-label { flex: 1; }
     .dm-modal-btn-handle { font-size: 0.65rem; color: var(--grey-light); display: block; margin-top: 0.15rem; }
     .dm-modal-close {
@@ -936,7 +985,7 @@
   <section id="reasons">
     <div class="section-inner">
       <span class="section-label">Why Shunsuke</span>
-      <h2>選ばれ続ける、<em>3つの理由</em></h2>
+      <h2>選ばれ続ける、<em><span style="font-family:var(--font-ui); font-weight:400;">3</span>つの理由</em></h2>
       <div class="divider"></div>
       <div class="reasons-grid">
         <div class="reason-item">
@@ -1221,7 +1270,7 @@
       </p>
       <div class="contact-methods">
         <a href="https://x.com/shunsuke_tokyo2" target="_blank" class="contact-method">
-          <span class="contact-method-icon">𝕏</span>
+          <span class="contact-method-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
           <span class="contact-method-label">
             X（旧Twitter）DM
             <span class="contact-method-sub" style="display:block;">@shunsuke_tokyo2 · 最も繋がりやすい</span>
@@ -1229,7 +1278,7 @@
           <span style="color:var(--gold); font-size:0.8rem;">→</span>
         </a>
         <a href="https://www.instagram.com/shunsuke_mtokyo" target="_blank" class="contact-method">
-          <span class="contact-method-icon">📷</span>
+          <span class="contact-method-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span>
           <span class="contact-method-label">
             Instagram DM
             <span class="contact-method-sub" style="display:block;">@shunsuke_mtokyo</span>
@@ -1237,7 +1286,7 @@
           <span style="color:var(--gold); font-size:0.8rem;">→</span>
         </a>
         <a href="https://tokyo-m-seikan.com/honten/therapist/48/" target="_blank" class="contact-method">
-          <span class="contact-method-icon">🏠</span>
+          <span class="contact-method-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M22 7.5c-1.6-.6-3.6-.9-5.4-.5-1.3.3-2.4.9-3.1 1.5-.4.3-.6.5-.7.6h-1.6c-.1-.1-.3-.3-.7-.6-.7-.6-1.8-1.2-3.1-1.5C3.6 6.6 1.6 6.9 0 7.5c.2 1.4.3 3.6 1.2 5.5.5 1.1 1.3 2.1 2.6 2.7 1 .5 2.2.7 3.5.4 1.4-.3 2.4-1 3.1-1.8.4-.5.7-1 .9-1.4h1.4c.2.4.5.9.9 1.4.7.8 1.7 1.5 3.1 1.8 1.3.3 2.5.1 3.5-.4 1.3-.6 2.1-1.6 2.6-2.7.9-1.9 1-4.1 1.2-5.5zM7 13.2c-1.4.3-2.7-.5-3.1-1.8-.4-1.3.4-2.6 1.7-2.9 1.4-.3 2.7.5 3.1 1.8.4 1.3-.4 2.6-1.7 2.9zm10 0c-1.3-.3-2.1-1.6-1.7-2.9.4-1.3 1.7-2.1 3.1-1.8 1.3.3 2.1 1.6 1.7 2.9-.4 1.3-1.7 2.1-3.1 1.8z"/></svg></span>
           <span class="contact-method-label">
             お店チャット・電話
             <span class="contact-method-sub" style="display:block;">東京M性感 公式ページから</span>
@@ -1249,6 +1298,29 @@
         守秘義務厳守 · 完全顔出しNG · 東京を拠点に活動中<br>
         スケジュールのご確認もDMにてお気軽にどうぞ。
       </p>
+      <div class="sns-follow">
+        <span class="sns-follow-label">SNSでも発信中</span>
+        <div class="sns-follow-icons">
+          <a href="https://x.com/shunsuke_tokyo2" target="_blank" class="sns-icon" aria-label="X (Twitter)">
+            <span class="sns-icon-mark">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </span>
+            <span class="sns-icon-handle">@shunsuke_tokyo2</span>
+          </a>
+          <a href="https://www.instagram.com/shunsuke_mtokyo" target="_blank" class="sns-icon" aria-label="Instagram">
+            <span class="sns-icon-mark">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </span>
+            <span class="sns-icon-handle">@shunsuke_mtokyo</span>
+          </a>
+          <a href="https://www.tiktok.com/@hs240240" target="_blank" class="sns-icon" aria-label="TikTok">
+            <span class="sns-icon-mark">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z"/></svg>
+            </span>
+            <span class="sns-icon-handle">@hs240240</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1259,7 +1331,7 @@
       <div class="dm-modal-title">まずはDMへ</div>
       <div class="dm-modal-sub">予約でなくても大丈夫です。質問だけでもお気軽にどうぞ。</div>
       <a href="https://x.com/shunsuke_tokyo2" target="_blank" class="dm-modal-btn">
-        <span class="dm-modal-btn-icon">𝕏</span>
+        <span class="dm-modal-btn-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
         <span class="dm-modal-btn-label">
           X（旧Twitter）でDM
           <span class="dm-modal-btn-handle">@shunsuke_tokyo2 · 最も繋がりやすい</span>
@@ -1267,7 +1339,7 @@
         <span style="color:var(--gold);">→</span>
       </a>
       <a href="https://www.instagram.com/shunsuke_mtokyo" target="_blank" class="dm-modal-btn">
-        <span class="dm-modal-btn-icon">📷</span>
+        <span class="dm-modal-btn-icon"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span>
         <span class="dm-modal-btn-label">
           InstagramでDM
           <span class="dm-modal-btn-handle">@shunsuke_mtokyo</span>
@@ -1292,6 +1364,8 @@
       <a href="https://x.com/shunsuke_tokyo2" target="_blank">X (Twitter)</a>
       ·
       <a href="https://www.instagram.com/shunsuke_mtokyo" target="_blank">Instagram</a>
+      ·
+      <a href="https://www.tiktok.com/@hs240240" target="_blank">TikTok</a>
     </span>
   </footer>
 
@@ -1311,7 +1385,8 @@
     "url": "https://tokyo-m-seikan.com/honten/therapist/48/",
     "sameAs": [
       "https://x.com/shunsuke_tokyo2",
-      "https://www.instagram.com/shunsuke_mtokyo"
+      "https://www.instagram.com/shunsuke_mtokyo",
+      "https://www.tiktok.com/@hs240240"
     ],
     "areaServed": {
       "@type": "Place",

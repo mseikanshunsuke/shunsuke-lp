@@ -2,6 +2,14 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VB93V3MKZY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VB93V3MKZY');
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHUNSUKE｜東京M性感 正規キャスト｜守秘義務・顔出しNG・開発特化</title>
   <meta name="description" content="東京M性感・正規キャスト SHUNSUKEの公式ページ。業界歴4年・1,500件以上の実績。守秘義務厳守、完全顔出しNG。経営者・夜職の方・初めての方も安心してご利用いただけます。東京を拠点に活動中。">
@@ -1494,6 +1502,47 @@
     // オーバーレイクリックで閉じる
     document.getElementById('dmModal').addEventListener('click', function(e){
       if(e.target === this) this.classList.remove('active');
+    });
+
+    // ===== GA4 イベント計測 =====
+    function track(name, params){
+      if (typeof gtag === 'function') { gtag('event', name, params || {}); }
+    }
+
+    // DM・ご予約ボタンのクリック（モーダルを開いた時）
+    document.querySelectorAll('a.btn-primary').forEach(function(btn){
+      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf('dmModal') !== -1) {
+        btn.addEventListener('click', function(){
+          track('dm_open', { source: btn.textContent.trim() });
+        });
+      }
+    });
+
+    // DMモーダル内・連絡先リンクのクリック（X / Instagram / お店）
+    document.querySelectorAll('.dm-modal-btn, .contact-method').forEach(function(link){
+      link.addEventListener('click', function(){
+        track('contact_click', { destination: link.href });
+      });
+    });
+
+    // スケジュールボタンのクリック
+    document.querySelectorAll('.nav-schedule-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ track('schedule_click'); });
+    });
+
+    // 声サンプルの再生（各audioが再生開始された時、1回だけ）
+    document.querySelectorAll('#voice audio').forEach(function(audio, i){
+      var labels = ['自己紹介','優しめ','ソフトM①','ソフトM②'];
+      audio.addEventListener('play', function(){
+        track('voice_play', { sample: labels[i] || ('sample_' + i) });
+      }, { once: true });
+    });
+
+    // SNSフォローアイコンのクリック
+    document.querySelectorAll('.sns-icon').forEach(function(link){
+      link.addEventListener('click', function(){
+        track('sns_follow_click', { destination: link.href });
+      });
     });
   </script>
 

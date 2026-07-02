@@ -629,6 +629,41 @@
     .ranking-item:last-child { border-bottom: none; }
     .ranking-item span:last-child { color: var(--gold-light); }
 
+    /* ─── OPTIONS ─── */
+    .option-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      background: rgba(184,150,62,0.04);
+      margin-bottom: 2rem;
+    }
+    .option-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(184,150,62,0.12);
+      border-right: 1px solid rgba(184,150,62,0.12);
+    }
+    .option-item:nth-child(2n) { border-right: none; }
+    .option-item:nth-last-child(-n+2) { border-bottom: none; }
+    .option-name { color: rgba(240,237,230,0.8); }
+    .option-price {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      color: var(--gold-light);
+      font-feature-settings: "tnum";
+      letter-spacing: 0.03em;
+    }
+    .option-free { color: var(--gold); letter-spacing: 0.08em; }
+    @media (max-width: 768px) {
+      .option-list { grid-template-columns: 1fr; }
+      .option-item { border-right: none; }
+      .option-item:nth-last-child(2) { border-bottom: 1px solid rgba(184,150,62,0.12); }
+    }
+
     /* ─── SECTION 7: CTA ─── */
     #contact {
       background: var(--black);
@@ -1394,6 +1429,17 @@
             <span class="play-tag">目隠し</span>
             <span class="play-tag">中イキ開発</span>
             <span class="play-tag">潮吹き開発</span>
+          </div>
+          <p style="font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); margin:0 0 0.8rem;">おすすめオプション</p>
+          <div class="option-list">
+            <div class="option-item"><span class="option-name">音声録音</span><span class="option-price">¥5,000</span></div>
+            <div class="option-item"><span class="option-name">ボイスアフメ</span><span class="option-price">¥5,000</span></div>
+            <div class="option-item"><span class="option-name">拘束具</span><span class="option-price option-free">FREE</span></div>
+            <div class="option-item"><span class="option-name">スパンキングパドル</span><span class="option-price option-free">FREE</span></div>
+            <div class="option-item"><span class="option-name">首輪</span><span class="option-price">¥1,000</span></div>
+            <div class="option-item"><span class="option-name">ボンテージテープ</span><span class="option-price">¥2,000</span></div>
+            <div class="option-item"><span class="option-name">一本鞭</span><span class="option-price">¥2,000</span></div>
+            <div class="option-item"><span class="option-name">アロマホットオイル</span><span class="option-price">¥3,000</span></div>
           </div>
           <div class="ranking-list">
             <div class="ranking-title">受賞・ランキング実績</div>

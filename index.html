@@ -20,7 +20,7 @@
   <meta property="og:title" content="SHUNSUKE｜東京M性感 正規キャスト">
   <meta property="og:description" content="業界歴4年・1,500件以上の実績。守秘義務厳守・完全顔出しNG。経営者・夜職の方も安心。">
   <meta property="og:type" content="website">
-　<meta property="og:url" content="https://mseikan-shunsuke.com/">
+  <meta property="og:url" content="https://mseikan-shunsuke.com/">
   <meta property="og:image" content="https://mseikan-shunsuke.com/shunsuke_profile.png">
   <meta name="twitter:card" content="summary_large_image">
   
@@ -932,7 +932,38 @@
       .voice-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 520px) {
-      .voice-grid { grid-template-columns: 1fr; }
+      .voice-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+      .voice-card {
+        padding: 1rem 1.1rem;
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        grid-template-areas:
+          "icon title"
+          "icon desc"
+          "audio audio";
+        column-gap: 0.9rem;
+        row-gap: 0.1rem;
+        align-items: center;
+        text-align: left;
+      }
+      .voice-icon {
+        grid-area: icon;
+        width: 36px; height: 36px;
+        margin-bottom: 0;
+      }
+      .voice-icon svg { width: 16px; height: 16px; }
+      .voice-title { grid-area: title; margin-bottom: 0; }
+      .voice-desc {
+        grid-area: desc;
+        margin-bottom: 0;
+        line-height: 1.5;
+        font-size: 0.72rem;
+      }
+      .voice-card audio {
+        grid-area: audio;
+        margin-top: 0.6rem;
+        height: 32px;
+      }
     }
 
     /* ─── SNS FOLLOW ─── */
@@ -1163,6 +1194,36 @@
           <div class="voice-desc">もう一段強めのソフトM。じっくり入り込んでお楽しみください。</div>
           <audio controls preload="none">
             <source src="voice_softm2.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="voice-card">
+          <div class="voice-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </div>
+          <div class="voice-title">かわいいな</div>
+          <div class="voice-desc">思わずこぼれた本音のひとこと。甘やかされたい夜に。</div>
+          <audio controls preload="none">
+            <source src="voice_kawaii.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="voice-card">
+          <div class="voice-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.6L20 8.4l-4.3 4 1.1 5.9L12 15.6l-4.8 2.7 1.1-5.9L4 8.4l5.6-.8z"></path></svg>
+          </div>
+          <div class="voice-title">ご褒美です</div>
+          <div class="voice-desc">頑張ったあなたへ。少し意地悪なご褒美。</div>
+          <audio controls preload="none">
+            <source src="voice_gohoubi.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="voice-card">
+          <div class="voice-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </div>
+          <div class="voice-title">お疲れさま</div>
+          <div class="voice-desc">一日の終わりに、癒しのねぎらいボイス。</div>
+          <audio controls preload="none">
+            <source src="voice_otsukare.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -1581,7 +1642,7 @@
 
     // 声サンプルの再生（各audioが再生開始された時、1回だけ）
     document.querySelectorAll('#voice audio').forEach(function(audio, i){
-      var labels = ['自己紹介','優しめ','ソフトM①','ソフトM②'];
+      var labels = ['自己紹介','優しめ','ソフトM①','ソフトM②','かわいいな','ご褒美です','お疲れさま'];
       audio.addEventListener('play', function(){
         track('voice_play', { sample: labels[i] || ('sample_' + i) });
       }, { once: true });

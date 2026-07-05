@@ -1,3 +1,33 @@
+# AI検索・RAG系ボット（許可 — ブロックするとAI回答から消える）
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# AI学習系ボット（許可 — 長期的にAIの学習知識へ入れる方針）
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# その他すべて
 User-agent: *
 Allow: /
 

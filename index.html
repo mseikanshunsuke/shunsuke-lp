@@ -1188,6 +1188,24 @@
     </div>
   </section>
 
+  <!-- ▼▼▼ 追加ブロック: 料金シミュレーション導線（チャットの費用概算機能へ誘導） ▼▼▼ -->
+  <section aria-label="料金シミュレーション" style="background:linear-gradient(180deg,#0D0D0D,#0A0F1E);border-top:1px solid rgba(184,150,62,.3);border-bottom:1px solid rgba(184,150,62,.3);padding:46px 5%;">
+    <div style="max-width:840px;margin:0 auto;display:flex;align-items:center;gap:30px;flex-wrap:wrap;justify-content:center;">
+      <div style="flex:1 1 360px;min-width:270px;">
+        <div style="font-family:'Noto Sans JP',sans-serif;font-size:.66rem;letter-spacing:.28em;color:#B8963E;text-transform:uppercase;margin-bottom:10px;">Cost Simulator</div>
+        <h2 style="font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:300;font-size:1.7rem;line-height:1.4;color:#F0EDE6;margin:0 0 8px;">料金が気になる方へ。<br><em style="font-style:italic;color:#E8D5A0;">チャットで今すぐ費用シミュレーション</em>。</h2>
+        <p style="font-family:'Noto Serif JP',serif;font-weight:300;font-size:.95rem;line-height:1.8;color:#c7c1b5;margin:0;">コース・エリア・指名を選ぶだけで、総額の目安がその場でわかります。テレフォンコースの料金もここで確認できます。</p>
+      </div>
+      <div style="flex:0 0 auto;">
+        <a href="#" onclick="if(window.SBotSim){SBotSim();}return false;" style="display:inline-flex;align-items:center;gap:10px;background:#B8963E;color:#0D0D0D;font-family:'Noto Sans JP',sans-serif;font-weight:500;font-size:.86rem;letter-spacing:.06em;padding:16px 32px;border-radius:2px;text-decoration:none;box-shadow:0 10px 30px rgba(184,150,62,.25);">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+          料金をシミュレーションする
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ▲▲▲ 追加ブロックここまで ▲▲▲ -->
+
   <!-- SECTION 1.5: 声サンプル -->
   <section id="voice">
     <div class="section-inner">
@@ -1569,14 +1587,14 @@
           </div>
           <p style="font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.2em; color:var(--gold); margin:0 0 0.8rem;">おすすめオプション</p>
           <div class="option-list">
-            <div class="option-item"><span class="option-name">音声録音</span><span class="option-price">¥5,000</span></div>
-            <div class="option-item"><span class="option-name">ボイスアフメ</span><span class="option-price">¥5,000</span></div>
+            <div class="option-item"><span class="option-name">音声録音（30分）</span><span class="option-price">¥5,000</span></div>
+            <div class="option-item"><span class="option-name">ボイスアフメ（1〜2分）</span><span class="option-price">¥5,000</span></div>
             <div class="option-item"><span class="option-name">拘束具</span><span class="option-price option-free">FREE</span></div>
             <div class="option-item"><span class="option-name">スパンキングパドル</span><span class="option-price option-free">FREE</span></div>
             <div class="option-item"><span class="option-name">首輪</span><span class="option-price">¥1,000</span></div>
             <div class="option-item"><span class="option-name">ボンテージテープ</span><span class="option-price">¥2,000</span></div>
             <div class="option-item"><span class="option-name">一本鞭</span><span class="option-price">¥2,000</span></div>
-            <div class="option-item"><span class="option-name">アロマホットオイル</span><span class="option-price">¥3,000</span></div>
+            <div class="option-item"><span class="option-name">アロマホットオイル（140分コース以上）</span><span class="option-price">¥3,000</span></div>
           </div>
           <div class="ranking-list">
             <div class="ranking-title">受賞・ランキング実績</div>
@@ -1882,6 +1900,510 @@
       }
     ]
   }
+  </script>
+
+  <!-- ============================================================
+       SHUNSUKE クローン 受付ウィジェット（デモ）
+       ※ 本LPには一切手を入れず、この1ブロックを追加するだけ
+       ※ 自己完結（クラスは sbot- 接頭辞・色/フォントは内包）
+       ============================================================ -->
+  <div class="sbot" id="sbot">
+    <div class="sbot-teaser" id="sbot-teaser">
+      <span class="sbot-x" onclick="document.getElementById('sbot-teaser').classList.add('sbot-hidden')">×</span>
+      はじめまして。<span class="sbot-em">シュンスケ</span>だよ。料金の<span class="sbot-em">概算シミュ</span>もできる。気になること聞いてください。
+    </div>
+
+    <div class="sbot-panel" id="sbot-panel" role="dialog" aria-label="シュンスケ">
+      <div class="sbot-head">
+        <div class="sbot-ava"><span>S</span></div>
+        <div class="sbot-who">
+          <div class="sbot-name">シュンスケ</div>
+          <div class="sbot-stat"><span class="sbot-dot"></span>本人監修｜予約前の相談OK</div>
+        </div>
+        <button class="sbot-min" onclick="SBot.close()" aria-label="閉じる">－</button>
+      </div>
+      <div class="sbot-log" id="sbot-log" aria-live="polite"></div>
+      <div class="sbot-chips" id="sbot-chips"></div>
+      <div class="sbot-input">
+        <input id="sbot-text" type="text" placeholder="メッセージを入力…" autocomplete="off" aria-label="メッセージ入力">
+        <button class="sbot-send" id="sbot-send" aria-label="送信">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="sbot-foot">シュンスケ｜<b>本人の代わりの一次受付</b></div>
+    </div>
+
+    <button class="sbot-launch" id="sbot-launch" aria-label="シュンスケに聞く">
+      <span class="sbot-ping">1</span>
+      <svg class="sbot-chat-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1121 11.5z"/></svg>
+      <svg class="sbot-close-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <style>
+    .sbot{position:fixed;right:24px;bottom:24px;z-index:9000;font-family:'Noto Serif JP',serif;line-height:1.8;}
+    .sbot *{box-sizing:border-box;}
+    .sbot-launch{width:62px;height:62px;border-radius:50%;border:1px solid #B8963E;cursor:pointer;background:radial-gradient(circle at 35% 30%,#111827,#0D0D0D);color:#E8D5A0;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 10px 34px rgba(0,0,0,.55),0 0 0 4px rgba(184,150,62,.08);transition:transform .25s,box-shadow .25s;}
+    .sbot-launch:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.6),0 0 22px rgba(184,150,62,.3);}
+    .sbot-launch svg{width:26px;height:26px;}
+    .sbot-launch .sbot-close-ic{display:none;}
+    .sbot.sbot-open .sbot-launch .sbot-chat-ic{display:none;}
+    .sbot.sbot-open .sbot-launch .sbot-close-ic{display:block;}
+    .sbot-ping{position:absolute;top:-2px;right:-2px;width:18px;height:18px;background:#B8963E;color:#0D0D0D;border-radius:50%;font-family:'Noto Sans JP',sans-serif;font-size:.68rem;font-weight:600;display:flex;align-items:center;justify-content:center;border:2px solid #0A0F1E;}
+    .sbot.sbot-open .sbot-ping{display:none;}
+    .sbot-teaser{position:absolute;right:0;bottom:74px;width:238px;background:#111827;border:1px solid rgba(184,150,62,.25);border-radius:8px 8px 2px 8px;box-shadow:0 14px 40px rgba(0,0,0,.5);padding:15px 17px;font-size:.9rem;color:#F0EDE6;line-height:1.7;animation:sbotpop .4s ease both;}
+    .sbot-teaser .sbot-em{color:#E8D5A0;}
+    .sbot-teaser .sbot-x{position:absolute;top:7px;right:10px;color:#6B6B6B;cursor:pointer;font-size:.95rem;line-height:1;}
+    .sbot.sbot-open .sbot-teaser,.sbot-teaser.sbot-hidden{display:none;}
+    @keyframes sbotpop{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+    .sbot-panel{position:absolute;right:0;bottom:80px;width:378px;max-width:calc(100vw - 34px);height:620px;max-height:calc(100vh - 96px);background:#0A0F1E;border:1px solid rgba(184,150,62,.25);border-radius:10px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+    .sbot.sbot-open .sbot-panel{display:flex;animation:sbotpop .3s ease both;}
+    .sbot-head{background:linear-gradient(180deg,#111827,#0D0D0D);padding:16px 18px;display:flex;align-items:center;gap:13px;border-bottom:1px solid rgba(184,150,62,.25);}
+    .sbot-ava{width:44px;height:44px;border-radius:50%;border:1px solid #B8963E;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:radial-gradient(circle at 40% 35%,rgba(184,150,62,.18),transparent);}
+    .sbot-ava span{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-style:italic;font-size:1.5rem;color:#E8D5A0;line-height:1;}
+    .sbot-who{flex:1;min-width:0;}
+    .sbot-who .sbot-name{font-family:'Cormorant Garamond','Noto Serif JP',serif;letter-spacing:.06em;font-size:1.12rem;color:#F0EDE6;}
+    .sbot-who .sbot-stat{font-family:'Noto Sans JP',sans-serif;font-size:.68rem;letter-spacing:.06em;color:#A0A0A0;display:flex;align-items:center;gap:6px;margin-top:2px;}
+    .sbot-who .sbot-dot{width:7px;height:7px;border-radius:50%;background:#B8963E;box-shadow:0 0 0 3px rgba(184,150,62,.25);}
+    .sbot-min{background:transparent;border:1px solid rgba(184,150,62,.25);color:#E8D5A0;width:30px;height:30px;border-radius:4px;cursor:pointer;font-size:1rem;line-height:1;}
+    .sbot-log{flex:1;min-height:0;overflow-y:auto;padding:20px 16px 8px;background:#0A0F1E;}
+    .sbot-log::-webkit-scrollbar{width:7px;}
+    .sbot-log::-webkit-scrollbar-thumb{background:#7A6128;border-radius:20px;}
+    .sbot-msg{display:flex;margin-bottom:13px;}
+    .sbot-msg .sbot-bubble{padding:12px 16px;border-radius:12px;font-size:.94rem;line-height:1.8;max-width:84%;word-break:break-word;}
+    .sbot-msg.sbot-bot .sbot-bubble{background:#111827;color:#F0EDE6;border:1px solid rgba(184,150,62,.25);border-top-left-radius:3px;}
+    .sbot-msg.sbot-user{justify-content:flex-end;}
+    .sbot-msg.sbot-user .sbot-bubble{background:#B8963E;color:#0D0D0D;border-top-right-radius:3px;font-family:'Noto Sans JP',sans-serif;font-weight:400;font-size:.9rem;}
+    .sbot-msg .sbot-bubble b{color:#E8D5A0;font-weight:500;}
+    .sbot-msg.sbot-user .sbot-bubble b{color:#0D0D0D;}
+    .sbot-bubble p{margin:0;}
+    .sbot-bubble p+p{margin-top:10px;}
+    .sbot-cta{background:linear-gradient(180deg,#111827,rgba(13,13,13,.5));border:1px solid #B8963E;border-radius:12px;padding:16px 16px;margin:2px 0 13px;}
+    .sbot-cta > p{font-size:.92rem;color:#d6d0c4;margin:0 0 12px;}
+    .sbot-ct-btn{display:flex;align-items:center;gap:11px;background:rgba(184,150,62,.06);border:1px solid rgba(184,150,62,.35);border-radius:4px;padding:11px 14px;margin-bottom:8px;color:#F0EDE6;text-decoration:none;transition:background .18s,border-color .18s;}
+    .sbot-ct-btn:hover{background:rgba(184,150,62,.14);border-color:#B8963E;}
+    .sbot-ct-btn:last-of-type{margin-bottom:0;}
+    .sbot-ct-btn svg{width:19px;height:19px;flex-shrink:0;color:#E8D5A0;}
+    .sbot-ct-btn span{font-family:'Noto Sans JP',sans-serif;font-size:.86rem;font-weight:500;flex:1;}
+    .sbot-ct-btn em{font-family:'Noto Sans JP',sans-serif;font-style:normal;font-size:.72rem;color:#A0A0A0;}
+    .sbot-ct-note{font-family:'Noto Sans JP',sans-serif;font-size:.68rem;color:#6B6B6B;margin-top:10px;line-height:1.6;}
+    .sbot-typing .sbot-bubble{display:inline-flex;gap:5px;align-items:center;padding:15px 17px;}
+    .sbot-typing .sbot-bubble i{width:6px;height:6px;border-radius:50%;background:#7A6128;animation:sbotblink 1.2s infinite;font-style:normal;}
+    .sbot-typing .sbot-bubble i:nth-child(2){animation-delay:.2s;}
+    .sbot-typing .sbot-bubble i:nth-child(3){animation-delay:.4s;}
+    @keyframes sbotblink{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+    .sbot-chips{padding:8px 14px;background:#0A0F1E;display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#7A6128 transparent;}
+    .sbot-chips::-webkit-scrollbar{height:5px;}
+    .sbot-chips::-webkit-scrollbar-thumb{background:#7A6128;border-radius:20px;}
+    .sbot-chips button{font-family:'Noto Sans JP',sans-serif;flex:0 0 auto;white-space:nowrap;background:transparent;border:1px solid rgba(184,150,62,.25);color:#E8D5A0;font-size:.78rem;letter-spacing:.02em;padding:8px 14px;border-radius:2px;cursor:pointer;transition:border-color .18s,background .18s;}
+    .sbot-chips button:hover{border-color:#B8963E;background:rgba(184,150,62,.08);}
+    .sbot-input{display:flex;align-items:center;gap:10px;padding:12px 14px;border-top:1px solid rgba(184,150,62,.25);background:#111827;}
+    .sbot-input input{flex:1;border:1px solid rgba(184,150,62,.25);background:#0A0F1E;border-radius:3px;padding:12px 16px;font-size:.9rem;font-family:'Noto Serif JP',serif;color:#F0EDE6;outline:none;transition:border-color .2s;}
+    .sbot-input input::placeholder{color:#6B6B6B;}
+    .sbot-input input:focus{border-color:#B8963E;}
+    .sbot-send{width:44px;height:44px;flex-shrink:0;border-radius:3px;border:1px solid #B8963E;background:#B8963E;color:#0D0D0D;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+    .sbot-send:hover{background:#E8D5A0;}
+    .sbot-send svg{width:19px;height:19px;}
+    .sbot-foot{text-align:center;font-family:'Noto Sans JP',sans-serif;font-size:.66rem;letter-spacing:.08em;color:#6B6B6B;padding:0 0 10px;background:#111827;}
+    .sbot-foot b{color:#7A6128;font-weight:500;}
+    /* Phase2: 概算計算機・希望ヒアリング */
+    .sbot-tool{background:linear-gradient(180deg,#111827,rgba(13,13,13,.5));border:1px solid rgba(184,150,62,.35);border-radius:12px;padding:15px 16px;margin:2px 0 13px;}
+    .sbot-tool-t{font-family:'Cormorant Garamond','Noto Serif JP',serif;color:#E8D5A0;font-size:1.08rem;letter-spacing:.06em;margin-bottom:4px;}
+    .sbot-tool-sub{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;color:#A0A0A0;margin-bottom:12px;line-height:1.6;}
+    .sbot-field{margin-bottom:10px;}
+    .sbot-field > label{display:block;font-family:'Noto Sans JP',sans-serif;font-size:.72rem;color:#B8963E;letter-spacing:.06em;margin-bottom:5px;}
+    .sbot-field select{width:100%;background:#0A0F1E;border:1px solid rgba(184,150,62,.3);color:#F0EDE6;border-radius:4px;padding:9px 10px;font-family:'Noto Serif JP',serif;font-size:.88rem;outline:none;}
+    .sbot-field select:focus{border-color:#B8963E;}
+    .sbot-check{display:flex;align-items:center;gap:8px;font-family:'Noto Sans JP',sans-serif;font-size:.8rem;color:#d6d0c4;cursor:pointer;padding:4px 0 2px;}
+    .sbot-check input{accent-color:#B8963E;width:16px;height:16px;flex-shrink:0;}
+    .sbot-calc-btn{width:100%;margin-top:8px;background:#B8963E;color:#0D0D0D;border:none;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-weight:500;font-size:.86rem;padding:11px;cursor:pointer;letter-spacing:.06em;}
+    .sbot-calc-btn:hover{background:#E8D5A0;}
+    .sbot-calc-result{margin-top:12px;border-top:1px solid rgba(184,150,62,.25);padding-top:12px;}
+    .sbot-calc-result .amt{font-family:'Noto Sans JP',sans-serif;font-weight:600;font-size:1.7rem;color:#E8D5A0;letter-spacing:.02em;}
+    .sbot-calc-result .amt small{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;color:#A0A0A0;}
+    .sbot-calc-result .brk{font-family:'Noto Sans JP',sans-serif;font-size:.75rem;color:#c7c1b5;margin-top:6px;line-height:1.8;}
+    .sbot-calc-result .note{font-family:'Noto Sans JP',sans-serif;font-size:.7rem;color:#9a9384;margin-top:9px;line-height:1.7;}
+    .sbot-calc-result .note b{color:#E8D5A0;font-weight:500;}
+    .sbot-choice{display:flex;flex-wrap:wrap;gap:8px;}
+    .sbot-choice button{flex:1 1 46%;background:transparent;border:1px solid rgba(184,150,62,.3);color:#F0EDE6;font-family:'Noto Sans JP',sans-serif;font-size:.82rem;padding:12px 10px;border-radius:4px;cursor:pointer;text-align:center;transition:background .15s,border-color .15s;}
+    .sbot-choice button:hover{background:rgba(184,150,62,.1);border-color:#B8963E;}
+    .sbot-opts{border:1px solid rgba(184,150,62,.2);border-radius:6px;padding:6px 10px;max-height:172px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#7A6128 transparent;}
+    .sbot-opts::-webkit-scrollbar{width:5px;}
+    .sbot-opts::-webkit-scrollbar-thumb{background:#7A6128;border-radius:20px;}
+    .sbot-opts .sbot-check{padding:5px 0;}
+    .sbot-opt-head{font-family:'Noto Sans JP',sans-serif;font-size:.72rem;letter-spacing:.05em;color:#B8963E;margin:6px 0 3px;padding-top:8px;border-top:1px solid rgba(184,150,62,.22);}
+    .sbot-opt-headnote{color:#8b8577;font-size:.64rem;}
+    .sbot-shun-tag{display:inline-block;margin-left:6px;font-family:'Noto Sans JP',sans-serif;font-size:.58rem;font-weight:500;color:#0D0D0D;background:#B8963E;border-radius:2px;padding:1px 6px;letter-spacing:.04em;vertical-align:middle;}
+    .sbot-opt-free{font-family:'Noto Sans JP',sans-serif;font-size:.68rem;color:#9a9384;margin-top:8px;line-height:1.7;}
+    @media(max-width:480px){
+      .sbot{right:14px;bottom:14px;}
+      .sbot-panel{bottom:78px;height:calc(100vh - 96px);}
+      .sbot-teaser{width:200px;}
+    }
+  </style>
+
+  <script>
+  (function(){
+    "use strict";
+    var DM_X="https://x.com/shunsuke_tokyo2";
+    var DM_IG="https://www.instagram.com/shunsuke_mtokyo";
+    var LINE_URL="https://line.me/R/ti/p/@059pjjvh"; /* 東京M性感 公式LINE */
+    var CONTACT_TEXT="本人と話したいなら、連絡はこの3つのどれかで。予約じゃなくて質問だけでも全然いいからね。";
+
+    var ICON_X='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
+    var ICON_IG='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>';
+    var ICON_LINE='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 5.64 2 10.13c0 4.02 3.55 7.39 8.35 8.03.32.07.77.21.88.49.1.25.06.64.03.9l-.14.85c-.04.25-.2.98.86.54 1.06-.45 5.72-3.37 7.8-5.77C21.36 13.6 22 11.94 22 10.13 22 5.64 17.52 2 12 2zM8.29 12.5H6.3a.4.4 0 0 1-.4-.4V8.06a.4.4 0 0 1 .8 0v3.64h1.59a.4.4 0 0 1 0 .8zm1.56-.4a.4.4 0 0 1-.8 0V8.06a.4.4 0 0 1 .8 0v4.04zm4.72 0a.4.4 0 0 1-.72.24l-2.06-2.8v2.56a.4.4 0 0 1-.8 0V8.06a.4.4 0 0 1 .72-.24l2.06 2.8V8.06a.4.4 0 0 1 .8 0v4.04zm3.02-2.42a.4.4 0 0 1 0 .8h-1.59v.82h1.59a.4.4 0 0 1 0 .8H15.6a.4.4 0 0 1-.4-.4V8.06a.4.4 0 0 1 .4-.4h1.99a.4.4 0 0 1 0 .8H16v.82h1.59z"/></svg>';
+
+    /* ===== ナレッジ（SHUNSUKE単体・すべて公開LP由来・本人の声） ===== */
+    var KB=[
+      {id:"greet",keys:["こんにちは","はじめまして","もしもし","はろー","hello","hi","やあ","ちは"],
+       answer:["どうも、シュンスケだよ。気になることに答えるよ。","予約とか関係なく、質問だけでも全然OK。怖い、不安、気になることなんでも質問してみてね。"]},
+      {id:"first",keys:["初めて","はじめて","怖い","こわい","不安","緊張","勇気","ドキドキ","経験ない","未経験","大丈夫かな","踏み出せ"],
+       answer:["怖いのは普通だよ。みんな最初はそこから始めているから安心してほしい。","初めての人は、140分くらいのゆったりめが安心。焦らず、自分のペースで進められる。","嫌なことは断れるし、途中でやめるのも自由。合流後のカウンセリングで、希望もNGも不安も全部聞くから、無理はさせない。まずは質問だけでもいいよ。","それでも対面がどうしても不安なら、会わずに電話で話せる『テレフォンコース』もある。まずは声から、でもいいよ。"]},
+      {id:"safety",keys:["断れ","嫌なこと","無理やり","むりやり","無理強い","途中でやめ","途中終了","やめられ","二人きり","密室","安全","危な","こわい人","怖い人"],
+       answer:["まず、嫌なことはしっかりと断ってください。始める前にNGを確認するし、途中で『やめたい』って言われたらそこで止める。無理強いは絶対しない。事前に『セーフワード』も決めるから、安心して。","言いにくかったら、おれ本人じゃなくて店のスタッフに希望やNGを伝えてもらってもいい。","部屋で二人になるのが不安なのは当然だと思う。気になるところは予約前に店に相談してくれてもいいよ。"]},
+      {id:"staff",keys:["言いにく","直接言","店に相談","スタッフ","内勤","苦情","クレーム","担当変更","変えたい","合わなかっ"],
+       answer:["言いにくいことは、おれ本人に言わなくてもいい。店のスタッフに伝えてくれれば、そちらで対応してもらえるよ。","『キャストを変えたい』『次はこの人がいい』も、店に言ってくれて大丈夫。会ってみて合わなかった、って正直な話も含めて、店が間に入る。","匿名っぽく相談したいことは、ここに質問してもらうか、店のスタッフ経由でもOKだよ。"]},
+      {id:"privacy",keys:["バレ","ばれ","身バレ","職業","名前","本名","偽名","住所","漏れ","秘密","守秘","プライバシー","家族","職場","個人情報","特定","履歴","明細","カード","身分証","自宅"],
+       answer:["本名じゃなくて大丈夫。呼んでほしい名前でいい。予約中やDMで知ったこと（名前・職業・住所とか）は、第三者に一切出さない。","支払いは現金だし、連絡や待ち合わせの仕方も、家族や職場に気づかれないよう配慮する。自宅じゃなくて、自分の生活圏の外のホテルを指定してもらってもいい。","『これは知られたくない』があれば、先に言ってくれたらそこも合わせるよ。"]},
+      {id:"face",keys:["顔","顔出し","顔写真","素顔","マスク","モザイク","どんな顔"],
+       answer:["おれは完全兼業だから、顔は出してない。そこはずっと変えてない。配信でも一度も顔を出したことがない。今ではそれが売りの1つ。","顔より、対応力と完成度で選んでもらえたら嬉しい。歴4年、プレイ件数1,500件と、満足度★5が300件。それが顔のかわりの証明かな。"]},
+      {id:"scope",keys:["何をする","なにをする","どこまで","挿入","本番","セックス","性行為","可能","できること","できないこと"],
+       answer:["何をするかは、基本カウンセリングで一緒に決める。決まった型に押し込むことはしないです。","本番行為はありません。マッサージ、ソフトSM、性感の開発など、その日の希望に合わせる。","『これはしたくない』は全部除外できる。逆に『これはしてほしい』も、言える範囲で先に教えてくれたら合わせるよ。あとはプロに任せて。"]},
+      {id:"massage_only",keys:["マッサージだけ","マッサージのみ","添い寝","添寝","会話だけ","話すだけ","デート","癒しだけ","癒され","ソフトだけ","何もしない"],
+       answer:["うん、マッサージだけでも全然いい。性的なことを必ずする必要はない。","添い寝とか、ただ話すだけ、癒される時間がほしい、でもOK。『今日はこういう感じで』ってカウンセリングで言ってくれたら、それに合わせるし、こっちからも今日どう過ごしたいかちゃんと聞くから安心して。","当日、気分が変わってもいい。『やっぱりここまでで』も自由だよ。"]},
+      {id:"intimacy",keys:["キス","裸","脱ぐ","脱が","触れて","触って","さわって","おもちゃ","道具","粘膜","どこまで触"],
+       answer:["キスも、裸になるのも、必須じゃない。したくないことはしなくていい。粘膜に触れない範囲のプレイ（粘膜非接触）もできる。","おれの身体に触れてくれてもいいし、触れなくてもいい。道具（おもちゃ）を使うかどうかも、希望で選べる。","全部カウンセリングで決めるから、恥ずかしかったら『これはNG』って一言でOKです。"]},
+      {id:"body_response",keys:["イけ","いけない","達し","反応","薄い","濡れ","痛い","痛み","経験少","初体験","うまくでき"],
+       answer:["イかなきゃダメ、なんてことは全然ない。イケなくても普通だし、それで問題ない。","反応が薄くても、濡れにくくても、痛みを感じやすくても、こっちがペース合わせるから大丈夫。無理に進めない。","経験が少なくても気にしなくていい。むしろ、そういう人こそゆっくりやるよ。"]},
+      {id:"desires",keys:["希望","性癖","支配","優しく","恋人","彼氏","甘い","言葉責め","敬語","タメ口","言っていい","相談したい","練習","性感帯","性生活","どこまで言"],
+       answer:["希望は、どこまででも言っていい。支配される感じ、逆にただ優しくされたい、恋人みたいに過ごしたい——どれも大丈夫。","口で言うのが恥ずかしかったら、DMで先に送ってくれてもいい。『恋人っぽく話してほしい』みたいなリクエストもしていい。","『自分の身体を知りたい』『パートナーとのことを相談したい』も受ける。まだ自分でもよく分からない、でもいいよ。"]},
+      {id:"price",keys:["料金","いくら","値段","費用","金額","予算","システム","相場","高い","安い","お金","円","総額","合計","交通費","ホテル代","指名料","オプション料金"],
+       answer:["料金は時間で決まってる。120分¥28,000／140分¥33,000あたりが目安。初めては140分〜180分くらいがゆっくりできておすすめ。","コース以外にかかるのは、指名料（初指名1本¥1,000 本指名1本¥2,000）、交通費（エリア次第で¥1,000〜4,000）、あとホテル代はお客さん負担。オプションは無料のものも多いよ。","当日にこっちが勝手に追加請求することはない。延長も、その場で同意してくれた分だけ。総額の目安が知りたかったら、地域と時間を教えてくれたら伝えるよ。"]},
+      {id:"total",keys:["最終的に","結局いくら","ぼったく","高額","勝手に","追加され","追加料金","延長料金","延長勝手"],
+       answer:["最後にドカッと高額請求、みたいなのはない。かかるのは基本、コース＋指名料＋交通費＋（ホテル代）＋選んだオプションだけ。","延長は、こっちが勝手にやることはない。その場で『延長する？』って聞いて、同意してくれた分だけ。","不安なら、予約のときに『総額いくらになる？』って先に聞いてくれていい。ちゃんと内訳で答えるよ。"]},
+      {id:"cancel",keys:["キャンセル","取り消","変更","日程変更","返金","会ってから","怖くなっ","行けなく","当日やめ"],
+       answer:["キャンセルは、2日前までなら無料。前日はコース料金の50%、当日〜合流後は100%かかる。体調とかの事情も、まず店に相談してくれたら。","日時やコース、キャストの変更もできる。会ってみて『やっぱり無理』と思ったら、途中で終了してもいい。","『予約したら逃げられない』ってことはないから、そこは安心して。返金の細かい扱いはお店が対応します。"]},
+      {id:"book",keys:["予約","指名","連絡","申し込み","dm","繋が","つなが","取りたい","会いたい","会う","ライン","line","インスタ","instagram","電話せず","当日予約","何を聞か","どうやって"],
+       answer:["電話しなくてもOK。X・InstagramのDMか、店のLINE・チャットで予約できる。当日予約もOKだよ。","聞かれるのは、希望の日時・コース時間・場所（エリア）と、してほしいこと／NG、あと不安なこと。決まってなければ相談しながらで大丈夫。","希望は、おれ本人じゃなくて店のスタッフにだけ伝える、でもOK。やり取りが不安なら、質問だけのDMから始めてくれていいよ。"],forceCta:true},
+      {id:"flow",keys:["流れ","当日","どんな感じ","進め方","ながれ","何する","スケジュール","予約から","はじまったら","会ってから"],
+       answer:["ざっくりこんな流れ。まずDMかお店へ連絡して予約、日時とコース時間と場所を決める。","当日はホテルで合流して、最初に20〜30分くらいカウンセリング。用意してる質問に沿って、してほしいこと／NGを確認していくよ。プレイ前のシャワーは必ず入ってもらうね。","何も決めてこなくても大丈夫。話しながら一緒に決められるし、途中で気が変わってもいい。プレイが終わったらそのまま解散でも、少し話してからでも大丈夫です。"]},
+      {id:"play",keys:["プレイ","得意","何ができる","内容","開発","責め","メニュー","どんなこと","sm","中イキ","潮","オプション"],
+       answer:["得意なのは、快楽責め・開発（外イキ、中イキ、潮吹き）・言葉責め・拘束・ロウソク・首締め・スパンキングパドルあたり。それ以外も数々のプレイをやってます。","快楽責め、言葉責め、目隠し・拘束・潮吹き・羞恥責め、スパンキングパドル、首締めなどは無料オプション、超低温ロウソク・プレイ音声録音、ボンテージテープ(拘束の一種）、媚薬などは有料のオプションになっている。詳しいオプションはお店のHPにたくさん載ってるし、当日のカウンセリングでも選べるよ。どれも希望と体調に合わせてね。","毎回みんなのM度を探りながら『ちょうど良いところ』を見つけていくスタイルだから、嫌なことは断っていいし、途中でやめるのも自由。無理はさせない。"]},
+      {id:"area",keys:["エリア","出張","どこ","場所","地域","東京","遠い","県","地方","来てくれる","ホテル"],
+       answer:["東京都内、23区内が中心。それ以外の関東近郊、全国出張も応相談だよ。","基本はホテルで合流する形。場所も、ご自身の生活圏の外を指定してもらって大丈夫。詳しいエリアやスケジュールは連絡もらえたら伝えるよ。","遠方でなかなか会えない人には、会わずに電話で話せる『テレフォンコース』もおすすめ。まずはそこから、って手もあるよ。"]},
+      {id:"telephone",keys:["テレフォン","テレフォンコース","電話コース","通話","声だけ","会えない","会わず","遠方","オンライン","リモート"],
+       answer:["会わずに、電話で楽しめる『テレフォンコース』もあるよ。料金は20分7,000円。","どうしても対面が心配な人や、遠方でなかなか会えない人には、これがおすすめ。おれの声で、まずは電話から、って入り方ができる。","もっと長く話したいとか、詳しいことはDMか店に聞いてくれたら案内するよ。"]},
+      {id:"whatis",keys:["女風","女性用風俗","m性感","性感","風俗とは","って何","とは","どういう","ジャンル"],
+       answer:["女性用風俗（女風）ってのは、女性が男性キャストから性的な施術・プレイを受けられるサービスの総称だよ。","M性感はそのなかのジャンルのひとつ。お客さんがキャストから、言葉や道具を使った刺激を受けるサービス。普通の性感マッサージより、責められる・支配される感覚を楽しめるのが特徴かな。","おれは東京M性感ってとこに所属してて、初めての人向けのゆるふわコースから、開発系までやってる。"]},
+      {id:"counsel",keys:["カウンセリング","何を話","打ち合わせ","事前","伝える","話すこと","相談"],
+       answer:["カウンセリングでは、希望・NG・体調・進めるペースを確認する。無理な提案はしない。","何も決まってなくても大丈夫。話しながら一緒に決められるから、身構えなくていいよ。"]},
+      {id:"profile",keys:["どんな人","プロフィール","年齢","何歳","身長","声","性格","趣味","本人","素性","二足"],
+       answer:["昼は別の本業をやっていて、夜はM性感のキャスト。二足のわらじだよ。29歳・173cm。","声は「通いたくなる癒しのイケボ」ってよく言われる。この個人HPに声のサンプルも置いてあるから、雰囲気はそれで掴んでもらえると思う。ぜひ聴いてみて。"]},
+      {id:"recommend",keys:["おすすめ","初心者向け","誰がいい","優しい人","会話苦手","選んで","マッチ","合う人","比較"],
+       answer:["このページはおれ（シュンスケ）個人のページだから、まずはおれで良ければ、って前提になる。","初めての人・緊張しやすい人には、ゆっくり進めるやり方で合わせてる。会話が苦手でも、静かめに過ごすのでも大丈夫。","『自分に合うか不安』も、予約前に店に相談すれば、合いそうか一緒に見てくれるはず。"]},
+      {id:"body_image",keys:["太っ","ぽっちゃり","痩せ","体型","何歳まで","歳でも","年齢制限","高齢","毛","ムダ毛","vio","におい","匂い","臭","傷","産後","帝王切開","見せるの","自信ない","胸","生理"],
+       answer:["体型も年齢も体毛も、こっちが評価する立場じゃない。安心して過ごしてもらうのが優先だから、そこは気にしなくて大丈夫。","VIOの処理とかも要らない。傷とか産後の身体とか、気になることは先にDMで一言伝えてくれてもOK。","生理中の利用は、状態にもよるけど基本的に断ることはないよ。キャストによっても違うから、念のため店に確認してくれたら確実。『こんな身体でも大丈夫かな』は、ほんとに大丈夫だよ。"]},
+      {id:"reviews",keys:["口コミ","評判","レビュー","実績","ランキング","人気","本当に","信用","何件"],
+       answer:["歴4年で施術は1,500件以上。口コミは<b>300件、ALL★5</b>（東京M性感の口コミページ集計・2026年7月時点）。","ランキングは2024年に全国15位（1,500人中）、M性感グループ内では1位。数字は店の公式にも載ってるよ。"]},
+      {id:"hygiene",keys:["性感染症","性病","感染","うつ","検査","衛生","消毒","清潔","病気","std","きれい","シャワー"],
+       answer:["正直に言うと、性病リスクをゼロにはできないです。そこは誠実に明確に伝えておきたい。","そのうえで、プレイ前にシャワー・歯磨きは必須。感染症がある状態での利用は断ってる。道具も使うたびに洗浄してる。","月に1度の性病検査を、お店に必須で報告しているよ。"]},
+      {id:"married",keys:["既婚","結婚","旦那","夫","パートナーいる","浮気","営業連絡","連絡くる","恋愛","好きになっ","依存","のめり込","はまっ"],
+       answer:["既婚の人も普通に多いよ。事情はこっちから詮索しないから安心して。こっちから個人的に営業の連絡をすることはないし、会ったあとにしつこく連絡、みたいなのもしない。","のめり込みすぎない距離感でいたいと思ってるし、『合う・合わない』は、あなた自身で決めてOK。"]},
+      {id:"human",keys:["本人と","直接","話したい","人と","電話","つないで","繋いで","本物","リアル"],
+       answer:["ここから先は、おれ本人が話すよ。連絡はこの3つから、好きなやつで。"],forceCta:true},
+      {id:"thanks",keys:["ありがとう","ありがと","thanks","助かった","わかった","なるほど","了解","おk","ok","うれしい"],
+       answer:["こっちこそ。ほかに気になることあったら、いつでも聞いてよ。急かさないから、ゆっくりで。"]},
+      {id:"escalate",keys:["撮影され","盗撮","晒され","脅","強要","されそう","むりやりされ","無理やりされ","同意してな","同意せず","高額請求","詐欺","つきまと","ストーカー","しつこく連絡","個人的に会","妊娠","出血","うつされ","依存して","借金","未成年","18歳未満","高校生"],
+       answer:["それが事実なら、店のスタッフがちゃんと個別に対応する内容だよ。ここで軽く判断していい話じゃないと思ってる。","キャスト本人じゃなくて、店のスタッフに直接つないでほしい。安全・お金・体調に関わることは、きちんと確認します。"],forceCta:true,ctaText:"下の連絡先から、店のスタッフに直接どうぞ。予約じゃなくて、相談で大丈夫。"}
+    ];
+
+    var CHIPS=[
+      {label:"料金を概算する",action:"calc"},
+      {label:"どう過ごしたい？",action:"intake"},
+      {label:"初めてで安全？",q:"初めてで不安です。安全に利用できますか？嫌なことは断れますか？"},
+      {label:"何をするの？",q:"女性用風俗って実際に何をするんですか？挿入はありますか？"},
+      {label:"マッサージだけOK？",q:"マッサージだけでも利用できますか？"},
+      {label:"バレない？",q:"家族や職場にバレませんか？本名は必要ですか？"},
+      {label:"検査・衛生は？",q:"性感染症や衛生面は大丈夫ですか？検査していますか？"},
+      {label:"会うのが不安・遠方",q:"テレフォンコースについて教えて"},
+      {label:"予約したい",q:"予約はどうすればいいですか？"}
+    ];
+
+    /* ===== Phase2: 料金概算・希望ヒアリング・予約ゲートのデータ ===== */
+    var COURSES=[
+      {label:"80分",price:18000,units:1},
+      {label:"100分",price:23000,units:1},
+      {label:"120分",price:28000,units:1},
+      {label:"140分（初めてにおすすめ）",price:33000,units:1},
+      {label:"160分（初めてにおすすめ）",price:36000,units:2},
+      {label:"180分",price:41000,units:2},
+      {label:"240分",price:56000,units:2},
+      {label:"360分",price:84000,units:3},
+      {label:"お泊り9時間",price:69000,units:2},
+      {label:"テレフォン20分（電話）",price:7000,phone:true,units:0}
+    ];
+    var AREAS=[
+      {label:"渋谷〜池袋エリア",fee:1000},
+      {label:"東京23区内",fee:2000},
+      {label:"東京23区外",fee:3000},
+      {label:"神奈川・千葉・埼玉",fee:4000},
+      {label:"その他（遠方・実費）",fee:null}
+    ];
+    var NOMS=[
+      {label:"初めての指名",rate:1000},
+      {label:"本指名（2回目以降）",rate:2000},
+      {label:"指名なし／まだ未定",rate:0}
+    ];
+    // 有料オプション（お店＋シュンスケ限定）。shun:true＝本人だけの個人オプション
+    var OPTIONS=[
+      {label:"口枷",price:1000},
+      {label:"落書き",price:1000},
+      {label:"首輪",price:1000},
+      {label:"ソフトムチ",price:1000},
+      {label:"ソフトお尻責め",price:2000},
+      {label:"超低温ろうそく",price:2000},
+      {label:"ボンテージテープ拘束",price:2000},
+      {label:"媚薬",price:3000},
+      {label:"バスローション",price:3000},
+      {label:"一本鞭",price:2000,shun:true},
+      {label:"オイル性感",price:3000,shun:true},
+      {label:"アフターボイス",price:5000,shun:true},
+      {label:"プレイ音声録音（30分毎）",price:5000,shun:true},
+      {label:"スーツ",price:11000,shun:true}
+    ];
+    var FREE_OPTS="目隠し・顔面騎乗・潮吹き・ラブ噛み・ラブスパンキング・乳首69・匂い責め・連続イキ・非粘膜接触プレイ・拘束・オナニー視姦・羞恥責め・キスマーク・くすぐり地獄・ストーリープレイ";
+    var INTAKE=[
+      {label:"癒やされたい",reply:["いいね。ゆっくり癒す時間にしよう。マッサージ多めで、力を抜いて過ごせるようにする。"]},
+      {label:"性感プレイ中心",reply:["了解。性感の責め・開発をしっかりやる方向で。快楽責め・言葉責め・開発が得意だから、任せてもらえたら。もちろん無理はさせない。"]},
+      {label:"恋人みたいに過ごしたい",reply:["恋人みたいな時間、得意だよ。話し方も距離感も、そっちの好みに寄せる。"]},
+      {label:"デート気分で",reply:["デート気分で過ごすのもいいね。少し話して、ゆっくりして、って流れでも大丈夫。過ごし方はそっちに合わせる。"]},
+      {label:"自分の身体を知りたい",reply:["開発を丁寧にやるよ。中イキ・潮吹きも、焦らずそっちのペースで探っていく。"]},
+      {label:"会話・相談をしたい",reply:["ただ話すだけ、相談だけ、でも全然いい。声とか雰囲気で安心してもらえたら。"]},
+      {label:"まだ自分でも分からない",reply:["それで大丈夫。会って話しながら一緒に決めよう。何も決めてこなくていい。"]}
+    ];
+    // 質問カテゴリ（予約ゲート用）— 5カテゴリのうち3つ触れたら、そっと予約導線を出す
+    var CAT_OF={first:"安全",safety:"安全",staff:"安全",escalate:"安全",hygiene:"安全",
+      scope:"内容",massage_only:"内容",intimacy:"内容",body_response:"内容",desires:"内容",play:"内容",whatis:"内容",counsel:"内容",telephone:"内容",flow:"内容",area:"内容",
+      price:"料金",total:"料金",cancel:"料金",
+      recommend:"相性",profile:"相性",reviews:"相性",face:"相性",body_image:"相性",
+      privacy:"プライバシー",married:"プライバシー"};
+    var seenCats={},gateOffered=false,pendingGate=false;
+    function markCat(cat){if(!cat)return;seenCats[cat]=true;if(Object.keys(seenCats).length>=3&&!gateOffered){pendingGate=true;}}
+
+    var logEl,chipsEl,textEl,rootEl,greeted=false,speaking=false;
+    function el(id){return document.getElementById(id);}
+    function scrollDown(){logEl.scrollTop=logEl.scrollHeight;requestAnimationFrame(function(){logEl.scrollTop=logEl.scrollHeight;});}
+
+    function addMsg(role,html){
+      var m=document.createElement('div');
+      m.className='sbot-msg sbot-'+role;
+      m.innerHTML='<div class="sbot-bubble">'+html+'</div>';
+      logEl.appendChild(m);scrollDown();
+    }
+
+    function addContact(text){
+      var c=document.createElement('div');
+      c.className='sbot-cta';
+      c.innerHTML='<p>'+(text||CONTACT_TEXT)+'</p>'+
+        '<a class="sbot-ct-btn" href="'+DM_X+'" target="_blank" rel="noopener">'+ICON_X+'<span>X（旧Twitter）のDM</span><em>@shunsuke_tokyo2</em></a>'+
+        '<a class="sbot-ct-btn" href="'+DM_IG+'" target="_blank" rel="noopener">'+ICON_IG+'<span>InstagramのDM</span><em>@shunsuke_mtokyo</em></a>'+
+        '<a class="sbot-ct-btn" href="'+LINE_URL+'" target="_blank" rel="noopener">'+ICON_LINE+'<span>お店のLINEに直接</span><em>公式LINEへ</em></a>';
+      logEl.appendChild(c);
+      scrollDown();
+    }
+
+    function typing(){
+      var t=document.createElement('div');
+      t.className='sbot-msg sbot-bot sbot-typing';t.id='sbot-typing';
+      t.innerHTML='<div class="sbot-bubble"><i></i><i></i><i></i></div>';
+      logEl.appendChild(t);scrollDown();
+    }
+    function stopTyping(){var t=el('sbot-typing');if(t)t.remove();}
+
+    function botSay(lines,opts){
+      opts=opts||{};speaking=true;
+      typing();
+      var totalLen=lines.join('').length;
+      var delay=Math.min(400+totalLen*8,1600);
+      setTimeout(function(){
+        stopTyping();
+        // 複数の回答は1つの吹き出し内の段落として表示
+        addMsg('bot',lines.map(function(l){return '<p>'+l+'</p>';}).join(''));
+        if(opts.cta) addContact(opts.ctaText);
+        if(pendingGate && !gateOffered && !opts.cta){
+          gateOffered=true;pendingGate=false;
+          addMsg('bot','<p>だいぶ気になること、聞けたね。もし気持ちが固まってきたら、いつでも連絡していいよ。急かさないから、ゆっくりで。</p>');
+          addContact('気持ちが固まってきたら、この3つのどれかで連絡してくれたら。予約じゃなくて、最後の質問でも大丈夫。');
+        }
+        renderChips();scrollDown();
+        speaking=false;
+        if(opts.onDone)opts.onDone();
+      },delay);
+    }
+
+    function match(text){
+      var q=text.toLowerCase().replace(/\s/g,'');var best=null,bestScore=0;
+      KB.forEach(function(item){
+        var score=0;
+        item.keys.forEach(function(k){if(q.indexOf(k.toLowerCase())>-1){score+=k.length>=3?2:1;}});
+        if(score>bestScore){bestScore=score;best=item;}
+      });
+      return bestScore>0?best:null;
+    }
+
+    function handle(text){
+      addMsg('user',escapeHtml(text));chipsEl.innerHTML='';
+      var hit=match(text);
+      if(hit){markCat(CAT_OF[hit.id]);botSay(hit.answer.slice(),{cta:!!hit.forceCta,ctaText:hit.ctaText});}
+      else{
+        botSay(
+          ["そこは、この場で正確に答えきれないかも。ごめんなさい。でも下の選択肢のどれかを押してみて。話のきっかけになるかも。",
+           "もし難しかったらぜひDMしてください。"],
+          {cta:true,ctaText:"細かいことは、直接DMで聞いてくれたほうが正確にお答えできます。予約連絡じゃなくて質問だけでも大丈夫です。"}
+        );
+      }
+    }
+
+    function renderChips(){
+      chipsEl.innerHTML='';
+      CHIPS.forEach(function(c){
+        var b=document.createElement('button');b.textContent=c.label;
+        b.onclick=function(){ if(c.action==='calc'){openCalc();} else if(c.action==='intake'){openIntake();} else {handle(c.q);} };
+        chipsEl.appendChild(b);
+      });
+    }
+
+    function yen(n){return '¥'+n.toLocaleString('ja-JP');}
+
+    function openCalc(){
+      addMsg('user','料金を概算したい');chipsEl.innerHTML='';
+      var opts=function(arr){return arr.map(function(o,i){return '<option value="'+i+'">'+o.label+'</option>';}).join('');};
+      var c=document.createElement('div');c.className='sbot-tool';
+      c.innerHTML=
+        '<div class="sbot-tool-t">料金の概算</div>'+
+        '<div class="sbot-tool-sub">条件を選ぶと、目安の総額を出すよ。ホテル代とオプションは別だからね。</div>'+
+        '<div class="sbot-field"><label>コース</label><select id="sbot-c-course">'+opts(COURSES)+'</select></div>'+
+        '<div class="sbot-field"><label>エリア（交通費）</label><select id="sbot-c-area">'+opts(AREAS)+'</select></div>'+
+        '<div class="sbot-field"><label>指名</label><select id="sbot-c-nom">'+opts(NOMS)+'</select></div>'+
+        '<label class="sbot-check"><input type="checkbox" id="sbot-c-late">終了が23時を回りそう（深夜料金 +¥4,000〜）</label>'+
+        '<div class="sbot-field"><label>有料オプション（複数選択OK）</label><div class="sbot-opts" id="sbot-c-opts">'+
+          OPTIONS.map(function(o,i){ var head=(o.shun&&(i===0||!OPTIONS[i-1].shun))?'<div class="sbot-opt-head">シュンスケ限定オプション <span class="sbot-opt-headnote">（本人だけの特別メニュー）</span></div>':''; return head+'<label class="sbot-check"><input type="checkbox" data-i="'+i+'">'+o.label+'（'+yen(o.price)+'）'+(o.shun?'<span class="sbot-shun-tag">限定</span>':'')+'</label>'; }).join('')+
+        '</div><div class="sbot-opt-free">無料オプションも豊富：'+FREE_OPTS+'。全裸カウンセリング（シュンスケ限定）も無料だよ。</div></div>'+
+        '<button class="sbot-calc-btn" id="sbot-c-go">概算を出す</button>'+
+        '<div class="sbot-calc-result" id="sbot-c-out" style="display:none;"></div>';
+      logEl.appendChild(c);
+      c.querySelector('#sbot-c-go').addEventListener('click',function(){computeCalc(c);});
+      var courseSel=c.querySelector('#sbot-c-course');
+      function syncCalc(){
+        var ph=!!COURSES[+courseSel.value].phone;
+        var area=c.querySelector('#sbot-c-area'),nom=c.querySelector('#sbot-c-nom'),late=c.querySelector('#sbot-c-late');
+        area.disabled=nom.disabled=late.disabled=ph;
+        area.closest('.sbot-field').style.opacity=ph?'.4':'1';
+        nom.closest('.sbot-field').style.opacity=ph?'.4':'1';
+        late.closest('.sbot-check').style.opacity=ph?'.4':'1';
+        var optsBox=c.querySelector('#sbot-c-opts');
+        [].forEach.call(optsBox.querySelectorAll('input'),function(el){el.disabled=ph;});
+        optsBox.closest('.sbot-field').style.opacity=ph?'.4':'1';
+      }
+      var defIdx=COURSES.findIndex(function(o){return o.label.indexOf('140分')===0;});
+      if(defIdx>=0) courseSel.value=String(defIdx);
+      courseSel.addEventListener('change',syncCalc);syncCalc();
+      scrollDown();renderChips();
+    }
+
+    function computeCalc(c){
+      var course=COURSES[+c.querySelector('#sbot-c-course').value];
+      var area=AREAS[+c.querySelector('#sbot-c-area').value];
+      var nom=NOMS[+c.querySelector('#sbot-c-nom').value];
+      var late=c.querySelector('#sbot-c-late').checked;
+      var phone=!!course.phone;
+      var total=course.price;
+      var brk=[course.label+'：'+yen(course.price)];
+      var jissi=false, units=course.units||0, optSum=0, optNames=[];
+      if(!phone){
+        var nomFee=units*nom.rate;
+        if(nomFee>0){ total+=nomFee; brk.push('指名料（'+nom.label+(units>1?'・'+units+'本':'')+'）：'+yen(nomFee)); }
+        if(area.fee!=null){ total+=area.fee; brk.push('交通費（'+area.label+'）：'+yen(area.fee)+'〜'); }
+        else { brk.push('交通費（'+area.label+'）：実費'); jissi=true; }
+        if(late){ total+=4000; brk.push('深夜料金：¥4,000〜'); }
+        [].forEach.call(c.querySelectorAll('#sbot-c-opts input:checked'),function(el){ var o=OPTIONS[+el.getAttribute('data-i')]; optSum+=o.price; optNames.push(o.label+(o.shun?'★':'')); });
+        if(optSum>0){ total+=optSum; brk.push('オプション（'+optNames.join('・')+'）：'+yen(optSum)); }
+      }
+      var note=[];
+      if(phone){ note.push('※ テレフォン（電話）だから、指名料・深夜料金・交通費・ホテル代・オプションはかからないよ。'); }
+      else{
+        note.push('※ このほかに <b>ホテル代（お客さん負担）</b> がかかる。');
+        note.push('※ 無料オプションもたくさんあるよ（総額には入れていない）。');
+        if(optNames.join('').indexOf('★')>-1) note.push('※ ★は<b>シュンスケ限定</b>のオプションだよ。');
+        if(units>1) note.push('※ 160分以上は複数コースの組み合わせ。指名料も'+units+'本分で計算しているよ。');
+        if(jissi) note.push('※ そのエリアは交通費が実費だから、正確な額はDMで聞いて。');
+      }
+      var out=c.querySelector('#sbot-c-out');
+      out.innerHTML='<div class="amt">'+yen(total)+' <small>〜（目安）'+(jissi?' ＋交通費（実費）':'')+'</small></div>'+
+        '<div class="brk">'+brk.join('<br>')+'</div>'+
+        '<div class="note">'+note.join('<br>')+'</div>';
+      out.style.display='block';scrollDown();
+      markCat('料金');
+      botSay(["こんな感じ。あくまで目安だから、正確な総額は予約や相談のときに聞いてくれたら、条件に合わせて出すよ。"]);
+    }
+
+    function openIntake(){
+      addMsg('user','どう過ごしたいか相談したい');chipsEl.innerHTML='';
+      var c=document.createElement('div');c.className='sbot-tool';
+      c.innerHTML='<div class="sbot-tool-t">どう過ごしたい？</div>'+
+        '<div class="sbot-tool-sub">近いものを選んでみて。無理に決めなくていいし、あとで変えてもいいよ。</div>'+
+        '<div class="sbot-choice">'+INTAKE.map(function(o,i){return '<button data-i="'+i+'">'+o.label+'</button>';}).join('')+'</div>';
+      logEl.appendChild(c);
+      [].forEach.call(c.querySelectorAll('.sbot-choice button'),function(b){
+        b.addEventListener('click',function(){
+          var o=INTAKE[+b.getAttribute('data-i')];
+          addMsg('user',escapeHtml(o.label));chipsEl.innerHTML='';
+          markCat('内容');
+          botSay(o.reply.concat(["当日のカウンセリングで、もっと細かく合わせるからね。まずは予約前の相談だけでもいいよ。"]));
+        });
+      });
+      scrollDown();renderChips();
+    }
+
+    function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+    function greet(){
+      if(greeted)return;greeted=true;
+      botSay([
+        "どうも、<b>シュンスケ</b>だよ。気になることに答えるよ。",
+        "予約とか関係なく、質問だけでも全然OK。怖い、不安、気になることなんでも質問してみてね。"
+      ]);
+    }
+
+    window.SBot={
+      open:function(){rootEl.classList.add('sbot-open');el('sbot-teaser').classList.add('sbot-hidden');setTimeout(function(){textEl&&textEl.focus();},260);greet();},
+      close:function(){rootEl.classList.remove('sbot-open');},
+      toggle:function(){rootEl.classList.contains('sbot-open')?this.close():this.open();}
+    };
+    // LPの「料金をシミュレーションする」ボタンから、チャットを開いて計算機に直行
+    // （自己紹介の表示が終わってから計算機を出す＝順序を保証）
+    window.SBotSim=function(){
+      SBot.open();
+      var tries=0;
+      (function wait(){
+        if(greeted && !speaking){ openCalc(); }
+        else if(tries++<50){ setTimeout(wait,150); }
+      })();
+    };
+
+    function init(){
+      logEl=el('sbot-log');chipsEl=el('sbot-chips');textEl=el('sbot-text');rootEl=el('sbot');
+      el('sbot-launch').addEventListener('click',function(){SBot.toggle();});
+      el('sbot-send').addEventListener('click',send);
+      textEl.addEventListener('keydown',function(e){
+        // 日本語入力(IME)の変換確定Enterで誤送信しないようガード
+        if(e.key==='Enter' && !e.isComposing && e.keyCode!==229){ e.preventDefault(); send(); }
+      });
+      function send(){var v=textEl.value.trim();if(!v)return;textEl.value='';handle(v);}
+    }
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+  })();
   </script>
 
 </body>

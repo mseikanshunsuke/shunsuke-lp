@@ -2046,6 +2046,15 @@
   (function(){
     "use strict";
     var DM_X="https://x.com/shunsuke_tokyo2";
+    /* 質問ログの送信先（GAS WebアプリのURL）。設置後にここへ貼る。空なら送信しない */
+    var LOG_URL="https://script.google.com/macros/s/AKfycbz00DjyQWKfHj1yJDSKMkzNOYr1_qNkuK2HWcT96Ww5cBRJf_p84VDn5K686rKbRj7S/exec";
+    function logQuestion(text,hit,source){
+      try{
+        if(!LOG_URL||LOG_URL.indexOf('http')!==0)return;
+        if(hit&&hit.id==='escalate')return; /* 安全相談は記録しない */
+        fetch(LOG_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({q:text,category:(hit?(CAT_OF[hit.id]||'その他'):'該当なし'),intent:(hit?hit.id:'fallback'),answered:(hit?'yes':'no'),source:(source||'typed')})});
+      }catch(e){}
+    }
     var DM_IG="https://www.instagram.com/shunsuke_mtokyo";
     var LINE_URL="https://line.me/R/ti/p/@059pjjvh"; /* 東京M性感 公式LINE */
     var CONTACT_TEXT="本人と話したいなら、連絡はこの3つのどれかで。予約じゃなくて質問だけでも全然いいからね。";
@@ -2252,9 +2261,10 @@
       return bestScore>0?best:null;
     }
 
-    function handle(text){
+    function handle(text,source){
       addMsg('user',escapeHtml(text));chipsEl.innerHTML='';
       var hit=match(text);
+      logQuestion(text,hit,source);
       if(hit){markCat(CAT_OF[hit.id]);botSay(hit.answer.slice(),{cta:!!hit.forceCta,ctaText:hit.ctaText});}
       else{
         botSay(
@@ -2269,7 +2279,7 @@
       chipsEl.innerHTML='';
       CHIPS.forEach(function(c){
         var b=document.createElement('button');b.textContent=c.label;
-        b.onclick=function(){ if(c.action==='calc'){openCalc();} else if(c.action==='intake'){openIntake();} else {handle(c.q);} };
+        b.onclick=function(){ if(c.action==='calc'){openCalc();} else if(c.action==='intake'){openIntake();} else {handle(c.q,'chip');} };
         chipsEl.appendChild(b);
       });
     }

@@ -1475,6 +1475,213 @@
     </div>
   </section>
 
+  <!-- ▼▼ 追加: 用語解説セクション（本体LPは無改変・注入ブロック。名前空間 sk-gloss- で既存CSSと非衝突） -->
+  <style>
+    #sk-glossary { background: var(--black); }
+    #sk-glossary .sk-gloss-toggle {
+      display: block;
+      cursor: pointer;
+      list-style: none;
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      color: var(--gold-light);
+      background: rgba(184,150,62,0.08);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    #sk-glossary .sk-gloss-toggle::-webkit-details-marker { display: none; }
+    #sk-glossary .sk-gloss-toggle::marker { content: ''; }
+    #sk-glossary .sk-gloss-toggle-label { display: flex; align-items: center; gap: 0.7rem; }
+    #sk-glossary .sk-gloss-toggle-icon {
+      font-family: var(--font-display);
+      color: var(--gold);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+    #sk-glossary details[open] > .sk-gloss-toggle .sk-gloss-toggle-icon { transform: rotate(45deg); }
+    #sk-glossary .sk-gloss-hint {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      color: var(--grey-light);
+    }
+    #sk-glossary .sk-gloss-body { padding-top: 1.6rem; }
+    #sk-glossary .sk-gloss-cat {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin: 2.4rem 0 0.2rem;
+    }
+    #sk-glossary .sk-gloss-cat:first-child { margin-top: 0; }
+    #sk-glossary .sk-gloss-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+    #sk-glossary .sk-gloss-item {
+      border-top: 1px solid var(--border);
+      padding: 1.4rem 1.6rem 1.4rem 0;
+    }
+    #sk-glossary .sk-gloss-item:nth-child(odd) { padding-right: 1.6rem; }
+    #sk-glossary .sk-gloss-item:nth-child(even) { padding-left: 1.6rem; }
+    #sk-glossary .sk-gloss-term {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+    #sk-glossary .sk-gloss-def {
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      color: rgba(240,237,230,0.65);
+      line-height: 1.9;
+    }
+    @media (max-width: 720px) {
+      #sk-glossary .sk-gloss-grid { grid-template-columns: 1fr; }
+      #sk-glossary .sk-gloss-item:nth-child(odd),
+      #sk-glossary .sk-gloss-item:nth-child(even) { padding: 1.2rem 0; }
+    }
+  </style>
+  <section id="sk-glossary" aria-label="女性用風俗・用語解説">
+    <div class="section-inner spine-section">
+      <span class="section-label">Glossary</span>
+      <h2>初めての方向け<em>用語解説</em></h2>
+      <p class="section-lead">女性用風俗（女風）でよく使われる言葉を、意味がわかるようにまとめました。読んでおくと、DMでの相談やカウンセリングがスムーズです。</p>
+      <details id="sk-gloss-details">
+        <summary class="sk-gloss-toggle">
+          <span class="sk-gloss-toggle-label">用語集を見る（全23語）</span>
+          <span class="sk-gloss-hint"><span class="sk-gloss-toggle-icon">+</span></span>
+        </summary>
+        <div class="sk-gloss-body">
+          <div class="sk-gloss-cat">予約・アクセス</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">DM予約</div>
+              <div class="sk-gloss-def">X（旧Twitter）やInstagramのダイレクトメッセージで直接やり取りして予約する方法です。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">即メン</div>
+              <div class="sk-gloss-def">今すぐに遊べるキャストのこと。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">出張</div>
+              <div class="sk-gloss-def">通常の活動エリア外へ訪問し予約を受け付けること。キャストにより対応エリアや頻度は異なるので直接確認するのが良い。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">先入り</div>
+              <div class="sk-gloss-def">ホテルにお客様が先に到着し、お部屋でキャストを待っておくことです。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">待ち合わせ</div>
+              <div class="sk-gloss-def">先入りの反対。ホテル以外で合流すること。場所の指定は事前のやり取りですり合わせます。</div>
+            </div>
+          </div>
+
+          <div class="sk-gloss-cat">カウンセリング・プレイ</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">カウンセリング</div>
+              <div class="sk-gloss-def">プレイ前に、ご希望・NG・体調・不安を確認するすり合わせの時間。この時にすり合わせられるかがプレイの満足度を左右します。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">開発</div>
+              <div class="sk-gloss-def">中イキ・外イキなど、オーガズムに導くプレイの総称。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">外イキ</div>
+              <div class="sk-gloss-def">クリトリスなど外性器への刺激で得られる絶頂感のこと。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">中イキ</div>
+              <div class="sk-gloss-def">膣内（Gスポット等）への刺激で得られる絶頂感のこと。外イキより時間や慣れを要することが多いです。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">焦らし</div>
+              <div class="sk-gloss-def">性感帯への接触を控えながら少しずつ快感を高めていくテクニックのことです。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">寸止め</div>
+              <div class="sk-gloss-def">絶頂の直前で刺激を止めること。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">拘束</div>
+              <div class="sk-gloss-def">手足や体の動きを制限するプレイです。事前のカウンセリングでNG・可否を必ず確認してから行います。</div>
+            </div>
+          </div>
+
+          <div class="sk-gloss-cat">オプション</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">オプション</div>
+              <div class="sk-gloss-def">基本プレイに追加できる内容のこと。無料・有料があり、具体的な種類・料金は所属店（東京M性感）の公式ページでご確認いただけます。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">個人オプション</div>
+              <div class="sk-gloss-def">店舗の正式オプションとは別に、キャスト個人が用意している追加オプションのこと。内容は事前にDMでご確認ください。</div>
+            </div>
+          </div>
+
+          <div class="sk-gloss-cat">コース・過ごし方</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">デート</div>
+              <div class="sk-gloss-def">食事や会話など、プレイ以外で一緒に過ごすことの総称。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">お泊り</div>
+              <div class="sk-gloss-def">一晩を共に過ごすコースのこと。睡眠時間の確保は必須。詳細ルールは店ごとに異なる。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">貸切</div>
+              <div class="sk-gloss-def">24時間コースの総称。</div>
+            </div>
+          </div>
+
+          <div class="sk-gloss-cat">料金まわり</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">指名料</div>
+              <div class="sk-gloss-def">基本料金とは別に、キャストを指名する際にかかる料金のことです。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">交通費</div>
+              <div class="sk-gloss-def">多くのお店で、基本料金とは別に交通費がかかります。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">イベント</div>
+              <div class="sk-gloss-def">期間限定の割引や特典が付くキャンペーン企画のことです。</div>
+            </div>
+          </div>
+
+          <div class="sk-gloss-cat">安心・キャストを知る</div>
+          <div class="sk-gloss-grid">
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">口コミ</div>
+              <div class="sk-gloss-def">実際に利用した方の感想・評価のこと。HPで公開されており、キャストの雰囲気がわかるので安心して利用するための目安になります。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">性病検査</div>
+              <div class="sk-gloss-def">性感染症の有無を定期的に確認する検査のこと。シュンスケは月1回受検し、安全な状態を維持しています。</div>
+            </div>
+            <div class="sk-gloss-item">
+              <div class="sk-gloss-term">ツイキャス</div>
+              <div class="sk-gloss-def">近況やキャストそれぞれの想いをライブ配信で届ける媒体です。人柄を知る手段としてもご活用いただけます。</div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+  <!-- ▲▲ 追加ここまで -->
+
   <!-- SECTION 5: 口コミ -->
   <section id="reviews">
     <div class="section-inner">

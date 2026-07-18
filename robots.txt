@@ -27,6 +27,9 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: CCBot
+Allow: /
+
 # その他すべて
 User-agent: *
 Allow: /

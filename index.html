@@ -25,7 +25,10 @@
   <meta property="og:url" content="https://mseikan-shunsuke.com/">
   <meta property="og:image" content="https://mseikan-shunsuke.com/shunsuke_profile.png">
   <meta name="twitter:card" content="summary_large_image">
-  
+  <meta name="twitter:title" content="SHUNSUKE｜東京M性感 正規キャスト">
+  <meta name="twitter:description" content="業界歴4年・1,500件以上の実績。守秘義務厳守・完全顔出しNG。経営者・夜職の方も安心。">
+  <meta name="twitter:image" content="https://mseikan-shunsuke.com/shunsuke_profile.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
 
@@ -1937,6 +1940,10 @@
     document.querySelectorAll('.dm-modal-btn, .contact-method').forEach(function(link){
       link.addEventListener('click', function(){
         track('contact_click', { destination: link.href });
+        // GA4推奨CVイベント: 申込/連絡導線への実クリックをリードとして計上（GA4管理画面でキーイベント化推奨）
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { method: (link.dataset.method || 'dm'), link_url: link.href });
+        }
       });
     });
 
@@ -1989,6 +1996,14 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://mseikan-shunsuke.com/#website",
+        "url": "https://mseikan-shunsuke.com/",
+        "name": "シュンスケ｜東京M性感 公式",
+        "inLanguage": "ja",
+        "publisher": { "@id": "https://mseikan-shunsuke.com/#person" }
+      },
+      {
         "@type": "Organization",
         "@id": "https://tokyo-m-seikan.com/honten/#organization",
         "name": "東京M性感",
@@ -2016,11 +2031,13 @@
         "@id": "https://mseikan-shunsuke.com/#webpage",
         "url": "https://mseikan-shunsuke.com/",
         "name": "SHUNSUKE｜東京M性感 正規キャスト 公式ページ",
+        "isPartOf": { "@id": "https://mseikan-shunsuke.com/#website" },
         "about": { "@id": "https://mseikan-shunsuke.com/#person" },
         "author": { "@id": "https://mseikan-shunsuke.com/#person" },
         "inLanguage": "ja",
         "datePublished": "2026-06-21",
-        "dateModified": "2026-07-18"
+        "dateModified": "2026-07-19",
+        "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["#hero h1", "#conclusion"] }
       },
       {
         "@type": "Service",

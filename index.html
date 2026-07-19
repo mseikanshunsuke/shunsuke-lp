@@ -8,7 +8,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-VB93V3MKZY');
+    gtag('config', 'G-VB93V3MKZY', { allow_google_signals: false, allow_ad_personalization_signals: false });
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SHUNSUKE｜東京M性感 正規キャスト｜守秘義務・顔出しNG・開発特化</title>
@@ -2273,6 +2273,13 @@
         fetch(LOG_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({q:text,category:(hit?(CAT_OF[hit.id]||'その他'):'該当なし'),intent:(hit?hit.id:'fallback'),answered:(hit?'yes':'no'),source:(source||'typed')})});
       }catch(e){}
     }
+
+    // ===== GA4: チャット計測 =====
+    // 生の質問本文・自由入力は絶対に送らない（match結果=intent/カテゴリ等の非個人情報のみ）。安全相談(escalate)はイベント化しない。
+    var chatEntry='launcher', chatEngaged=false;
+    function bt(name,params){ try{ if(typeof track==='function'){ track(name, params||{}); } }catch(e){} }
+    function markEngaged(firstAction){ if(chatEngaged)return; chatEngaged=true; bt('chat_engaged',{chat_first_action:firstAction}); }
+    function intakeBucket(i){ return ['heal','play','romance','romance','play','heal','undecided'][i]||'other'; }
     var DM_IG="https://www.instagram.com/shunsuke_mtokyo";
     var LINE_URL="https://line.me/R/ti/p/@059pjjvh"; /* 東京M性感 公式LINE */
     var CONTACT_TEXT="本人と話したいなら、連絡はこの3つのどれかで。予約じゃなくて質問だけでも全然いいからね。";
@@ -2476,14 +2483,18 @@
       logEl.appendChild(m);scrollDown();
     }
 
-    function addContact(text){
+    function addContact(text, trigger, noMeasure){
+      trigger = trigger || 'answer';
       var c=document.createElement('div');
       c.className='sbot-cta';
+      c.setAttribute('data-cta-trigger', trigger);
+      if(noMeasure) c.setAttribute('data-cta-nomeasure','1');
       c.innerHTML='<p>'+(text||CONTACT_TEXT)+'</p>'+
         '<a class="sbot-ct-btn" href="'+DM_X+'" target="_blank" rel="noopener">'+ICON_X+'<span>X（旧Twitter）のDM</span><em>@shunsuke_tokyo2</em></a>'+
         '<a class="sbot-ct-btn" href="'+DM_IG+'" target="_blank" rel="noopener">'+ICON_IG+'<span>InstagramのDM</span><em>@shunsuke_mtokyo</em></a>'+
         '<a class="sbot-ct-btn" href="'+LINE_URL+'" target="_blank" rel="noopener">'+ICON_LINE+'<span>お店のLINEに直接</span><em>公式LINEへ</em></a>';
       logEl.appendChild(c);
+      if(!noMeasure) bt('chat_cta_view',{chat_cta_trigger:trigger});
       scrollDown();
     }
 
@@ -2504,11 +2515,11 @@
         stopTyping();
         // 複数の回答は1つの吹き出し内の段落として表示
         addMsg('bot',lines.map(function(l){return '<p>'+l+'</p>';}).join(''));
-        if(opts.cta) addContact(opts.ctaText);
+        if(opts.cta) addContact(opts.ctaText, opts.ctaTrigger||'answer', opts.noMeasure);
         if(pendingGate && !gateOffered && !opts.cta){
           gateOffered=true;pendingGate=false;
           addMsg('bot','<p>だいぶ気になること、聞けたね。もし気持ちが固まってきたら、いつでも連絡していいよ。急かさないから、ゆっくりで。</p>');
-          addContact('気持ちが固まってきたら、この3つのどれかで連絡してくれたら。予約じゃなくて、最後の質問でも大丈夫。');
+          addContact('気持ちが固まってきたら、この3つのどれかで連絡してくれたら。予約じゃなくて、最後の質問でも大丈夫。', 'gate');
         }
         renderChips();scrollDown();
         speaking=false;
@@ -2530,12 +2541,23 @@
       addMsg('user',escapeHtml(text));chipsEl.innerHTML='';
       var hit=match(text);
       logQuestion(text,hit,source);
-      if(hit){markCat(CAT_OF[hit.id]);botSay(hit.answer.slice(),{cta:!!hit.forceCta,ctaText:hit.ctaText});}
+      var isEsc = hit && hit.id==='escalate';   // 安全相談はGA4へ一切送らない
+      if(!isEsc){
+        markEngaged('message');
+        // GA4パラメータは非個人情報のみを新規リテラルで構築（logQuestionのq入りbodyは絶対に流用しない）
+        bt('chat_message_send',{
+          chat_send_source:(source||'typed'),
+          chat_intent:(hit?hit.id:'fallback'),
+          chat_category:(hit?(CAT_OF[hit.id]||'その他'):'none'),
+          chat_answered:(hit?'yes':'no')
+        });
+      }
+      if(hit){markCat(CAT_OF[hit.id]);botSay(hit.answer.slice(),{cta:!!hit.forceCta,ctaText:hit.ctaText,ctaTrigger:'answer',noMeasure:isEsc});}
       else{
         botSay(
           ["そこは、この場で正確に答えきれないかも。ごめんなさい。でも下の選択肢のどれかを押してみて。話のきっかけになるかも。",
            "もし難しかったらぜひDMしてください。"],
-          {cta:true,ctaText:"細かいことは、直接DMで聞いてくれたほうが正確にお答えできます。予約連絡じゃなくて質問だけでも大丈夫です。"}
+          {cta:true,ctaText:"細かいことは、直接DMで聞いてくれたほうが正確にお答えできます。予約連絡じゃなくて質問だけでも大丈夫です。",ctaTrigger:'fallback'}
         );
       }
     }
@@ -2551,7 +2573,10 @@
 
     function yen(n){return '¥'+n.toLocaleString('ja-JP');}
 
-    function openCalc(){
+    function openCalc(entry){
+      entry = entry || 'chip';
+      bt('chat_calc_open',{chat_entry:entry});
+      if(entry!=='lp_sim') markEngaged('calc');
       addMsg('user','料金を概算したい');chipsEl.innerHTML='';
       var opts=function(arr){return arr.map(function(o,i){return '<option value="'+i+'">'+o.label+'</option>';}).join('');};
       var c=document.createElement('div');c.className='sbot-tool';
@@ -2619,11 +2644,16 @@
         '<div class="brk">'+brk.join('<br>')+'</div>'+
         '<div class="note">'+note.join('<br>')+'</div>';
       out.style.display='block';scrollDown();
+      var eb = phone ? 'tel' : (String(Math.floor(total/10000)*10000)+'_'+String(Math.floor(total/10000)*10000+10000));
+      bt('chat_calc_result',{chat_course:course.label, chat_phone:(phone?'yes':'no'), chat_estimate_band:eb});
+      markEngaged('calc');
       markCat('料金');
       botSay(["こんな感じ。あくまで目安だから、正確な総額は予約や相談のときに聞いてくれたら、条件に合わせて出すよ。"]);
     }
 
     function openIntake(){
+      bt('chat_intake_open',{});
+      markEngaged('intake');
       addMsg('user','どう過ごしたいか相談したい');chipsEl.innerHTML='';
       var c=document.createElement('div');c.className='sbot-tool';
       c.innerHTML='<div class="sbot-tool-t">どう過ごしたい？</div>'+
@@ -2632,8 +2662,10 @@
       logEl.appendChild(c);
       [].forEach.call(c.querySelectorAll('.sbot-choice button'),function(b){
         b.addEventListener('click',function(){
-          var o=INTAKE[+b.getAttribute('data-i')];
+          var idx=+b.getAttribute('data-i');
+          var o=INTAKE[idx];
           addMsg('user',escapeHtml(o.label));chipsEl.innerHTML='';
+          bt('chat_intake_submit',{chat_intake_bucket:intakeBucket(idx)});
           markCat('内容');
           botSay(o.reply.concat(["当日のカウンセリングで、もっと細かく合わせるからね。まずは予約前の相談だけでもいいよ。"]));
         });
@@ -2645,6 +2677,7 @@
 
     function greet(){
       if(greeted)return;greeted=true;
+      bt('chat_open',{chat_entry:chatEntry});
       botSay([
         "どうも、<b>シュンスケ</b>だよ。気になることに答えるよ。",
         "予約とか関係なく、質問だけでも全然OK。怖い、不安、気になることなんでも質問してみてね。"
@@ -2659,16 +2692,27 @@
     // LPの「料金をシミュレーションする」ボタンから、チャットを開いて計算機に直行
     // （自己紹介の表示が終わってから計算機を出す＝順序を保証）
     window.SBotSim=function(){
+      chatEntry='lp_sim';
       SBot.open();
       var tries=0;
       (function wait(){
-        if(greeted && !speaking){ openCalc(); }
+        if(greeted && !speaking){ openCalc('lp_sim'); }
         else if(tries++<50){ setTimeout(wait,150); }
       })();
     };
 
     function init(){
       logEl=el('sbot-log');chipsEl=el('sbot-chips');textEl=el('sbot-text');rootEl=el('sbot');
+      // チャット内の連絡ボタン(.sbot-ct-btn)クリック＝チャット由来CV（委譲リスナはlogEl限定・ページCTAは対象外）
+      logEl.addEventListener('click',function(e){
+        var a=e.target && e.target.closest ? e.target.closest('.sbot-ct-btn') : null;
+        if(!a||!logEl.contains(a))return;
+        var block=a.closest('.sbot-cta');
+        if(block && block.getAttribute('data-cta-nomeasure'))return;   // 安全相談CTAは計測しない
+        var href=a.getAttribute('href')||'';
+        var ch=href.indexOf('line.me')>-1?'line':(href.indexOf('instagram')>-1?'instagram':'x');
+        bt('chat_contact_click',{chat_channel:ch, chat_cta_trigger:((block&&block.getAttribute('data-cta-trigger'))||'answer')});
+      });
       el('sbot-launch').addEventListener('click',function(){SBot.toggle();});
       el('sbot-send').addEventListener('click',send);
       textEl.addEventListener('keydown',function(e){

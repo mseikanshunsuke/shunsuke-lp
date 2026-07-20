@@ -97,7 +97,7 @@
     }
 
     /* ─── NAV ─── */
-    nav {
+    .site-nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
@@ -812,8 +812,8 @@
       .reviews-grid { grid-template-columns: 1fr; }
       .profile-grid { grid-template-columns: 1fr; gap: 2rem; }
       .profile-photo-wrap { max-width: 260px; margin: 0 auto; }
-      nav .nav-links { display: none; }
-      nav { padding: 1rem 4%; }
+      .site-nav .nav-links { display: none; }
+      .site-nav { padding: 1rem 4%; }
       .nav-logo { font-size: 1.05rem; letter-spacing: 0.18em; }
       .nav-actions { gap: 0.45rem; }
       .nav-schedule-btn { font-size: 0.62rem; padding: 0.5rem 0.7rem; letter-spacing: 0.05em; }
@@ -1130,7 +1130,7 @@
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav class="site-nav">
     <a href="#hero" class="nav-logo">SHUNSUKE</a>
     <ul class="nav-links">
       <li><a href="#voice">声サンプル</a></li>

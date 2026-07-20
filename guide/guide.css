@@ -1,0 +1,87 @@
+/* SHUNSUKE ガイド共通スタイル — LP（index.html）のデザイントークンを踏襲 */
+:root{
+  --black:#0D0D0D; --navy:#0A0F1E; --navy-mid:#111827;
+  --gold:#B8963E; --gold-light:#E8D5A0; --gold-dim:#7A6128;
+  --offwhite:#F0EDE6; --grey:#6B6B6B; --grey-light:#A0A0A0;
+  --border:rgba(184,150,62,0.25);
+  --font-display:'Cormorant Garamond','Noto Serif JP',serif;
+  --font-body:'Noto Serif JP',serif;
+  --font-ui:'Noto Sans JP',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy); color:var(--offwhite);
+  font-family:var(--font-body); line-height:1.9;
+  font-size:16px; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--gold-light)}
+img{max-width:100%;height:auto}
+
+/* nav */
+.g-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.4rem; border-bottom:1px solid var(--border);
+  position:sticky; top:0; background:rgba(10,15,30,0.92);
+  backdrop-filter:blur(6px); z-index:20;
+}
+.g-nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.15em;color:var(--offwhite);text-decoration:none}
+.g-nav-cta{font-family:var(--font-ui);font-size:0.72rem;letter-spacing:0.1em;color:var(--navy);background:var(--gold);padding:0.55rem 1rem;border-radius:2px;text-decoration:none;white-space:nowrap}
+.g-nav-cta:hover{background:var(--gold-light)}
+
+/* layout */
+.g-wrap{max-width:760px;margin:0 auto;padding:2.4rem 1.4rem 4rem}
+.g-breadcrumb{font-family:var(--font-ui);font-size:0.7rem;color:var(--grey-light);letter-spacing:0.05em;margin-bottom:1.6rem}
+.g-breadcrumb a{color:var(--grey-light);text-decoration:none}
+.g-breadcrumb a:hover{color:var(--gold-light)}
+.g-eyebrow{font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.28em;color:var(--gold);text-transform:uppercase;margin-bottom:0.9rem}
+h1{font-family:var(--font-display);font-weight:600;font-size:2rem;line-height:1.35;margin-bottom:1.2rem;color:#fff}
+.g-lead{font-size:1.02rem;color:var(--offwhite);border-left:2px solid var(--gold);padding-left:1.1rem;margin-bottom:2.4rem}
+.g-updated{font-family:var(--font-ui);font-size:0.66rem;color:var(--grey-light);letter-spacing:0.05em;margin-bottom:2.4rem}
+h2{font-family:var(--font-display);font-weight:600;font-size:1.5rem;line-height:1.4;margin:2.6rem 0 0.9rem;color:#fff;padding-top:1.2rem;border-top:1px solid var(--border)}
+h3{font-family:var(--font-ui);font-weight:400;font-size:1.02rem;color:var(--gold-light);margin:1.6rem 0 0.6rem}
+p{margin-bottom:1.1rem}
+.g-wrap ul,.g-wrap ol{margin:0 0 1.2rem 1.3rem}
+.g-wrap li{margin-bottom:0.5rem}
+strong{color:var(--gold-light);font-weight:500}
+
+/* answer box (AEO: 各H2直下の結論) */
+.g-answer{background:var(--navy-mid);border:1px solid var(--border);padding:1.1rem 1.3rem;margin:0 0 1.2rem;font-size:0.98rem}
+.g-answer::before{content:"結論";font-family:var(--font-ui);font-size:0.6rem;letter-spacing:0.2em;color:var(--gold);display:block;margin-bottom:0.4rem}
+
+/* callout */
+.g-note{border:1px dashed var(--border);padding:1rem 1.2rem;margin:1.4rem 0;font-size:0.9rem;color:var(--grey-light)}
+
+/* FAQ */
+.g-faq{margin-top:1rem}
+.g-faq details{border-bottom:1px solid var(--border);padding:0.9rem 0}
+.g-faq summary{font-family:var(--font-ui);font-size:0.92rem;color:var(--offwhite);cursor:pointer;list-style:none}
+.g-faq summary::-webkit-details-marker{display:none}
+.g-faq summary::before{content:"Q ";color:var(--gold)}
+.g-faq .g-faq-a{font-size:0.92rem;color:var(--grey-light);margin-top:0.7rem}
+
+/* CTA */
+.g-cta{margin:3rem 0 1rem;padding:1.8rem 1.4rem;border:1px solid var(--border);background:var(--navy-mid);text-align:center}
+.g-cta-title{font-family:var(--font-display);font-size:1.35rem;color:#fff;margin-bottom:0.5rem}
+.g-cta-sub{font-family:var(--font-ui);font-size:0.8rem;color:var(--grey-light);margin-bottom:1.4rem}
+.g-cta-btns{display:flex;flex-direction:column;gap:0.7rem;max-width:340px;margin:0 auto}
+.g-btn{display:flex;align-items:center;justify-content:center;gap:0.6rem;padding:0.9rem 1.2rem;font-family:var(--font-ui);font-size:0.8rem;letter-spacing:0.08em;text-decoration:none;transition:background 0.2s,border-color 0.2s}
+.g-btn-primary{background:var(--gold);color:var(--navy)}
+.g-btn-primary:hover{background:var(--gold-light)}
+.g-btn-outline{border:1px solid var(--border);color:var(--offwhite)}
+.g-btn-outline:hover{background:rgba(184,150,62,0.1);border-color:var(--gold)}
+
+/* related */
+.g-related{margin-top:2.6rem}
+.g-related-title{font-family:var(--font-ui);font-size:0.72rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.9rem}
+.g-related a{display:block;padding:0.8rem 0;border-bottom:1px solid var(--border);color:var(--offwhite);text-decoration:none;font-size:0.92rem}
+.g-related a:hover{color:var(--gold-light)}
+
+/* footer */
+.g-foot{border-top:1px solid var(--border);padding:2rem 1.4rem;text-align:center;font-family:var(--font-ui);font-size:0.68rem;color:var(--grey-light);line-height:2}
+.g-foot a{color:var(--grey-light)}
+
+@media(max-width:600px){
+  h1{font-size:1.6rem} h2{font-size:1.3rem}
+  .g-wrap{padding:1.8rem 1.1rem 3rem}
+}

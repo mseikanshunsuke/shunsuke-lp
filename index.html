@@ -959,16 +959,6 @@
       display: block;
       filter: sepia(0.3) saturate(0.8) hue-rotate(5deg);
     }
-    .voice-soon {
-      font-family: var(--font-ui);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      color: var(--grey);
-      padding: 0.6rem 0;
-      border-top: 1px solid var(--border);
-      width: 100%;
-      margin-top: auto;
-    }
     @media (max-width: 900px) {
       .voice-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -1006,6 +996,211 @@
         height: auto;
         min-height: 54px;
       }
+    }
+
+    /* ─── VOICE: 「もっと聴く」マスタートグル ─── */
+    .voice-more { margin-top: 2.2rem; }
+    .voice-more-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      list-style: none;
+      padding: 1.15rem 1.6rem;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      background: rgba(184,150,62,0.08);
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      color: var(--gold-light);
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+    .voice-more-toggle:hover { background: rgba(184,150,62,0.14); }
+    .voice-more-toggle::-webkit-details-marker { display: none; }
+    .voice-more-toggle::marker { content: ''; }
+    .voice-more-count {
+      font-size: 0.72rem;
+      color: var(--grey-light);
+      letter-spacing: 0.08em;
+    }
+    .voice-more-icon {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--gold);
+      transition: transform 0.25s ease;
+    }
+    .voice-more[open] > .voice-more-toggle .voice-more-icon { transform: rotate(45deg); }
+    .voice-more[open] > .voice-more-toggle { margin-bottom: 1.2rem; }
+    .voice-more-open-label { display: inline; }
+    .voice-more[open] .voice-more-open-label { display: none; }
+    .voice-more-close-label { display: none; }
+    .voice-more[open] .voice-more-close-label { display: inline; }
+
+    /* ─── カウンセリング体験デモセクション ─── */
+    #counseling-preview {
+      background: var(--navy);
+      padding: 2.1rem 5%;
+      border-bottom: 1px solid var(--border);
+    }
+    #counseling-preview .cp-inner { max-width: 840px; margin: 0 auto; }
+    @media (max-width: 640px) {
+      #counseling-preview { padding: 1.6rem 5%; }
+    }
+
+    /* ─── VOICE: カウンセリング体験デモ（フィーチャー枠） ─── */
+    .voice-feature {
+      border: 1px solid var(--gold);
+      background: rgba(184,150,62,0.07);
+      border-radius: 4px;
+      padding: 1.4rem 1.7rem;
+    }
+    .voice-feature-head {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.55rem;
+    }
+    .voice-feature-badge {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+    }
+    .voice-feature-time {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-light);
+    }
+    .voice-feature-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--offwhite);
+      margin: 0 0 0.45rem;
+    }
+    .voice-feature-desc {
+      font-size: 0.84rem;
+      line-height: 1.8;
+      color: rgba(240,237,230,0.72);
+      margin: 0 0 0.9rem;
+      max-width: 46em;
+    }
+    .voice-feature audio {
+      width: 100%;
+      min-height: 54px;
+      display: block;
+      filter: sepia(0.3) saturate(0.8) hue-rotate(5deg);
+    }
+    .voice-feature-note {
+      font-family: var(--font-ui);
+      font-size: 0.66rem;
+      line-height: 1.7;
+      color: var(--grey-light);
+      margin: 0.6rem 0 0;
+    }
+
+    /* ─── VOICE: グループ別トグル ─── */
+    .voice-groups { display: grid; gap: 0.6rem; }
+    .voice-group {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(184,150,62,0.04);
+    }
+    .voice-group-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      list-style: none;
+      padding: 1.05rem 1.4rem;
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--gold-light);
+    }
+    .voice-group-toggle::-webkit-details-marker { display: none; }
+    .voice-group-toggle::marker { content: ''; }
+    .voice-group-name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    .voice-group-name svg { color: var(--gold); flex-shrink: 0; }
+    .voice-group-count {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--grey-light);
+      flex-shrink: 0;
+    }
+    .voice-group-icon {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
+    }
+    .voice-group[open] > .voice-group-toggle .voice-group-icon { transform: rotate(45deg); }
+    .voice-group[open] > .voice-group-toggle { border-bottom: 1px solid var(--border); }
+    .voice-group-body { padding: 1.3rem 1.4rem 1.4rem; }
+    .voice-group-desc {
+      font-size: 0.78rem;
+      line-height: 1.9;
+      color: rgba(240,237,230,0.6);
+      margin: 0 0 1.2rem;
+    }
+    .voice-track {
+      display: grid;
+      grid-template-columns: 2.6rem 3rem 1fr;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.65rem 0;
+      border-top: 1px solid rgba(184,150,62,0.14);
+    }
+    .voice-track:first-of-type { border-top: none; }
+    .voice-track-no {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--gold);
+    }
+    .voice-track-time {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      color: var(--grey-light);
+      letter-spacing: 0.06em;
+    }
+    .voice-track audio {
+      width: 100%;
+      min-height: 44px;
+      display: block;
+      filter: sepia(0.3) saturate(0.8) hue-rotate(5deg);
+    }
+    @media (max-width: 640px) {
+      .voice-feature { padding: 1.5rem 1.2rem; }
+      .voice-feature-title { font-size: 1.35rem; }
+      .voice-feature-desc { font-size: 0.8rem; line-height: 1.9; }
+      .voice-group-toggle { padding: 0.95rem 1.1rem; font-size: 0.85rem; }
+      .voice-group-body { padding: 1.1rem 1.1rem 1.2rem; }
+      .voice-track {
+        grid-template-columns: 2.2rem 1fr;
+        grid-template-areas:
+          "no time"
+          "audio audio";
+        row-gap: 0.35rem;
+        column-gap: 0.7rem;
+      }
+      .voice-track-no { grid-area: no; }
+      .voice-track-time { grid-area: time; justify-self: start; }
+      .voice-track audio { grid-area: audio; }
     }
 
     /* ─── SNS FOLLOW ─── */
@@ -1213,6 +1408,25 @@
   </section>
   <!-- ▲▲▲ 追加ブロックここまで ▲▲▲ -->
 
+  <!-- ▼▼▼ 追加ブロック: カウンセリング体験デモ（No.101） ▼▼▼ -->
+  <section id="counseling-preview" aria-label="カウンセリング体験デモ">
+    <div class="cp-inner">
+      <div class="voice-feature">
+        <div class="voice-feature-head">
+          <span class="voice-feature-badge">体験デモ</span>
+          <span class="voice-feature-time">約4分</span>
+        </div>
+        <h2 class="voice-feature-title">カウンセリングって、こんな感じです</h2>
+        <p class="voice-feature-desc">初めての方がいちばん不安なのは、当日どう始まるのか分からないこと。カウンセリングの冒頭をそのまま再現しました。イヤホン推奨。</p>
+        <audio controls preload="none" data-voice-group="カウンセリング体験デモ" data-voice-id="No.101">
+          <source src="No.101.m4a" type="audio/mp4">
+        </audio>
+        <p class="voice-feature-note">※ お客様との実際の会話を録音したものではありません。カウンセリング冒頭の流れを、シュンスケ本人が一人で再現したものです。</p>
+      </div>
+    </div>
+  </section>
+  <!-- ▲▲▲ 追加ブロックここまで ▲▲▲ -->
+
   <!-- SECTION 1.5: 声サンプル -->
   <section id="voice">
     <div class="section-inner">
@@ -1226,7 +1440,7 @@
           </div>
           <div class="voice-title">自己紹介</div>
           <div class="voice-desc">はじめましての挨拶。声のトーンや雰囲気が伝わります。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="自己紹介" data-voice-id="intro">
             <source src="voice_intro.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1236,7 +1450,7 @@
           </div>
           <div class="voice-title">優しめ</div>
           <div class="voice-desc">穏やかで安心できる声。優しい雰囲気が伝わります。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="優しめ" data-voice-id="gentle">
             <source src="voice_gentle.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1246,7 +1460,7 @@
           </div>
           <div class="voice-title">ソフトM①</div>
           <div class="voice-desc">少しだけ意地悪なシチュエーション。シュンスケの世界観を少しだけ。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="softm1">
             <source src="voice_softm1.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1256,7 +1470,7 @@
           </div>
           <div class="voice-title">ソフトM②</div>
           <div class="voice-desc">もう一段強めのソフトM。じっくり入り込んでお楽しみください。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="ソフトM②" data-voice-id="softm2">
             <source src="voice_softm2.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1266,7 +1480,7 @@
           </div>
           <div class="voice-title">かわいいな</div>
           <div class="voice-desc">思わずこぼれた本音のひとこと。甘やかされたい夜に。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="かわいいな" data-voice-id="kawaii">
             <source src="voice_kawaii.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1276,7 +1490,7 @@
           </div>
           <div class="voice-title">ご褒美です</div>
           <div class="voice-desc">頑張ったあなたへ。少し意地悪なご褒美。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="ご褒美です" data-voice-id="gohoubi">
             <source src="voice_gohoubi.mp3" type="audio/mpeg">
           </audio>
         </div>
@@ -1286,11 +1500,210 @@
           </div>
           <div class="voice-title">お疲れさま</div>
           <div class="voice-desc">一日の終わりに、癒しのねぎらいボイス。</div>
-          <audio controls preload="none">
+          <audio controls preload="none" data-voice-group="お疲れさま" data-voice-id="otsukare">
             <source src="voice_otsukare.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
+
+      <details class="voice-more">
+        <summary class="voice-more-toggle">
+          <span class="voice-more-icon">+</span>
+          <span class="voice-more-open-label">もっと聴きたい方はこちら</span>
+          <span class="voice-more-close-label">閉じる</span>
+          <span class="voice-more-count">グループ別・全31本</span>
+        </summary>
+      <div class="voice-groups">
+
+        <details class="voice-group" open>
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+              自己紹介<span class="voice-group-count">1本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">はじめましての挨拶。声のトーンや雰囲気が伝わります。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">1:18</span><audio controls preload="none" data-voice-group="自己紹介" data-voice-id="No.008"><source src="No.008.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              優しめ<span class="voice-group-count">7本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">穏やかで安心できる声。優しい雰囲気が伝わります。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:13</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.009"><source src="No.009.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:17</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.010"><source src="No.010.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">03</span><span class="voice-track-time">0:21</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.011"><source src="No.011.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">04</span><span class="voice-track-time">0:18</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.013"><source src="No.013.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">05</span><span class="voice-track-time">0:21</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.014"><source src="No.014.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">06</span><span class="voice-track-time">0:11</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.015"><source src="No.015.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">07</span><span class="voice-track-time">0:35</span><audio controls preload="none" data-voice-group="優しめ" data-voice-id="No.016"><source src="No.016.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              ソフトM①<span class="voice-group-count">6本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">少しだけ意地悪なシチュエーション。シュンスケの世界観を少しだけ。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:08</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.017"><source src="No.017.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:13</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.018"><source src="No.018.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">03</span><span class="voice-track-time">0:15</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.019"><source src="No.019.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">04</span><span class="voice-track-time">0:21</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.021"><source src="No.021.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">05</span><span class="voice-track-time">0:12</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.022"><source src="No.022.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">06</span><span class="voice-track-time">0:28</span><audio controls preload="none" data-voice-group="ソフトM①" data-voice-id="No.023"><source src="No.023.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+              ソフトM②<span class="voice-group-count">3本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">もう一段強めのソフトM。じっくり入り込んでお楽しみください。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:18</span><audio controls preload="none" data-voice-group="ソフトM②" data-voice-id="No.025"><source src="No.025.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:16</span><audio controls preload="none" data-voice-group="ソフトM②" data-voice-id="No.029"><source src="No.029.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">03</span><span class="voice-track-time">0:21</span><audio controls preload="none" data-voice-group="ソフトM②" data-voice-id="No.030"><source src="No.030.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              かわいいな<span class="voice-group-count">1本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">思わずこぼれた本音のひとこと。甘やかされたい夜に。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:11</span><audio controls preload="none" data-voice-group="かわいいな" data-voice-id="No.035"><source src="No.035.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.6L20 8.4l-4.3 4 1.1 5.9L12 15.6l-4.8 2.7 1.1-5.9L4 8.4l5.6-.8z"></path></svg>
+              ご褒美です<span class="voice-group-count">3本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">頑張ったあなたへ。少し意地悪なご褒美。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:18</span><audio controls preload="none" data-voice-group="ご褒美です" data-voice-id="No.042"><source src="No.042.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:20</span><audio controls preload="none" data-voice-group="ご褒美です" data-voice-id="No.044"><source src="No.044.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">03</span><span class="voice-track-time">0:38</span><audio controls preload="none" data-voice-group="ご褒美です" data-voice-id="No.048"><source src="No.048.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+              お疲れさま<span class="voice-group-count">1本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">一日の終わりに、癒しのねぎらいボイス。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:13</span><audio controls preload="none" data-voice-group="お疲れさま" data-voice-id="No.049"><source src="No.049.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              言葉責め<span class="voice-group-count">2本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">耳から追い詰められる感覚。言葉だけで、じわじわと。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:14</span><audio controls preload="none" data-voice-group="言葉責め" data-voice-id="No.057"><source src="No.057.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:18</span><audio controls preload="none" data-voice-group="言葉責め" data-voice-id="No.060"><source src="No.060.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              拘束・独占<span class="voice-group-count">3本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">動けない時間の、緊張と安心。独占されたい夜に。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:27</span><audio controls preload="none" data-voice-group="拘束・独占" data-voice-id="No.063"><source src="No.063.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:13</span><audio controls preload="none" data-voice-group="拘束・独占" data-voice-id="No.065"><source src="No.065.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">03</span><span class="voice-track-time">0:40</span><audio controls preload="none" data-voice-group="拘束・独占" data-voice-id="No.067"><source src="No.067.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+              蝋燭・焦らし<span class="voice-group-count">1本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">急がない時間。焦らされる感覚を、声だけで。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:24</span><audio controls preload="none" data-voice-group="蝋燭・焦らし" data-voice-id="No.069"><source src="No.069.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              目隠し・首輪<span class="voice-group-count">2本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">視界を預けたときの、聴覚だけの世界。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:34</span><audio controls preload="none" data-voice-group="目隠し・首輪" data-voice-id="No.077"><source src="No.077.m4a" type="audio/mp4"></audio></div>
+            <div class="voice-track"><span class="voice-track-no">02</span><span class="voice-track-time">0:51</span><audio controls preload="none" data-voice-group="目隠し・首輪" data-voice-id="No.080"><source src="No.080.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+        <details class="voice-group">
+          <summary class="voice-group-toggle">
+            <span class="voice-group-name">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"></path><line x1="12" y1="2" x2="12" y2="9"></line><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line><line x1="1" y1="18" x2="3" y2="18"></line><line x1="21" y1="18" x2="23" y2="18"></line><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line><line x1="23" y1="22" x2="1" y2="22"></line><polyline points="8 6 12 2 16 6"></polyline></svg>
+              朝の目覚めコール<span class="voice-group-count">1本</span>
+            </span>
+            <span class="voice-group-icon">+</span>
+          </summary>
+          <div class="voice-group-body">
+            <p class="voice-group-desc">朝いちばんに届く声。一日の始まりに。</p>
+            <div class="voice-track"><span class="voice-track-no">01</span><span class="voice-track-time">0:16</span><audio controls preload="none" data-voice-group="朝の目覚めコール" data-voice-id="No.086"><source src="No.086.m4a" type="audio/mp4"></audio></div>
+          </div>
+        </details>
+
+      </div>
+      </details>
     </div>
   </section>
 
@@ -1972,11 +2385,30 @@
     });
 
     // 声サンプルの再生（各audioが再生開始された時、1回だけ）
-    document.querySelectorAll('#voice audio').forEach(function(audio, i){
-      var labels = ['自己紹介','優しめ','ソフトM①','ソフトM②','かわいいな','ご褒美です','お疲れさま'];
+    // サンプル本数が増減しても壊れないよう、順番ではなくdata属性でラベルを取る
+    document.querySelectorAll('#voice audio, #counseling-preview audio').forEach(function(audio, i){
       audio.addEventListener('play', function(){
-        track('voice_play', { sample: labels[i] || ('sample_' + i) });
+        track('voice_play', {
+          sample:   audio.dataset.voiceGroup || ('sample_' + i),
+          voice_id: audio.dataset.voiceId || ''
+        });
       }, { once: true });
+    });
+
+    // 「もっと聴きたい方はこちら」を開いた回数
+    document.querySelectorAll('#voice details.voice-more').forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if (d.open) track('voice_more_open');
+      });
+    });
+
+    // グループトグルを開いた回数（どのグループに関心があるか）
+    document.querySelectorAll('#voice details.voice-group').forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if (!d.open) return;
+        var name = d.querySelector('.voice-group-name');
+        track('voice_group_open', { sample: name ? name.textContent.trim().replace(/\s*\d+本$/, '') : '' });
+      });
     });
 
     // SNSフォローアイコンのクリック

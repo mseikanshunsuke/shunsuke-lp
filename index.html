@@ -65,7 +65,9 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    /* ページ内ジャンプは即時移動（scroll-behavior:smooth はアプリ内ブラウザ・埋め込みWebViewで
+       アニメーションが止まり「押しても動かない」に見えることがある。2万px級の長いページでは即時が確実） */
+    html { scroll-behavior: auto; }
 
     body {
       background: var(--navy);
@@ -171,6 +173,258 @@
       white-space: nowrap;
     }
     .nav-dm-btn:hover { background: var(--gold-light); color: var(--black); transform: translateY(-1px); }
+
+    /* ─── NAV DRAWER（左上メニュー・モバイルで表示） ─── */
+    .nav-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 11px 9px;
+      background: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .nav-menu-btn span {
+      display: block;
+      height: 1px;
+      background: var(--gold-light);
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 140;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: auto; }
+    .nav-drawer {
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: min(78vw, 300px);
+      background: var(--navy-mid);
+      border-right: 1px solid var(--border);
+      z-index: 150;
+      transform: translateX(-102%);
+      visibility: hidden;
+      transition: transform 0.28s ease, visibility 0.28s;
+      display: flex;
+      flex-direction: column;
+      padding: 1.1rem 1.5rem 1.5rem;
+      overflow-y: auto;
+    }
+    .nav-drawer.open { transform: translateX(0); visibility: visible; }
+    .nav-drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-drawer-title {
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-drawer-close {
+      background: none;
+      border: none;
+      color: var(--grey-light);
+      font-size: 1.4rem;
+      line-height: 1;
+      padding: 0.3rem 0.4rem;
+      cursor: pointer;
+    }
+    .nav-drawer-links {
+      list-style: none;
+      margin: 0.4rem 0 1.2rem;
+      padding: 0;
+    }
+    .nav-drawer-links a {
+      display: block;
+      padding: 0.85rem 0.2rem;
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      color: var(--offwhite);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,150,62,0.12);
+    }
+    .nav-drawer-links a:active { color: var(--gold-light); }
+    .nav-drawer-cta {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .nav-drawer-dm {
+      display: block;
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 1rem;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-drawer-official {
+      display: block;
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      color: var(--grey-light);
+      text-decoration: none;
+    }
+    body.drawer-open { overflow: hidden; }
+    /* 〜1080pxはテキストリンクが窮屈（折り返し・縦積み）になるため、ハンバーガーへ切り替え */
+    @media (max-width: 1080px) {
+      .site-nav .nav-links { display: none; }
+      .nav-menu-btn { display: flex; }
+    }
+    @media (max-width: 768px) {
+      /* モバイルは外部スケジュールボタンも畳む（同じ導線はメニュー内CTAと出勤予定セクションにある） */
+      .site-nav .nav-schedule-btn { display: none; }
+    }
+
+    /* ─── VOICE LIKE（声サンプルのいいね） ───
+       注: <button> を flex コンテナにすると Chromium系で内在幅の計算が崩れる
+       （文字がボタン外へはみ出す）ため、inline-block＋インライン配置で組む */
+    .voice-like-btn {
+      display: inline-block;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--grey-light);
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+      min-width: 7.4em; /* 環境によりカード内で内在幅が潰れるため明示（実測: 中身は約6.9em） */
+      text-align: center;
+    }
+    .voice-like-btn svg { width: 14px; height: 14px; vertical-align: -3px; margin-right: 0.35rem; }
+    .voice-like-btn .vlb-heart { fill: none; stroke: currentColor; stroke-width: 1.6; }
+    .voice-like-btn.liked {
+      color: var(--gold-light);
+      border-color: var(--gold);
+      background: rgba(184,150,62,0.12);
+    }
+    .voice-like-btn.liked .vlb-heart { fill: var(--gold); stroke: var(--gold); }
+    .voice-card .voice-like-btn { margin-top: 0.9rem; }
+
+    /* ─── VOICE AWARD（2026 ベストサンプルボイス投票の告知帯） ─── */
+    .voice-award {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      border: 1px solid var(--gold);
+      background:
+        radial-gradient(ellipse 70% 130% at 10% 50%, rgba(184,150,62,0.16) 0%, transparent 60%),
+        rgba(184,150,62,0.05);
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 3rem;
+    }
+    .voice-award-badge {
+      font-family: var(--font-ui);
+      font-weight: 300;
+      font-size: 1.7rem;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      padding-right: 1.2rem;
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .voice-award-title {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.92rem;
+      color: var(--offwhite);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .voice-award-desc {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 0.76rem;
+      color: var(--grey-light);
+      line-height: 1.9;
+    }
+    @media (max-width: 600px) {
+      .voice-award { flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1rem 1.1rem; margin-bottom: 2.2rem; }
+      .voice-award-badge { border-right: none; padding-right: 0; }
+    }
+
+    /* ─── SHIFT（出勤予定） ─── */
+    #shift { scroll-margin-top: 70px; }
+    .shift-board {
+      max-width: 620px;
+      border: 1px solid var(--border);
+      background: rgba(10,15,30,0.5);
+    }
+    .shift-row {
+      display: grid;
+      grid-template-columns: 8.5em 1fr;
+      align-items: center;
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid rgba(184,150,62,0.12);
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+    }
+    .shift-row:last-child { border-bottom: none; }
+    .shift-date { color: var(--offwhite); letter-spacing: 0.05em; }
+    .shift-dow { font-size: 0.72rem; color: var(--grey-light); margin-left: 0.3em; }
+    .shift-time { color: var(--gold-light); letter-spacing: 0.05em; }
+    .shift-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--grey-light);
+      border: 1px solid rgba(184,150,62,0.2);
+      padding: 0.12rem 0.45rem;
+      margin-left: 0.6em;
+      white-space: nowrap;
+    }
+    .shift-row.is-off .shift-date { color: var(--grey); }
+    .shift-row.is-off .shift-time { color: var(--grey); }
+    .shift-note {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      color: var(--grey-light);
+      line-height: 1.9;
+      margin-top: 1.2rem;
+      max-width: 620px;
+    }
+    .shift-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.6rem;
+    }
+    @media (max-width: 768px) {
+      .shift-row { padding: 0.7rem 0.9rem; font-size: 0.8rem; grid-template-columns: 7.2em 1fr; }
+      .shift-tag { display: inline-block; margin-left: 0.4em; }
+    }
 
     /* ─── HERO ─── */
     #hero {
@@ -1160,7 +1414,7 @@
     }
     .voice-track {
       display: grid;
-      grid-template-columns: 2.6rem 3rem 1fr;
+      grid-template-columns: 2.6rem 3rem 1fr auto;
       align-items: center;
       gap: 0.9rem;
       padding: 0.65rem 0;
@@ -1191,16 +1445,17 @@
       .voice-group-toggle { padding: 0.95rem 1.1rem; font-size: 0.85rem; }
       .voice-group-body { padding: 1.1rem 1.1rem 1.2rem; }
       .voice-track {
-        grid-template-columns: 2.2rem 1fr;
+        grid-template-columns: 2.2rem 1fr auto;
         grid-template-areas:
-          "no time"
-          "audio audio";
+          "no time like"
+          "audio audio audio";
         row-gap: 0.35rem;
         column-gap: 0.7rem;
       }
       .voice-track-no { grid-area: no; }
       .voice-track-time { grid-area: time; justify-self: start; }
       .voice-track audio { grid-area: audio; }
+      .voice-track .voice-like-btn { grid-area: like; justify-self: end; }
     }
 
     /* ─── SNS FOLLOW ─── */
@@ -1326,6 +1581,9 @@
 
   <!-- NAV -->
   <nav class="site-nav">
+    <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="navDrawer">
+      <span></span><span></span><span></span>
+    </button>
     <a href="#hero" class="nav-logo">SHUNSUKE</a>
     <ul class="nav-links">
       <li><a href="#voice">声サンプル</a></li>
@@ -1341,12 +1599,36 @@
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
       DMご予約はこちら
     </a>
-    <a href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" target="_blank" class="nav-schedule-btn">
+    <a href="#shift" class="nav-schedule-btn">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-      スケジュール
+      出勤予定
     </a>
     </div>
   </nav>
+
+  <!-- NAV DRAWER（左上メニュー） -->
+  <div class="nav-overlay" id="navOverlay"></div>
+  <aside class="nav-drawer" id="navDrawer" aria-label="ページ内メニュー">
+    <div class="nav-drawer-head">
+      <span class="nav-drawer-title">Menu</span>
+      <button class="nav-drawer-close" id="navDrawerClose" type="button" aria-label="メニューを閉じる">&#10005;</button>
+    </div>
+    <ul class="nav-drawer-links">
+      <li><a href="#voice">声サンプル</a></li>
+      <li><a href="#reasons">選ばれる理由</a></li>
+      <li><a href="#for-you">こんな方へ</a></li>
+      <li><a href="#guide">はじめてガイド</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#reviews">お客様の声</a></li>
+      <li><a href="#profile">プロフィール</a></li>
+      <li><a href="#shift">出勤予定</a></li>
+      <li><a href="#contact">ご予約</a></li>
+    </ul>
+    <div class="nav-drawer-cta">
+      <a href="#" class="nav-drawer-dm" id="navDrawerDm">DMご予約はこちら</a>
+      <a href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" target="_blank" rel="noopener" class="nav-drawer-official">公式ページで空き状況を見る</a>
+    </div>
+  </aside>
 
   <!-- HERO -->
   <section id="hero">
@@ -1437,6 +1719,14 @@
       <span class="section-label">Voice Sample</span>
       <h2>声を、<em>聴いてみてください</em></h2>
       <p class="section-lead">「声だけでリピートしたくなる」と評判のハイパーイケボ。文字では伝わらない魅力を、ぜひ貴方の耳で。</p>
+      <!-- 2026 ベストサンプルボイス投票の告知 -->
+      <div class="voice-award" id="voice-award">
+        <span class="voice-award-badge">2026</span>
+        <div class="voice-award-body">
+          <strong class="voice-award-title">ベストサンプルボイス投票、開催中</strong>
+          <span class="voice-award-desc">気に入った声に ♡（いいね）を押してください。いいねの数で、2026年のベストサンプルボイスが決まります。投票よろしくお願いします！</span>
+        </div>
+      </div>
       <div class="voice-grid">
         <div class="voice-card">
           <div class="voice-icon">
@@ -2256,6 +2546,35 @@
     </div>
   </section>
 
+  <!-- SHIFT: 出勤予定（お店公式ページの出勤表をもとに掲載） -->
+  <section id="shift">
+    <div class="section-inner">
+      <span class="section-label">Schedule</span>
+      <h2>直近の<em>出勤予定</em></h2>
+      <p class="section-lead">所属店（東京M性感）公式ページの出勤表をもとにしています（<span id="shiftAsOf">2026年8月30日時点</span>）。シフトは変わることがあるため、最新の空き状況は公式ページかDMでご確認ください。</p>
+      <div class="shift-board">
+        <!-- SHIFT:START -->
+        <div class="shift-row is-off"><span class="shift-date">8月30日<span class="shift-dow">(日)</span></span><span class="shift-time">お休み</span></div>
+        <div class="shift-row is-off"><span class="shift-date">8月31日<span class="shift-dow">(月)</span></span><span class="shift-time">お休み</span></div>
+        <div class="shift-row"><span class="shift-date">9月1日<span class="shift-dow">(火)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月2日<span class="shift-dow">(水)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月3日<span class="shift-dow">(木)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月4日<span class="shift-dow">(金)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月5日<span class="shift-dow">(土)</span></span><span class="shift-time">12:00～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月6日<span class="shift-dow">(日)</span></span><span class="shift-time">17:00～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月7日<span class="shift-dow">(月)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月8日<span class="shift-dow">(火)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <div class="shift-row"><span class="shift-date">9月9日<span class="shift-dow">(水)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
+        <!-- SHIFT:END -->
+      </div>
+      <p class="shift-note">お休みの日や掲載のない日でも、希望日があればDMで相談できます。予定が合わない時期は、テレフォンコースという選択肢もあります。</p>
+      <div class="shift-actions">
+        <a href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" class="btn-primary">DMで予約の相談をする</a>
+        <a href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" target="_blank" rel="noopener" class="btn-secondary">公式ページで空き状況を見る</a>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 7: CTA -->
   <section id="contact">
     <div class="contact-inner">
@@ -2352,6 +2671,106 @@
       if(e.target === this) this.classList.remove('active');
     });
 
+    // ===== 左上メニュー（ナビドロワー） =====
+    (function(){
+      var btn = document.getElementById('navMenuBtn');
+      var drawer = document.getElementById('navDrawer');
+      var overlay = document.getElementById('navOverlay');
+      var closeBtn = document.getElementById('navDrawerClose');
+      if (!btn || !drawer || !overlay) return;
+      function setDrawer(open){
+        drawer.classList.toggle('open', open);
+        overlay.classList.toggle('open', open);
+        document.body.classList.toggle('drawer-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      }
+      btn.addEventListener('click', function(){
+        var opening = !drawer.classList.contains('open');
+        setDrawer(opening);
+        if (opening) track('menu_open', { source: 'nav' });
+      });
+      overlay.addEventListener('click', function(){ setDrawer(false); });
+      if (closeBtn) closeBtn.addEventListener('click', function(){ setDrawer(false); });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') setDrawer(false);
+      });
+      // メニュー内リンクをタップしたら閉じてからジャンプ
+      // （閉じると同時に body のスクロールロックが外れるため、既定のアンカー移動だと
+      //   スクロールが無効化されたままの計算で止まることがある。次フレームで明示的に移動する）
+      drawer.addEventListener('click', function(e){
+        var a = e.target.closest('a');
+        if (!a) return;
+        setDrawer(false);
+        if (a.hash && a.hash.length > 1) {
+          var target = document.querySelector(a.hash);
+          if (target) {
+            e.preventDefault();
+            setTimeout(function(){
+              target.scrollIntoView();
+              if (history.pushState) history.pushState(null, '', a.hash);
+            }, 0);
+          }
+          track('menu_jump', { destination: a.hash });
+        }
+      });
+      // ドロワー内のDMボタンはモーダルを開く
+      var dm = document.getElementById('navDrawerDm');
+      if (dm) dm.addEventListener('click', function(e){
+        e.preventDefault();
+        document.getElementById('dmModal').classList.add('active');
+        track('dm_open', { source: 'drawer' });
+      });
+    })();
+
+    // ===== 声サンプルの「いいね」（2026 ベストサンプルボイス投票） =====
+    // 端末ごとの状態は localStorage に持つ（同じ端末から1本につき1回・取り消せば再度可）。
+    // 集計は GA4 の voice_like / voice_unlike（voice_id別の 差し引き = 得票数）で行う。
+    (function(){
+      var KEY = 'shunsuke_voice_likes';
+      function loadLikes(){
+        try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; }
+      }
+      function saveLikes(likes){
+        try { localStorage.setItem(KEY, JSON.stringify(likes)); } catch(e){}
+      }
+      var HEART = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path class="vlb-heart" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
+      var likes = loadLikes();
+      // 対象は #voice 内の声サンプル（カウンセリング体験デモは対象外）
+      document.querySelectorAll('#voice audio[data-voice-id]').forEach(function(audio){
+        var id = audio.dataset.voiceId;
+        if (!id) return;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'voice-like-btn';
+        btn.innerHTML = HEART + '<span>いいね</span>';
+        function render(){
+          var on = !!likes[id];
+          btn.classList.toggle('liked', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          btn.setAttribute('aria-label', (on ? 'いいねを取り消す' : 'この声にいいね') + '（' + id + '）');
+        }
+        btn.addEventListener('click', function(){
+          likes = loadLikes();
+          var on = !likes[id];
+          if (on) { likes[id] = true; } else { delete likes[id]; }
+          saveLikes(likes);
+          render();
+          track(on ? 'voice_like' : 'voice_unlike', {
+            voice_id: id,
+            sample: audio.dataset.voiceGroup || ''
+          });
+        });
+        render();
+        audio.insertAdjacentElement('afterend', btn);
+      });
+    })();
+
+    // 出勤予定セクションの公式ページリンク
+    document.querySelectorAll('#shift .btn-secondary, .nav-drawer-official').forEach(function(link){
+      link.addEventListener('click', function(){ track('schedule_click', { source: 'shift' }); });
+    });
+
     // ===== GA4 イベント計測 =====
     function track(name, params){
       if (typeof gtag === 'function') { gtag('event', name, params || {}); }
@@ -2384,9 +2803,9 @@
       });
     });
 
-    // スケジュールボタンのクリック
+    // ナビの出勤予定ボタン（ページ内の #shift へジャンプ。外部公式ページへの送客は schedule_click 側で計測）
     document.querySelectorAll('.nav-schedule-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){ track('schedule_click'); });
+      btn.addEventListener('click', function(){ track('menu_jump', { destination: '#shift' }); });
     });
 
     // 声サンプルの再生（各audioが再生開始された時、1回だけ）
@@ -2523,7 +2942,7 @@
       },
       "inLanguage": "ja",
       "datePublished": "2026-06-21",
-      "dateModified": "2026-07-20",
+      "dateModified": "2026-08-30",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -3384,7 +3803,8 @@
       {"id":"genki","keys":["元気","げんき","最近どう","最近は","調子どう","調子は","元気にして","元気してる","元気だった","どうしてる","変わりない","元気$","元気ですか","元気にしてる","元気にしてますか","げんき$","元気か","元気？"],"answer":["うん、おれは元気だよ。気にかけてくれてありがとう。","そっちはどう？ちゃんと休めてる？無理してないといいけど。","疲れてる時は、ここで少し話すだけでもいいし、会ってゆっくりするのもありだからね。"],"p":4,"t":"元気？","chat":true,"alt":[["うん、元気だよ。そっちも無理しないでね。"],["元気だよ。"]],"neg":true,"negTo":"feelings_down"},
       {"id":"content_reaction","keys":["ボイス","官能小説","ツイキャス","用語集","用語解説","専門用語","声きいた","声聞いた","今日のキャス","キャス見","キャス聴","キャスよかっ",{"re":"キャス(?!ト)","w":2,"len":3},"きゃす","配信","小説","声聴いた","聴いた","聴きました","聞きました","聴いてる","聞いてる","聴いてます","聞いてます","聴いてきた","聞いてきた","聴きに","サンプル","デモ","体験デモ","新作","新しいの","新しいやつ","^新しい$","レパートリー","投稿","ポスト","ツイート","固定コメ","アーカイブ","動画","ニヤけ","にやけ","ニヤニヤ","にやにや","音声","聴くね","聞くね","聴こ$","聞こ$","また聞こ","また聴こ","ボイスサンプル","シミュレーション","シュミレーション","シュミレ","シミュレ","^聞きました$","^聞いたよ$","^聞いた$","ボイス聞","サンプル聞","声聞い"],"answer":["聴いてくれて（見てくれて）ありがと。そう言ってもらえると、作った甲斐がある。","声のサンプルはこのページに置いてあるから、好きな時に聴きに来て。","感想はDMで直接くれたら全部読むよ。ニヤけるのは、もう許して（笑）。"],"p":6,"t":"ボイス・配信の感想","alt":[["聴いてくれてありがと。何度でも来ていいよ。"],["ありがと。"]],"chat":true},
       {"id":"tools","keys":["パドル","鞭","ムチ","一本鞭","蝋燭","ろうそく","ロウソク","口枷","首輪","媚薬","ボンテージ","バスローション","アフターボイス","どんな道具","道具って","道具","好きな道具","目隠し","拘束具","叩かれ","叩いて","お尻叩","鞭は","鞭って","鞭で","痛いですか","痛いの$","痛そう","迷い中","迷ってる","迷ってます","痛くない","痛くありません","痛くないですか","痛くないの","痛いかな","^痛い$"],"answer":["パドルは平たい板で軽くお尻を叩く道具。首輪・口枷・鞭とかの拘束具系、超低温ろうそく、媚薬なんかもある。","目隠し・拘束・スパンキングあたりは無料オプション。超低温ろうそく（¥2,000）や媚薬（¥3,000）、おれ限定の一本鞭（¥2,000）とかは有料オプション。","気になる道具や迷ってるものがあったら、DMで相談してみて。詳しく案内するよ。ページ下の用語解説にもまとまってるよ。"],"p":5,"t":"道具・オプション"},
-      {"id":"shift","keys":["シフト","出勤","出勤日","何曜日","いつ空いて","いつなら","スケジュール","予定は","予定教え","空いてる日","空いてる","空いて","平日","昼間出勤","来月","今月","出勤して","出勤する","いつ出勤","出勤いつ","いつ会える","いつ会え","会える日"],"answer":["出勤スケジュールは店の公式ページに出てるよ。このページ右上の「スケジュール」ボタンからも飛べる。","シフトに載ってない日でも、希望日があればDMで相談してみて。","予定が合わない時期は、テレフォンコースって手もあるよ。"],"p":5,"t":"シフト・出勤日"},
+      {"id":"shift","keys":["シフト","出勤","出勤日","何曜日","いつ空いて","いつなら","スケジュール","予定は","予定教え","空いてる日","空いてる","空いて","平日","昼間出勤","来月","今月","出勤して","出勤する","いつ出勤","出勤いつ","いつ会える","いつ会え","会える日"],"answer":["直近の出勤予定は、このページの「出勤予定」の欄にまとめてあるよ。最新の空き状況は、その欄の「公式ページで空き状況を見る」から確認できる。","シフトに載ってない日でも、希望日があればDMで相談してみて。","予定が合わない時期は、テレフォンコースって手もあるよ。"],"p":5,"t":"シフト・出勤日"},
+      {"id":"voice_award","keys":["いいね","ベストサンプルボイス","ベストボイス","投票","表彰"],"answer":["声サンプルに♡（いいね）を付けられるようにしたよ。いいねの数で、2026年のベストサンプルボイスを決める。","気に入った声があったら、声サンプルの欄で♡を押してみて。同じ端末からは1本につき1回で、取り消しもできる。全部に押してもOK。"],"p":5,"t":"ベストサンプルボイス投票"},
       {"id":"meta_surprise","keys":["返事きた","返事来た","自動返信","公式line","botっぽ","ボットっぽ","返しみたい","返事くる","返事ある","返事する","返事嬉し","返事うれし","返事ありがと","aiの","aiが","aiって","aiか","aiなの","aiさん","aiだ","aiレパ","人工","届いてる","届いた","読んでる","進化して","レパートリー増","増えてる","増えた","お返事","返事$","返信$","返信きた","反応してくれ"],"answer":["お、ちゃんと届いてるよ（笑）。ここは、よくある質問におれの言葉ですぐ答えられるように用意してる窓口。","型どおりに見えたらごめんね。生のおれと話したくなったら、DMに来てくれたらちゃんとおれが返すよ。"],"p":5,"t":"これって自動返信？","alt":[["うん、ちゃんと届いてる。"],["（笑）届いてるよ。"]],"chat":true},
       {"id":"who_sees","keys":["誰から","誰が見","誰に見られ","匿名です","バレずに聞け","本人から見","本人も見","本人見","本人が見","見てるの","見られるの","読まれ","本人も読","見てます","読んでます","見てる？","ここの会話","この会話","会話って本人","会話は本人"],"answer":["ここのチャットは匿名だよ。誰が送ったかは、こっちからは分からない仕組み。名前も連絡先も送られない。","名乗ってちゃんと話したい時は、DMへどうぞ。"],"p":5,"t":"この会話は誰が見てる？"},
       {"id":"aizuchi","keys":["^うん$","^うんうん$","^はい$","^はーい$","^はぁい$","^そうする$","^そうします$","^そーなの$","^そうなの$","^そうなんだ$","^そうなんですね$","^あー$","^あ$","^え$","^えー$","^へー$","^ふーん$","^ほー$","^そう$","^そうそう$","^だね$","^ね$","^うむ$","^おけ$","^おっけー$","^おっけ$","^りょ$","^おう$","^うい$","^そだね$","^そうだね$","^うんそうだね$","^はいはい$","^まあね$","^まぁね$","^そんなに$","^こう$","^素直に","^はいよ$","^ほい$","^良かった$","^よかった$","^うんうんうん$","^なるほどね$","^ですね$","^そうですね$","^そうね$","^よし$","^いいよ$","^いいね$","^おっけい$","^うぃ$","^ん$","^んー$","^うーん$","^え？$","^えっ$","^ほんと$","^ほんとに$","^まじ$","^マジ$","^まじで$","あっというま","^了$"],"answer":["うん。"],"alt":[["（笑）うん。"],["うん。"]],"p":1,"t":"相づち","chat":true},

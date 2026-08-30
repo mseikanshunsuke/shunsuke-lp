@@ -293,10 +293,15 @@
       text-decoration: none;
     }
     body.drawer-open { overflow: hidden; }
-    /* 〜1080pxはテキストリンクが窮屈（折り返し・縦積み）になるため、ハンバーガーへ切り替え */
-    @media (max-width: 1080px) {
+    /* 〜1260pxはテキストリンク8本が折り返す（実測: 1181で折返し・1280で収まる）ため、ハンバーガーへ切り替え。
+       1261〜1460pxは間隔を詰めて8本を1行に収める */
+    @media (max-width: 1260px) {
       .site-nav .nav-links { display: none; }
       .nav-menu-btn { display: flex; }
+    }
+    @media (min-width: 1261px) and (max-width: 1460px) {
+      .nav-links { gap: 1.1rem; }
+      .nav-links a { letter-spacing: 0.08em; }
     }
     @media (max-width: 768px) {
       /* モバイルは外部スケジュールボタンも畳む（同じ導線はメニュー内CTAと出勤予定セクションにある） */
@@ -323,6 +328,8 @@
       text-align: center;
     }
     .voice-like-btn svg { width: 14px; height: 14px; vertical-align: -3px; margin-right: 0.35rem; }
+    .vlb-count { margin-left: 0.35rem; color: var(--gold-light); font-weight: 500; }
+    .vlb-count:empty { display: none; }
     .voice-like-btn .vlb-heart { fill: none; stroke: currentColor; stroke-width: 1.6; }
     .voice-like-btn.liked {
       color: var(--gold-light);
@@ -331,6 +338,42 @@
     }
     .voice-like-btn.liked .vlb-heart { fill: var(--gold); stroke: var(--gold); }
     .voice-card .voice-like-btn { margin-top: 0.9rem; }
+
+    /* ─── TOP AWARD RIBBON（ページ最上部の投票告知帯・タップで#voice-awardへ） ─── */
+    .top-award-ribbon {
+      position: absolute;
+      top: 81px; /* 固定ナビの実測高（デスクトップ）。ヒーローの上余白128px内に収まる */
+      left: 0; right: 0;
+      z-index: 90;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.6rem 4%;
+      background: linear-gradient(90deg, rgba(184,150,62,0.18), rgba(184,150,62,0.06) 50%, rgba(184,150,62,0.18));
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-ui);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      color: var(--gold-light);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .top-award-ribbon:hover .tar-main { text-decoration: underline; text-underline-offset: 3px; }
+    .tar-year {
+      font-weight: 500;
+      border: 1px solid var(--gold);
+      padding: 0.1rem 0.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+    }
+    .tar-sub { color: var(--grey-light); }
+    .tar-arrow { color: var(--gold); }
+    #voice-award { scroll-margin-top: 90px; }
+    @media (max-width: 768px) {
+      .top-award-ribbon { top: 73px; font-size: 0.68rem; letter-spacing: 0.06em; gap: 0.45rem; }
+      .tar-sub { display: none; } /* 375pxで1行に収めるため補足文は畳む */
+    }
 
     /* ─── VOICE AWARD（2026 ベストサンプルボイス投票の告知帯） ─── */
     .voice-award {
@@ -1592,6 +1635,7 @@
       <li><a href="#guide">はじめてガイド</a></li>
       <li><a href="#faq">よくある質問</a></li>
       <li><a href="#reviews">お客様の声</a></li>
+      <li><a href="#shift">出勤予定</a></li>
       <li><a href="#contact">ご予約</a></li>
     </ul>
     <div class="nav-actions">
@@ -1605,6 +1649,14 @@
     </a>
     </div>
   </nav>
+
+  <!-- 2026 ベストサンプルボイス投票（トップ帯・タップで投票欄へ） -->
+  <a class="top-award-ribbon" id="topAwardRibbon" href="#voice-award">
+    <span class="tar-year">2026</span>
+    <span class="tar-main">ベストサンプルボイス投票、開催中</span>
+    <span class="tar-sub">— 気に入った声に ♡ を</span>
+    <span class="tar-arrow" aria-hidden="true">▸</span>
+  </a>
 
   <!-- NAV DRAWER（左上メニュー） -->
   <div class="nav-overlay" id="navOverlay"></div>
@@ -1629,6 +1681,9 @@
       <a href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" target="_blank" rel="noopener" class="nav-drawer-official">公式ページで空き状況を見る</a>
     </div>
   </aside>
+
+  <!-- いいね集計（GA4の voice_like − voice_unlike を tools/likes-sync.mjs が書き込む） -->
+  <!-- LIKES:START --><script type="application/json" id="voiceLikeCounts">{"intro":3,"kawaii":2,"otsukare":2,"No.008":2,"No.086":2,"softm2":2,"No.021":1,"No.023":1,"No.025":1,"No.029":1,"No.030":1,"No.049":1,"No.069":1,"gohoubi":1,"softm1":1}</script><!-- LIKES:END -->
 
   <!-- HERO -->
   <section id="hero">
@@ -2555,7 +2610,7 @@
       <div class="shift-board">
         <!-- SHIFT:START -->
         <div class="shift-row is-off"><span class="shift-date">8月30日<span class="shift-dow">(日)</span></span><span class="shift-time">お休み</span></div>
-        <div class="shift-row is-off"><span class="shift-date">8月31日<span class="shift-dow">(月)</span></span><span class="shift-time">お休み</span></div>
+        <div class="shift-row"><span class="shift-date">8月31日<span class="shift-dow">(月)</span></span><span class="shift-time">20:00～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
         <div class="shift-row"><span class="shift-date">9月1日<span class="shift-dow">(火)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
         <div class="shift-row"><span class="shift-date">9月2日<span class="shift-dow">(水)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
         <div class="shift-row"><span class="shift-date">9月3日<span class="shift-dow">(木)</span></span><span class="shift-time">19:30～翌01:00<span class="shift-tag">DM予約のみ</span></span></div>
@@ -2736,6 +2791,10 @@
       }
       var HEART = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path class="vlb-heart" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>';
       var likes = loadLikes();
+      // 集計済みのいいね数（tools/likes-sync.mjs がGA4集計をページに書き込む。無ければ全て0扱い）
+      var baseCounts = {};
+      var countsEl = document.getElementById('voiceLikeCounts');
+      if (countsEl) { try { baseCounts = JSON.parse(countsEl.textContent) || {}; } catch(e){} }
       // 対象は #voice 内の声サンプル（カウンセリング体験デモは対象外）
       document.querySelectorAll('#voice audio[data-voice-id]').forEach(function(audio){
         var id = audio.dataset.voiceId;
@@ -2743,18 +2802,24 @@
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'voice-like-btn';
-        btn.innerHTML = HEART + '<span>いいね</span>';
+        btn.innerHTML = HEART + '<span>いいね</span><span class="vlb-count"></span>';
+        var countEl = btn.querySelector('.vlb-count');
+        var sessionDelta = 0; // この画面で押した/取り消した分の即時反映（集計は後追い）
         function render(){
           var on = !!likes[id];
           btn.classList.toggle('liked', on);
           btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-          btn.setAttribute('aria-label', (on ? 'いいねを取り消す' : 'この声にいいね') + '（' + id + '）');
+          var n = Math.max(0, (baseCounts[id] || 0) + sessionDelta);
+          countEl.textContent = n > 0 ? String(n) : '';
+          btn.setAttribute('aria-label',
+            (on ? 'いいねを取り消す' : 'この声にいいね') + '（' + id + (n > 0 ? '・現在' + n + '件' : '') + '）');
         }
         btn.addEventListener('click', function(){
           likes = loadLikes();
           var on = !likes[id];
           if (on) { likes[id] = true; } else { delete likes[id]; }
           saveLikes(likes);
+          sessionDelta += on ? 1 : -1;
           render();
           track(on ? 'voice_like' : 'voice_unlike', {
             voice_id: id,
@@ -2765,6 +2830,12 @@
         audio.insertAdjacentElement('afterend', btn);
       });
     })();
+
+    // トップ帯（ベストサンプルボイス投票）のタップ
+    var awardRibbon = document.getElementById('topAwardRibbon');
+    if (awardRibbon) awardRibbon.addEventListener('click', function(){
+      track('award_banner_click', { source: 'top_ribbon' });
+    });
 
     // 出勤予定セクションの公式ページリンク
     document.querySelectorAll('#shift .btn-secondary, .nav-drawer-official').forEach(function(link){
@@ -3804,7 +3875,7 @@
       {"id":"content_reaction","keys":["ボイス","官能小説","ツイキャス","用語集","用語解説","専門用語","声きいた","声聞いた","今日のキャス","キャス見","キャス聴","キャスよかっ",{"re":"キャス(?!ト)","w":2,"len":3},"きゃす","配信","小説","声聴いた","聴いた","聴きました","聞きました","聴いてる","聞いてる","聴いてます","聞いてます","聴いてきた","聞いてきた","聴きに","サンプル","デモ","体験デモ","新作","新しいの","新しいやつ","^新しい$","レパートリー","投稿","ポスト","ツイート","固定コメ","アーカイブ","動画","ニヤけ","にやけ","ニヤニヤ","にやにや","音声","聴くね","聞くね","聴こ$","聞こ$","また聞こ","また聴こ","ボイスサンプル","シミュレーション","シュミレーション","シュミレ","シミュレ","^聞きました$","^聞いたよ$","^聞いた$","ボイス聞","サンプル聞","声聞い"],"answer":["聴いてくれて（見てくれて）ありがと。そう言ってもらえると、作った甲斐がある。","声のサンプルはこのページに置いてあるから、好きな時に聴きに来て。","感想はDMで直接くれたら全部読むよ。ニヤけるのは、もう許して（笑）。"],"p":6,"t":"ボイス・配信の感想","alt":[["聴いてくれてありがと。何度でも来ていいよ。"],["ありがと。"]],"chat":true},
       {"id":"tools","keys":["パドル","鞭","ムチ","一本鞭","蝋燭","ろうそく","ロウソク","口枷","首輪","媚薬","ボンテージ","バスローション","アフターボイス","どんな道具","道具って","道具","好きな道具","目隠し","拘束具","叩かれ","叩いて","お尻叩","鞭は","鞭って","鞭で","痛いですか","痛いの$","痛そう","迷い中","迷ってる","迷ってます","痛くない","痛くありません","痛くないですか","痛くないの","痛いかな","^痛い$"],"answer":["パドルは平たい板で軽くお尻を叩く道具。首輪・口枷・鞭とかの拘束具系、超低温ろうそく、媚薬なんかもある。","目隠し・拘束・スパンキングあたりは無料オプション。超低温ろうそく（¥2,000）や媚薬（¥3,000）、おれ限定の一本鞭（¥2,000）とかは有料オプション。","気になる道具や迷ってるものがあったら、DMで相談してみて。詳しく案内するよ。ページ下の用語解説にもまとまってるよ。"],"p":5,"t":"道具・オプション"},
       {"id":"shift","keys":["シフト","出勤","出勤日","何曜日","いつ空いて","いつなら","スケジュール","予定は","予定教え","空いてる日","空いてる","空いて","平日","昼間出勤","来月","今月","出勤して","出勤する","いつ出勤","出勤いつ","いつ会える","いつ会え","会える日"],"answer":["直近の出勤予定は、このページの「出勤予定」の欄にまとめてあるよ。最新の空き状況は、その欄の「公式ページで空き状況を見る」から確認できる。","シフトに載ってない日でも、希望日があればDMで相談してみて。","予定が合わない時期は、テレフォンコースって手もあるよ。"],"p":5,"t":"シフト・出勤日"},
-      {"id":"voice_award","keys":["いいね","ベストサンプルボイス","ベストボイス","投票","表彰"],"answer":["声サンプルに♡（いいね）を付けられるようにしたよ。いいねの数で、2026年のベストサンプルボイスを決める。","気に入った声があったら、声サンプルの欄で♡を押してみて。同じ端末からは1本につき1回で、取り消しもできる。全部に押してもOK。"],"p":5,"t":"ベストサンプルボイス投票"},
+      {"id":"voice_award","keys":["いいね","ベストサンプルボイス","ベストボイス","投票","表彰"],"answer":["声サンプルに♡（いいね）を付けられるようにしたよ。いいねの数は♡の横に出ていて、その数で2026年のベストサンプルボイスを決める。","気に入った声があったら、声サンプルの欄で♡を押してみて。同じ端末からは1本につき1回で、取り消しもできる。全部に押してもOK。"],"p":5,"t":"ベストサンプルボイス投票"},
       {"id":"meta_surprise","keys":["返事きた","返事来た","自動返信","公式line","botっぽ","ボットっぽ","返しみたい","返事くる","返事ある","返事する","返事嬉し","返事うれし","返事ありがと","aiの","aiが","aiって","aiか","aiなの","aiさん","aiだ","aiレパ","人工","届いてる","届いた","読んでる","進化して","レパートリー増","増えてる","増えた","お返事","返事$","返信$","返信きた","反応してくれ"],"answer":["お、ちゃんと届いてるよ（笑）。ここは、よくある質問におれの言葉ですぐ答えられるように用意してる窓口。","型どおりに見えたらごめんね。生のおれと話したくなったら、DMに来てくれたらちゃんとおれが返すよ。"],"p":5,"t":"これって自動返信？","alt":[["うん、ちゃんと届いてる。"],["（笑）届いてるよ。"]],"chat":true},
       {"id":"who_sees","keys":["誰から","誰が見","誰に見られ","匿名です","バレずに聞け","本人から見","本人も見","本人見","本人が見","見てるの","見られるの","読まれ","本人も読","見てます","読んでます","見てる？","ここの会話","この会話","会話って本人","会話は本人"],"answer":["ここのチャットは匿名だよ。誰が送ったかは、こっちからは分からない仕組み。名前も連絡先も送られない。","名乗ってちゃんと話したい時は、DMへどうぞ。"],"p":5,"t":"この会話は誰が見てる？"},
       {"id":"aizuchi","keys":["^うん$","^うんうん$","^はい$","^はーい$","^はぁい$","^そうする$","^そうします$","^そーなの$","^そうなの$","^そうなんだ$","^そうなんですね$","^あー$","^あ$","^え$","^えー$","^へー$","^ふーん$","^ほー$","^そう$","^そうそう$","^だね$","^ね$","^うむ$","^おけ$","^おっけー$","^おっけ$","^りょ$","^おう$","^うい$","^そだね$","^そうだね$","^うんそうだね$","^はいはい$","^まあね$","^まぁね$","^そんなに$","^こう$","^素直に","^はいよ$","^ほい$","^良かった$","^よかった$","^うんうんうん$","^なるほどね$","^ですね$","^そうですね$","^そうね$","^よし$","^いいよ$","^いいね$","^おっけい$","^うぃ$","^ん$","^んー$","^うーん$","^え？$","^えっ$","^ほんと$","^ほんとに$","^まじ$","^マジ$","^まじで$","あっというま","^了$"],"answer":["うん。"],"alt":[["（笑）うん。"],["うん。"]],"p":1,"t":"相づち","chat":true},

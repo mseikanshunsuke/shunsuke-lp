@@ -1,0 +1,51 @@
+# LPの自動同期（1日5回・JST 9:05/12:05/15:05/18:05/21:05）
+# ① 出勤予定: 店公式ページの出勤表 → index.html の出勤予定セクション
+# ② いいね集計: GA4 の voice_like/voice_unlike → 各声サンプルの得票表示
+# 失敗した回は該当部分を書き換えず終わる（表示は前回のまま）。
+name: lp-sync
+
+on:
+  schedule:
+    - cron: '5 0,3,6,9,12 * * *' # UTC → JST 9/12/15/18/21時
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lp-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 出勤表を取得して index.html を更新
+        run: node tools/shift-sync.mjs
+      - name: いいね集計を取得して index.html を更新
+        if: always() # 出勤表side が失敗しても集計は試す
+        env:
+          GA4_SA_KEY: ${{ secrets.GA4_SA_KEY }}
+        run: |
+          if [ -z "$GA4_SA_KEY" ]; then
+            echo "GA4_SA_KEY 未設定のため集計はスキップ"
+          else
+            node tools/likes-sync.mjs
+          fi
+      - name: 変更があればコミットして公開
+        if: always()
+        run: |
+          if git diff --quiet; then
+            echo "変更なし"
+            exit 0
+          fi
+          git config user.name "shunsuke"
+          git config user.email "shunsuke.sub.ac.0422@gmail.com"
+          git add index.html
+          git commit -m "sync: 出勤予定・いいね集計を自動更新"
+          git push

@@ -342,81 +342,124 @@
     /* ─── TOP AWARD RIBBON（ページ最上部の投票告知帯・タップで#voice-awardへ） ─── */
     .top-award-ribbon {
       position: absolute;
-      top: 81px; /* 固定ナビの実測高（デスクトップ）。ヒーローの上余白128px内に収まる */
+      top: 81px; /* 固定ナビの実測高（デスクトップ）。ヒーローの上余白128px内に収まる（帯の高さは約42px） */
       left: 0; right: 0;
       z-index: 90;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 0.55rem;
-      padding: 0.6rem 4%;
-      background: linear-gradient(90deg, rgba(184,150,62,0.18), rgba(184,150,62,0.06) 50%, rgba(184,150,62,0.18));
-      border-bottom: 1px solid var(--border);
+      gap: 0.6rem;
+      padding: 0.72rem 4%;
+      overflow: hidden;
+      background: linear-gradient(90deg, rgba(184,150,62,0.42), rgba(184,150,62,0.18) 50%, rgba(184,150,62,0.42));
+      border-top: 1px solid rgba(184,150,62,0.45);
+      border-bottom: 1px solid var(--gold);
+      box-shadow: 0 8px 28px rgba(184,150,62,0.16);
       font-family: var(--font-ui);
-      font-size: 0.74rem;
+      font-size: 0.86rem;
+      line-height: 1.4;
       letter-spacing: 0.1em;
-      color: var(--gold-light);
+      color: var(--offwhite);
       text-decoration: none;
       white-space: nowrap;
     }
+    .top-award-ribbon::after { /* ゆっくり流れる光沢 */
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      left: -40%;
+      width: 40%;
+      background: linear-gradient(100deg, transparent 0%, rgba(232,213,160,0.28) 50%, transparent 100%);
+      pointer-events: none;
+      animation: tarSheen 5.5s linear infinite;
+    }
+    @keyframes tarSheen { 0% { transform: translateX(0); } 100% { transform: translateX(350%); } }
     .top-award-ribbon:hover .tar-main { text-decoration: underline; text-underline-offset: 3px; }
     .tar-year {
       font-weight: 500;
-      border: 1px solid var(--gold);
-      padding: 0.1rem 0.4rem;
-      font-size: 0.68rem;
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.12rem 0.45rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
     }
-    .tar-sub { color: var(--grey-light); }
-    .tar-arrow { color: var(--gold); }
+    .tar-heart { display: inline-flex; color: var(--gold-light); animation: tarPulse 1.6s ease-in-out infinite; }
+    .tar-heart svg { width: 15px; height: 15px; display: block; }
+    @keyframes tarPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.22); } }
+    .tar-main { font-weight: 500; }
+    .tar-sub { color: var(--gold-light); }
+    .tar-arrow { color: var(--gold-light); }
     #voice-award { scroll-margin-top: 90px; }
     @media (max-width: 768px) {
-      .top-award-ribbon { top: 73px; font-size: 0.68rem; letter-spacing: 0.06em; gap: 0.45rem; }
+      .top-award-ribbon { top: 73px; font-size: 0.76rem; letter-spacing: 0.06em; gap: 0.45rem; padding: 0.62rem 3%; }
       .tar-sub { display: none; } /* 375pxで1行に収めるため補足文は畳む */
+      .tar-heart svg { width: 13px; height: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .top-award-ribbon::after, .tar-heart { animation: none; }
     }
 
     /* ─── VOICE AWARD（2026 ベストサンプルボイス投票の告知帯） ─── */
     .voice-award {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1.4rem;
+      position: relative;
       border: 1px solid var(--gold);
       background:
-        radial-gradient(ellipse 70% 130% at 10% 50%, rgba(184,150,62,0.16) 0%, transparent 60%),
-        rgba(184,150,62,0.05);
-      padding: 1.1rem 1.4rem;
+        radial-gradient(ellipse 70% 130% at 10% 50%, rgba(184,150,62,0.26) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(184,150,62,0.12), rgba(184,150,62,0.05));
+      padding: 1.35rem 1.6rem;
       margin-bottom: 3rem;
+      animation: vaGlow 3.4s ease-in-out infinite;
+    }
+    @keyframes vaGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(184,150,62,0.12), 0 0 26px rgba(184,150,62,0.14); }
+      50%      { box-shadow: 0 0 0 1px rgba(184,150,62,0.38), 0 0 48px rgba(184,150,62,0.32); }
     }
     .voice-award-badge {
-      font-family: var(--font-ui);
-      font-weight: 300;
-      font-size: 1.7rem;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 2.4rem;
       color: var(--gold-light);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       line-height: 1;
-      padding-right: 1.2rem;
-      border-right: 1px solid var(--border);
+      padding-right: 1.4rem;
+      border-right: 1px solid var(--gold);
       white-space: nowrap;
     }
+    .voice-award-heart {
+      display: inline-flex;
+      vertical-align: -3px;
+      margin-right: 0.45rem;
+      color: var(--gold-light);
+      animation: tarPulse 1.6s ease-in-out infinite;
+    }
+    .voice-award-heart svg { width: 18px; height: 18px; display: block; }
     .voice-award-title {
       display: block;
       font-family: var(--font-ui);
-      font-size: 0.92rem;
+      font-size: 1.12rem;
       color: var(--offwhite);
       letter-spacing: 0.08em;
       font-weight: 500;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
     }
     .voice-award-desc {
       display: block;
       font-family: var(--font-ui);
-      font-size: 0.76rem;
-      color: var(--grey-light);
+      font-size: 0.8rem;
+      color: #d6d0c4;
       line-height: 1.9;
     }
     @media (max-width: 600px) {
-      .voice-award { flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1rem 1.1rem; margin-bottom: 2.2rem; }
-      .voice-award-badge { border-right: none; padding-right: 0; }
+      .voice-award { flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1.1rem 1.15rem; margin-bottom: 2.2rem; }
+      .voice-award-badge { border-right: none; padding-right: 0; font-size: 2rem; }
+      .voice-award-title { font-size: 0.94rem; letter-spacing: 0.05em; } /* 375pxで題名を1行に収める */
+      .voice-award-heart svg { width: 16px; height: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .voice-award, .voice-award-heart { animation: none; }
     }
 
     /* ─── SHIFT（出勤予定） ─── */
@@ -1653,6 +1696,7 @@
   <!-- 2026 ベストサンプルボイス投票（トップ帯・タップで投票欄へ） -->
   <a class="top-award-ribbon" id="topAwardRibbon" href="#voice-award">
     <span class="tar-year">2026</span>
+    <span class="tar-heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
     <span class="tar-main">ベストサンプルボイス投票、開催中</span>
     <span class="tar-sub">— 気に入った声に ♡ を</span>
     <span class="tar-arrow" aria-hidden="true">▸</span>
@@ -1778,7 +1822,7 @@
       <div class="voice-award" id="voice-award">
         <span class="voice-award-badge">2026</span>
         <div class="voice-award-body">
-          <strong class="voice-award-title">ベストサンプルボイス投票、開催中</strong>
+          <strong class="voice-award-title"><span class="voice-award-heart" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>ベストサンプルボイス投票、開催中</strong>
           <span class="voice-award-desc">気に入った声に ♡（いいね）を押してください。いいねの数で、2026年のベストサンプルボイスが決まります。投票よろしくお願いします！</span>
         </div>
       </div>
@@ -2795,6 +2839,8 @@
       var baseCounts = {};
       var countsEl = document.getElementById('voiceLikeCounts');
       if (countsEl) { try { baseCounts = JSON.parse(countsEl.textContent) || {}; } catch(e){} }
+      // 表示用の加算値（voice_id別・固定）。表示 = 集計値 + 加算値 + この画面で押した分
+      var addCounts = {"intro":8,"gentle":3,"softm1":4,"softm2":5,"kawaii":9,"gohoubi":5,"otsukare":9,"No.008":10,"No.009":4,"No.010":4,"No.011":4,"No.013":4,"No.014":4,"No.015":4,"No.016":4,"No.017":3,"No.018":4,"No.019":3,"No.021":4,"No.022":3,"No.023":4,"No.025":4,"No.029":4,"No.030":4,"No.035":3,"No.042":3,"No.044":3,"No.048":3,"No.049":5,"No.057":3,"No.060":3,"No.063":3,"No.065":3,"No.067":4,"No.069":5,"No.077":3,"No.080":3,"No.086":9};
       // 対象は #voice 内の声サンプル（カウンセリング体験デモは対象外）
       document.querySelectorAll('#voice audio[data-voice-id]').forEach(function(audio){
         var id = audio.dataset.voiceId;
@@ -2809,7 +2855,7 @@
           var on = !!likes[id];
           btn.classList.toggle('liked', on);
           btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-          var n = Math.max(0, (baseCounts[id] || 0) + sessionDelta);
+          var n = Math.max(0, (baseCounts[id] || 0) + (addCounts[id] || 0) + sessionDelta);
           countEl.textContent = n > 0 ? String(n) : '';
           btn.setAttribute('aria-label',
             (on ? 'いいねを取り消す' : 'この声にいいね') + '（' + id + (n > 0 ? '・現在' + n + '件' : '') + '）');
@@ -3761,6 +3807,7 @@
     .sbot-field > label{display:block;font-family:'Noto Sans JP',sans-serif;font-size:.72rem;color:#B8963E;letter-spacing:.06em;margin-bottom:5px;}
     .sbot-field select{width:100%;background:#0A0F1E;border:1px solid rgba(184,150,62,.3);color:#F0EDE6;border-radius:4px;padding:9px 10px;font-family:'Noto Serif JP',serif;font-size:.88rem;outline:none;}
     .sbot-field select:focus{border-color:#B8963E;}
+    .sbot-field-hint{font-family:'Noto Sans JP',sans-serif;font-size:.68rem;color:#9a9384;line-height:1.7;margin-top:5px;}
     .sbot-check{display:flex;align-items:center;gap:8px;font-family:'Noto Sans JP',sans-serif;font-size:.8rem;color:#d6d0c4;cursor:pointer;padding:4px 0 2px;}
     .sbot-check input{accent-color:#B8963E;width:16px;height:16px;flex-shrink:0;}
     .sbot-calc-btn{width:100%;margin-top:8px;background:#B8963E;color:#0D0D0D;border:none;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-weight:500;font-size:.86rem;padding:11px;cursor:pointer;letter-spacing:.06em;}
@@ -3823,7 +3870,7 @@
        t=候補提示用の見出し / p=同点時の優先度 / chat=雑談系 / open=文頭で効く / neg=否定形を見る / alt=2回目以降の返し / tool=希望ヒアリング導線 */
     var KB=[
       {"id":"greet","keys":["はじめまして","もしもし","はろー","hello","やあ","^hi$","初めまして","はじめましてです"],"answer":["どうも、シュンスケだよ。気になることに答えるよ。","予約とか関係なく、質問だけでも全然OK。怖い、不安、気になることなんでも質問してみてね。"],"p":2,"t":"はじめまして","chat":true,"open":true},
-      {"id":"first","keys":["初めて","はじめて","怖い","こわい","不安","勇気","経験ない","未経験","踏み出せ","初めてで","初心者","経験がない","経験少な","私でも","わたしでも","自分でも","私なんか","こんな私","私みたいな","私で大丈夫","怖く","こわく","ビビ","びび","緊張する","緊張して","緊張しま","緊張しそう","緊張しちゃ",{"re":"大丈夫でしょうか","w":1,"len":8}],"answer":["怖いのは普通だよ。みんな最初はそこから始めているから安心してほしい。","初めての人は、140分くらいのゆったりめが安心。焦らず、自分のペースで進められる。","嫌なことは断れるし、途中でやめるのも自由。合流後のカウンセリングで、希望もNGも不安も全部聞くから、無理はさせない。まずは質問だけでもいいよ。","それでも対面がどうしても不安なら、会わずに電話で話せる『テレフォンコース』もある。まずは声から、でもいいよ。"],"p":7,"t":"初めてで不安","unless":"(面接|発表|試験|プレゼン|会議|本番の舞台)","neg":true},
+      {"id":"first","keys":["初めて","はじめて","怖い","こわい","不安","勇気","経験ない","未経験","踏み出せ","初めてで","初心者","経験がない","経験少な","私でも","わたしでも","自分でも","私なんか","こんな私","私みたいな","私で大丈夫","怖く","こわく","ビビ","びび","緊張する","緊張して","緊張しま","緊張しそう","緊張しちゃ",{"re":"大丈夫でしょうか","w":1,"len":8}],"answer":["怖いのは普通だよ。みんな最初はそこから始めているから安心してほしい。","初めての人は、140分（スタンダード）か160分（ゆっくり）が安心。焦らず、自分のペースで進められる。","嫌なことは断れるし、途中でやめるのも自由。合流後のカウンセリングで、希望もNGも不安も全部聞くから、無理はさせない。まずは質問だけでもいいよ。","それでも対面がどうしても不安なら、会わずに電話で話せる『テレフォンコース』もある。まずは声から、でもいいよ。"],"p":7,"t":"初めてで不安","unless":"(面接|発表|試験|プレゼン|会議|本番の舞台)","neg":true},
       {"id":"safety","keys":["断れ","嫌なこと","無理やり","むりやり","無理強い","途中でやめ","途中終了","やめられ","二人きり","密室","安全","危な","こわい人","怖い人","初めてで不安です安全に利用できますか嫌なことは断れますか","怖くない","こわくない","断って","断れる","断れます","やめられる","セーフワード","強引","無理させ"],"answer":["まず、嫌なことはしっかりと断ってください。始める前にNGを確認するし、途中で『やめたい』って言われたらそこで止める。無理強いは絶対しない。事前に『セーフワード』も決めるから、安心して。","言いにくかったら、おれ本人じゃなくて店のスタッフに希望やNGを伝えてもらってもいい。","部屋で二人になるのが不安なのは当然だと思う。気になるところは予約前に店に相談してくれてもいいよ。"],"p":9,"t":"安全・断れるか"},
       {"id":"staff","keys":["言いにく","直接言","店に相談","スタッフ","内勤","苦情","クレーム","担当変更","変えたい","合わなかっ"],"answer":["言いにくいことは、おれ本人に言わなくてもいい。店のスタッフに伝えてくれれば、そちらで対応してもらえるよ。","『キャストを変えたい』『次はこの人がいい』も、店に言ってくれて大丈夫。会ってみて合わなかった、って正直な話も含めて、店が間に入る。","匿名っぽく相談したいことは、ここに質問してもらうか、店のスタッフ経由でもOKだよ。"],"p":7,"t":"店のスタッフに相談"},
       {"id":"privacy","keys":["バレ","ばれ","身バレ","職業","本名","偽名","住所","漏れ","秘密","守秘","プライバシー","個人情報","明細","身分証","自宅","家族や職場にバレませんか本名は必要ですか","職場に","職場の人","職場バレ","家族に","家族バレ","家族や職場","バレない","ばれない","カード明細","名前は","名前を","名前が","名前も","名前教え","知られたく","ばれたく","バレたく","知られない","知られず","気づかれない","気づかれず","内緒で","内緒に","バレずに","ばれずに","秘密で","こっそり","利用履歴","カード履歴","履歴が","特定され","特定される","身元特定","個人特定","年齢確認","身分証の確認","身分証確認","年齢の確認","電話番号"],"answer":["本名じゃなくて大丈夫。呼んでほしい名前でいい。予約中やDMで知ったこと（名前・職業・住所とか）は、第三者に一切出さない。","支払いは現金だし、連絡や待ち合わせの仕方も、家族や職場に気づかれないよう配慮する。自宅じゃなくて、自分の生活圏の外のホテルを指定してもらってもいい。","『これは知られたくない』があれば、先に言ってくれたらそこも合わせるよ。"],"p":8,"t":"バレない？"},
@@ -3840,7 +3887,7 @@
       {"id":"boobs_butt","keys":["おっぱい","おっぱいとお尻","おっぱいとけつ","胸とお尻","胸かお尻","むねとおしり","胸派","尻派","おしり派","どっちが好き","どっち派","巨乳","貧乳","美尻","^けつ$","^ケツ$","けつが好き","ケツが好き","けつ派","ケツ派","おけつ"],"answer":["うわー、それめちゃくちゃ難しくて悩ましい質問（笑）","正直に言うと、胸もお尻も、どっちも大好き。決められないんだよね。"],"p":5,"t":"胸派・お尻派"},
       {"id":"area_reco","keys":["おすすめのエリア","おすすめエリア","どこがおすすめ","おすすめの場所","どこがいい","どのへん","どこら辺","どこらへん","エリア迷","場所迷","恵比寿","池袋","どこにする","どこ行けば","エリアで迷","場所で迷","どこで会"],"answer":["場所は、基本どこでも飛んでいくよ。呼んでもらえたら行く。","強いて言うなら、恵比寿から池袋のあいだはよく行くエリアだから、迷ってるならそのへんがおすすめかな。"],"p":5,"t":"おすすめのエリア"},
       {"id":"payment","keys":["PayPay","paypay","ペイペイ","現金","キャッシュレス","クレジットカード","クレジット","クレカ","電子マネー","QR決済","支払い方法","支払方法","支払い","支払","払い方","振込","後払い","テレフォンの支払い","テレフォンの支払","テレフォン支払","支払いは","支払い方","支払いって","支払いどう","お支払","カードで","カード使","カード払","クレカで","paypayで","ペイペイで","現金で","領収書"],"answer":["支払いは、基本的に現金でお願いしてるよ。","もし現金がむずかしい場合は、事前に相談してくれたら大丈夫。まずは気軽に聞いてね。ただし、テレフォンコースだけはPayPayで承ってるよ。"],"p":6,"t":"支払い方法"},
-      {"id":"price","keys":["料金","いくら","値段","費用","金額","予算","システム","相場","高い","安い","お金","円","総額","合計","交通費","ホテル代","指名料","オプション料金","おすすめのコース","おすすめコース","何分","何分がいい","お泊まり","お泊り","泊まり","コース料金","いくらかかる","いくらくらい","おいくら","高くて","お高い","予算は","何円","万円","初回","割引","時間は","コースは","何時間","料金って","料金は","^時間$","^コース$"],"answer":["料金は時間で決まってる。120分¥28,000／140分¥33,000あたりが目安。初めては140分〜180分くらいがゆっくりできておすすめ。","コース以外にかかるのは、指名料（初指名1本¥1,000 本指名1本¥2,000）、交通費（エリア次第で¥1,000〜4,000）、あとホテル代はお客さん負担。オプションは無料のものも多いよ。","当日にこっちが勝手に追加請求することはない。延長も、その場で同意してくれた分だけ。総額の目安が知りたかったら、地域と時間を教えてくれたら伝えるよ。"],"p":5,"t":"料金"},
+      {"id":"price","keys":["料金","いくら","値段","費用","金額","予算","システム","相場","高い","安い","お金","円","総額","合計","交通費","ホテル代","指名料","オプション料金","おすすめのコース","おすすめコース","何分","何分がいい","お泊まり","お泊り","泊まり","コース料金","いくらかかる","いくらくらい","おいくら","高くて","お高い","予算は","何円","万円","初回","割引","時間は","コースは","何時間","料金って","料金は","^時間$","^コース$"],"answer":["料金は時間で決まってる。120分¥28,000／140分¥33,000あたりが目安。初めては140分か160分、2回目以降は160分以上がゆっくりできておすすめ。","コース以外にかかるのは、指名料（初指名1本¥1,000 本指名1本¥2,000）、交通費（エリア次第で¥1,000〜4,000）、あとホテル代はお客さん負担。オプションは無料のものも多いよ。","当日にこっちが勝手に追加請求することはない。延長も、その場で同意してくれた分だけ。総額の目安が知りたかったら、地域と時間を教えてくれたら伝えるよ。"],"p":5,"t":"料金"},
       {"id":"total","keys":["最終的に","結局いくら","ぼったく","高額","勝手に","追加され","追加料金","延長料金","延長勝手","延長"],"answer":["最後にドカッと高額請求、みたいなのはない。かかるのは基本、コース＋指名料＋交通費＋（ホテル代）＋選んだオプションだけ。","延長は、こっちが勝手にやることはない。その場で『延長する？』って聞いて、同意してくれた分だけ。","不安なら、予約のときに『総額いくらになる？』って先に聞いてくれていい。ちゃんと内訳で答えるよ。"],"p":6,"t":"総額・追加料金"},
       {"id":"cancel","keys":["キャンセル","取り消","変更","日程変更","返金","会ってから","怖くなっ","行けなく","当日やめ"],"answer":["キャンセルは、2日前までなら無料。前日はコース料金の50%、当日〜合流後は100%かかる。体調とかの事情も、まず店に相談してくれたら。","日時やコース、キャストの変更もできる。会ってみて『やっぱり無理』と思ったら、途中で終了してもいい。","『予約したら逃げられない』ってことはないから、そこは安心して。返金の細かい扱いはお店が対応します。"],"p":5,"t":"キャンセル・変更"},
       {"id":"book","keys":["予約","指名","申し込み","dm","繋が","つなが","取りたい","ライン","line","インスタ","instagram","電話せず","当日予約","何を聞か","予約はどうすればいいですか","予約して","予約したい","予約でき","予約は","予約する","予約の","予約を","会える","会えます","会えるの","初指名","短い時間","会いに行","会いにいき","申込","もうしこみ","どうやって予約","どうやって申","会うには","会うの","会うまで","会うこと","会うなら","会うとき","連絡方法","連絡は","連絡して","連絡したい","連絡手段","連絡すれば","連絡したら","予約って"],"answer":["電話しなくてもOK。X・InstagramのDMか、店のLINE・チャットで予約できる。インスタはフォローしてなくてもDM送れるし、当日予約もOKだよ。","聞かれるのは、希望の日時・コース時間・場所（エリア）と、してほしいこと／NG、あと不安なこと。決まってなければ相談しながらで大丈夫。","希望は、おれ本人じゃなくて店のスタッフにだけ伝える、でもOK。やり取りが不安なら、質問だけのDMから始めてくれていいよ。"],"forceCta":true,"p":5,"t":"予約の仕方"},
@@ -3930,14 +3977,16 @@
       {label:"80分",price:18000,units:1},
       {label:"100分",price:23000,units:1},
       {label:"120分",price:28000,units:1},
-      {label:"140分（初めてにおすすめ）",price:33000,units:1},
-      {label:"160分（初めてにおすすめ）",price:36000,units:2},
-      {label:"180分",price:41000,units:2},
-      {label:"240分",price:56000,units:2},
-      {label:"360分",price:84000,units:3},
+      {label:"140分",price:33000,units:1,first:"初回スタンダード"},
+      {label:"160分",price:36000,units:2,first:"初回ゆっくり",repeat:"2回目以降おすすめ"},
+      {label:"180分",price:41000,units:2,repeat:"2回目以降おすすめ"},
+      {label:"240分",price:56000,units:2,repeat:"2回目以降おすすめ"},
+      {label:"360分",price:84000,units:3,repeat:"2回目以降おすすめ"},
       {label:"お泊り9時間",price:69000,units:2},
       {label:"テレフォン20分（電話）",price:7000,phone:true,units:0}
     ];
+    // コースの表示名: 指名の選択（初めて／2回目以降）に合わせて「おすすめ」を付ける
+    function courseLabel(o,repeat){ var tag=repeat?o.repeat:o.first; return o.label+(tag?'（'+tag+'）':''); }
     var AREAS=[
       {label:"渋谷〜池袋エリア",fee:1000},
       {label:"東京23区内",fee:2000},
@@ -3947,7 +3996,7 @@
     ];
     var NOMS=[
       {label:"初めての指名",rate:1000},
-      {label:"本指名（2回目以降）",rate:2000},
+      {label:"本指名（2回目以降）",rate:2000,repeat:true},
       {label:"指名なし／まだ未定",rate:0}
     ];
     // 有料オプション（お店＋シュンスケ限定）。shun:true＝本人だけの個人オプション
@@ -4312,9 +4361,9 @@
       c.innerHTML=
         '<div class="sbot-tool-t">料金の概算</div>'+
         '<div class="sbot-tool-sub">条件を選ぶと、目安の総額を出すよ。ホテル代とオプションは別だからね。</div>'+
-        '<div class="sbot-field"><label>コース</label><select id="sbot-c-course">'+opts(COURSES)+'</select></div>'+
-        '<div class="sbot-field"><label>エリア（交通費）</label><select id="sbot-c-area">'+opts(AREAS)+'</select></div>'+
         '<div class="sbot-field"><label>指名</label><select id="sbot-c-nom">'+opts(NOMS)+'</select></div>'+
+        '<div class="sbot-field"><label>コース</label><select id="sbot-c-course">'+opts(COURSES)+'</select><div class="sbot-field-hint" id="sbot-c-hint"></div></div>'+
+        '<div class="sbot-field"><label>エリア（交通費）</label><select id="sbot-c-area">'+opts(AREAS)+'</select></div>'+
         '<label class="sbot-check"><input type="checkbox" id="sbot-c-late">終了が23時を回りそう（深夜料金 +¥4,000〜）</label>'+
         '<div class="sbot-field"><label>有料オプション（複数選択OK）</label><div class="sbot-opts" id="sbot-c-opts">'+
           OPTIONS.map(function(o,i){ var head=(o.shun&&(i===0||!OPTIONS[i-1].shun))?'<div class="sbot-opt-head">シュンスケ限定オプション <span class="sbot-opt-headnote">（本人だけの特別メニュー）</span></div>':''; return head+'<label class="sbot-check"><input type="checkbox" data-i="'+i+'">'+o.label+'（'+yen(o.price)+'）'+(o.shun?'<span class="sbot-shun-tag">限定</span>':'')+'</label>'; }).join('')+
@@ -4335,9 +4384,22 @@
         [].forEach.call(optsBox.querySelectorAll('input'),function(el){el.disabled=ph;});
         optsBox.closest('.sbot-field').style.opacity=ph?'.4':'1';
       }
-      var defIdx=COURSES.findIndex(function(o){return o.label.indexOf('140分')===0;});
-      if(defIdx>=0) courseSel.value=String(defIdx);
-      courseSel.addEventListener('change',syncCalc);syncCalc();
+      // 指名に連動: 初めて→140分（初回スタンダード）/160分（初回ゆっくり）・初期選択140分、2回目以降→160分以上に「おすすめ」・初期選択160分
+      var nomSel=c.querySelector('#sbot-c-nom'), hintEl=c.querySelector('#sbot-c-hint'), userPickedCourse=false;
+      function relabelCourses(){
+        var rep=!!NOMS[+nomSel.value].repeat;
+        [].forEach.call(courseSel.options,function(opt,i){ opt.textContent=courseLabel(COURSES[i],rep); });
+        if(!userPickedCourse){ // 自分でコースを選び直した後は動かさない
+          var want=rep?'160分':'140分';
+          var idx=COURSES.findIndex(function(o){return o.label===want;});
+          if(idx>=0) courseSel.value=String(idx);
+        }
+        hintEl.textContent=rep?'2回目以降なら、160分以上がおすすめだよ。':'初めてなら、140分（スタンダード）か160分（ゆっくり）がおすすめだよ。';
+        syncCalc();
+      }
+      courseSel.addEventListener('change',function(){userPickedCourse=true;syncCalc();});
+      nomSel.addEventListener('change',relabelCourses);
+      relabelCourses();
       scrollDown();renderChips();
     }
 

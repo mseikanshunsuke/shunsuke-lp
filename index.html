@@ -23,13 +23,13 @@
   <meta property="og:description" content="口コミ281件のうち139件が声に言及。「声感魔術師」と呼ばれる声を、39本のサンプルで確かめられます。ツイキャス定期配信中。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mseikan-shunsuke.com/">
-  <meta property="og:image" content="https://mseikan-shunsuke.com/og-image.jpg">
-  <meta property="og:image:width" content="1080">
-  <meta property="og:image:height" content="1080">
+  <meta property="og:image" content="https://mseikan-shunsuke.com/og-image-shadow.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="声サンプル39本｜イケボ・言葉責めのセラピスト シュンスケ">
   <meta name="twitter:description" content="口コミ281件のうち139件が声に言及。「声感魔術師」と呼ばれる声を、39本のサンプルで確かめられます。ツイキャス定期配信中。">
-  <meta name="twitter:image" content="https://mseikan-shunsuke.com/og-image.jpg">
+  <meta name="twitter:image" content="https://mseikan-shunsuke.com/og-image-shadow.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
@@ -2726,7 +2726,7 @@
       <div class="divider"></div>
       <div class="profile-grid">
         <div class="profile-photo-wrap">
-          <img src="shunsuke_profile.webp" alt="SHUNSUKE シュンスケ 東京M性感 正規キャスト" class="profile-photo" width="800" height="800" loading="lazy">
+          <img src="shunsuke_profile_shadow.webp" alt="SHUNSUKE シュンスケ 東京M性感 正規キャスト（顔は影で隠したシルエット）" class="profile-photo" width="800" height="800" loading="lazy">
         </div>
         <div class="profile-left">
           <div class="profile-rank-badge">☕ 正規キャスト認定</div>
@@ -3212,7 +3212,7 @@
         "@id": "https://tokyo-m-seikan.com/honten/#organization"
       },
       "url": "https://mseikan-shunsuke.com/",
-      "image": "https://mseikan-shunsuke.com/shunsuke_profile.webp",
+      "image": "https://mseikan-shunsuke.com/shunsuke_profile_shadow.webp",
       "description": "シュンスケ（SHUNSUKE）は、女性向け性感技術特化店「東京M性感」所属の正規キャスト。お客様から「声感魔術師」と呼ばれており、所属店舗に寄せられた口コミ281件のうち139件（49.5%）が声について言及している。得意はイケボ言葉責めと開発。公式ページで声サンプル39本と約4分のカウンセリング体験デモを公開し、ツイキャスでも定期配信しており、2ヶ月間の毎日配信とイケボ言葉責めの200日連続投稿は、いずれも所属店舗の店内記録。4年目（2023年4月デビュー）・プレイ実績1,500件以上、2024年は全国約1,500名中の人気ランキング第15位（店舗グループ集計）。完全顔出しNG・守秘義務厳守。",
       "sameAs": [
         "https://twitcasting.tv/shunsuke_subacc",
@@ -3901,8 +3901,9 @@
        ※ 本LPには一切手を入れず、この1ブロックを追加するだけ
        ※ 自己完結（クラスは sbot- 接頭辞・色/フォントは内包）
        ============================================================ -->
+  <script>setTimeout(function(){var t=document.getElementById('sbot-teaser');if(t)t.classList.remove('sbot-wait');},6000);</script>
   <div class="sbot" id="sbot">
-    <div class="sbot-teaser" id="sbot-teaser">
+    <div class="sbot-teaser sbot-wait" id="sbot-teaser">
       <span class="sbot-x" onclick="document.getElementById('sbot-teaser').classList.add('sbot-hidden')">×</span>
       はじめまして。<span class="sbot-em">シュンスケ</span>だよ。料金の<span class="sbot-em">概算シミュ</span>もできる。気になること聞いてください。
     </div>
@@ -3948,7 +3949,8 @@
     .sbot-teaser{position:absolute;right:0;bottom:74px;width:238px;background:#111827;border:1px solid rgba(184,150,62,.25);border-radius:8px 8px 2px 8px;box-shadow:0 14px 40px rgba(0,0,0,.5);padding:15px 17px;font-size:.9rem;color:#F0EDE6;line-height:1.7;animation:sbotpop .4s ease both;}
     .sbot-teaser .sbot-em{color:#E8D5A0;}
     .sbot-teaser .sbot-x{position:absolute;top:7px;right:10px;color:#6B6B6B;cursor:pointer;font-size:.95rem;line-height:1;}
-    .sbot.sbot-open .sbot-teaser,.sbot-teaser.sbot-hidden{display:none;}
+    .sbot.sbot-open .sbot-teaser,.sbot-teaser.sbot-hidden,.sbot-teaser.sbot-wait{display:none;}
+    /* 吹き出しは開いてすぐではなく少し遅れて出す（冒頭の写真に重ねない・2026-10-04 Shinyaさん指示） */
     @keyframes sbotpop{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
     .sbot-panel{position:absolute;right:0;bottom:80px;width:378px;max-width:calc(100vw - 34px);height:620px;max-height:calc(100vh - 96px);background:#0A0F1E;border:1px solid rgba(184,150,62,.25);border-radius:10px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.6);}
     .sbot.sbot-open .sbot-panel{display:flex;animation:sbotpop .3s ease both;}

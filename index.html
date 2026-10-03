@@ -16,7 +16,7 @@
   <meta name="keywords" content="女風 イケボ,イケボ セラピスト,女性用風俗 声,言葉責め 声,声フェチ 女風,ボイスサンプル セラピスト,ツイキャス セラピスト,SHUNSUKE,シュンスケ,東京M性感,女性用風俗,女風,M性感,東京,守秘義務,顔出しなし,開発,正規キャスト">
   <meta name="rating" content="adult">
   <link rel="canonical" href="https://mseikan-shunsuke.com/">
-  <link rel="preload" as="image" href="shunsuke_profile.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="shunsuke_shadow.webp" fetchpriority="high">
   
   <!-- OGP -->
   <meta property="og:title" content="声サンプル39本｜イケボ・言葉責めのセラピスト シュンスケ">
@@ -1249,6 +1249,154 @@
       color: var(--grey-light);
     }
 
+    /* ─── INTRO（全画面の写真＋スクロールの合図） ─── */
+    #intro {
+      position: relative;
+      height: 100vh;
+      height: 100svh;
+      min-height: 520px;
+      padding: 0;
+      overflow: hidden;
+      background: #050407;
+    }
+    .intro-visual {
+      position: absolute;
+      top: 122px; /* 固定ナビ＋投票の帯の下から写真を出す */
+      left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: center;
+    }
+    .intro-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 64% 0%; /* 縦長の画面では本人を中央寄りに */
+      -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+              mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+      will-change: opacity, transform;
+    }
+    @media (min-aspect-ratio: 1/1) {
+      /* 横長の画面（パソコン）では写真を切らずに高さいっぱいで出し、左右は闇に溶かす */
+      .intro-img {
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+        -webkit-mask-composite: source-in;
+                mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%), linear-gradient(to bottom, #000 70%, transparent 100%);
+                mask-composite: intersect;
+      }
+    }
+    .intro-mark {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px));
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .intro-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 4.2vw, 2.3rem);
+      font-weight: 400;
+      letter-spacing: 0.55em;
+      padding-left: 0.55em; /* 字間ぶん中央を補正 */
+      color: var(--gold-light);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.85);
+    }
+    .intro-scroll {
+      position: absolute;
+      left: 50%;
+      bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+      padding: 0.4rem 1.2rem;
+      text-decoration: none;
+      color: var(--gold-light);
+    }
+    .intro-scroll-text {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      padding-left: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      opacity: 0.85;
+    }
+    .intro-scroll-chevron {
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-right: 1.5px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
+      transform: rotate(45deg);
+      margin-top: -6px;
+      animation: introChevron 1.8s ease-in-out infinite;
+    }
+    .intro-scroll-chevron + .intro-scroll-chevron { animation-delay: 0.2s; }
+    @keyframes introChevron {
+      0%   { opacity: 0;   transform: translateY(-4px) rotate(45deg); }
+      50%  { opacity: 1; }
+      100% { opacity: 0;   transform: translateY(6px) rotate(45deg); }
+    }
+    @media (max-width: 768px) {
+      .intro-visual { top: 110px; }
+    }
+    @media (max-aspect-ratio: 1/1) {
+      /* 縦長の画面（スマホ）では、輪と本人が収まる大きさで上寄せに出す */
+      .intro-visual { display: block; }
+      .intro-mark { bottom: calc(14.5rem + env(safe-area-inset-bottom, 0px)); } /* 右下のチャットの吹き出しと重ならない高さ */
+      .intro-img {
+        width: 170%;
+        max-width: none;
+        height: auto;
+        margin-left: -55%; /* 本人（画像の横62%の位置）を画面の中央へ */
+        object-fit: fill;
+        -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+                mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+      }
+    }
+
+    /* ─── HERO の紹介動画 ─── */
+    .hero-movie-wrap { max-width: 560px; }
+    .hero-movie-label {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .hero-movie-label span { color: var(--grey-light); letter-spacing: 0.08em; margin-left: 0.6em; }
+    .hero-movie {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .hero-movie-wrap { max-width: 100%; }
+    }
+
+    /* スクロールで文字がふわっと出る（JSが動いた時だけ。JSなしでも全文は最初から表示） */
+    .js-reveal .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .js-reveal .reveal-item.is-shown { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .intro-scroll-chevron { animation: none; opacity: 1; }
+      .js-reveal .reveal-item { opacity: 1; transform: none; transition: none; }
+    }
+
     /* ─── VOICE SAMPLES ─── */
     #voice { background: var(--navy-mid); }
     .voice-grid {
@@ -1670,7 +1818,7 @@
     <button class="nav-menu-btn" id="navMenuBtn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="navDrawer">
       <span></span><span></span><span></span>
     </button>
-    <a href="#hero" class="nav-logo">SHUNSUKE</a>
+    <a href="#intro" class="nav-logo">SHUNSUKE</a>
     <ul class="nav-links">
       <li><a href="#voice">声サンプル</a></li>
       <li><a href="#reasons">選ばれる理由</a></li>
@@ -1729,11 +1877,26 @@
   <!-- いいね集計（GA4の voice_like − voice_unlike を tools/likes-sync.mjs が書き込む） -->
   <!-- LIKES:START --><script type="application/json" id="voiceLikeCounts">{"kawaii":9,"No.008":8,"otsukare":7,"No.086":7,"softm2":7,"intro":5,"No.021":5,"No.009":4,"No.010":4,"No.018":4,"No.023":4,"No.069":4,"gohoubi":4,"softm1":4,"No.011":3,"No.014":3,"No.016":3,"No.017":3,"No.022":2,"No.029":3,"No.049":3,"No.067":3,"gentle":2,"No.013":2,"No.015":2,"No.019":2,"No.025":2,"No.030":2,"No.042":2,"No.044":2,"No.048":2,"No.057":2,"No.060":2,"No.063":2,"No.065":2,"No.077":2,"No.080":2,"No.035":1}</script><!-- LIKES:END -->
 
+  <!-- INTRO（開いて最初に見える全画面の写真。文字はスクロールした先の #hero から） -->
+  <section id="intro" aria-label="SHUNSUKE">
+    <div class="intro-visual">
+      <img src="shunsuke_shadow.webp" alt="SHUNSUKE（顔は影で隠したシルエット）" class="intro-img" width="1080" height="880" fetchpriority="high">
+    </div>
+    <div class="intro-mark">
+      <span class="intro-name">SHUNSUKE</span>
+    </div>
+    <a href="#hero" class="intro-scroll" aria-label="下へスクロール">
+      <span class="intro-scroll-text">Scroll</span>
+      <span class="intro-scroll-chevron" aria-hidden="true"></span>
+      <span class="intro-scroll-chevron" aria-hidden="true"></span>
+    </a>
+  </section>
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-grid section-inner">
-      <div class="hero-left">
+      <div class="hero-left reveal-item">
         <p class="eyebrow">Tokyo M-Seikan · Official</p>
         <h1><em>声</em>で、<br>選ばれて<br>きました。</h1>
         <p class="hero-subtitle">イケボ・言葉責め ｜ 東京M性感 正規キャスト · SHUNSUKE</p>
@@ -1758,9 +1921,12 @@
           <a href="#faq" class="btn-secondary">よくある質問</a>
         </div>
       </div>
-      <div class="hero-right">
-        <div class="hero-photo-wrap">
-          <img src="shunsuke_profile.webp" alt="SHUNSUKE 東京M性感 正規キャスト" class="hero-photo" width="800" height="800" fetchpriority="high">
+      <div class="hero-right reveal-item">
+        <div class="hero-photo-wrap hero-movie-wrap">
+          <p class="hero-movie-label">紹介動画 <span>70秒・音声あり</span></p>
+          <video class="hero-movie" id="heroMovie" controls playsinline preload="none" poster="shunsuke_intro_poster.jpg" width="1280" height="720">
+            <source src="shunsuke_intro.mp4" type="video/mp4">
+          </video>
           <div class="hero-photo-stats">
             <div class="hero-photo-stat"><span class="hero-photo-num">1,500+</span><span class="hero-photo-label">実績件数</span></div>
             <div class="hero-photo-stat"><span class="hero-photo-num">281</span><span class="hero-photo-label">口コミ件数</span></div>
@@ -1768,10 +1934,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="scroll-line">
-      <span class="scroll-text">Scroll</span>
-      <div class="scroll-bar"></div>
     </div>
   </section>
 
@@ -2924,6 +3086,45 @@
     document.querySelectorAll('.nav-schedule-btn').forEach(function(btn){
       btn.addEventListener('click', function(){ track('menu_jump', { destination: '#shift' }); });
     });
+
+    // ===== 冒頭の写真 → スクロールで文字が出る =====
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal-item');
+      if ('IntersectionObserver' in window && !reduce && items.length) {
+        document.documentElement.classList.add('js-reveal');
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if (e.isIntersecting) { e.target.classList.add('is-shown'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(function(el){ io.observe(el); });
+      }
+      // 写真はスクロールに合わせて少しずつ暗く・奥へ
+      var img = document.querySelector('.intro-img');
+      var intro = document.getElementById('intro');
+      if (img && intro && !reduce) {
+        var ticking = false;
+        window.addEventListener('scroll', function(){
+          if (ticking) return; ticking = true;
+          requestAnimationFrame(function(){
+            var h = intro.offsetHeight || 1;
+            var p = Math.min(Math.max(window.scrollY / h, 0), 1);
+            img.style.opacity = String(1 - p * 0.7);
+            img.style.transform = 'translateY(' + (p * 40) + 'px) scale(' + (1 + p * 0.04) + ')';
+            ticking = false;
+          });
+        }, { passive: true });
+      }
+    })();
+
+    // 紹介動画の再生（1回だけ）
+    (function(){
+      var mv = document.getElementById('heroMovie');
+      if (!mv) return;
+      mv.addEventListener('play', function(){ track('video_play', { video: 'intro_v2' }); }, { once: true });
+      mv.addEventListener('ended', function(){ track('video_complete', { video: 'intro_v2' }); }, { once: true });
+    })();
 
     // 声サンプルの再生（各audioが再生開始された時、1回だけ）
     // サンプル本数が増減しても壊れないよう、順番ではなくdata属性でラベルを取る

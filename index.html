@@ -1923,7 +1923,7 @@
       </div>
       <div class="hero-right reveal-item">
         <div class="hero-photo-wrap hero-movie-wrap">
-          <p class="hero-movie-label">紹介動画 <span>70秒・音声あり</span></p>
+          <p class="hero-movie-label">紹介動画 <span>75秒・音声あり</span></p>
           <video class="hero-movie" id="heroMovie" controls playsinline preload="none" poster="shunsuke_intro_poster.jpg" width="1280" height="720">
             <source src="shunsuke_intro.mp4" type="video/mp4">
           </video>
@@ -3122,8 +3122,8 @@
     (function(){
       var mv = document.getElementById('heroMovie');
       if (!mv) return;
-      mv.addEventListener('play', function(){ track('video_play', { video: 'intro_v2' }); }, { once: true });
-      mv.addEventListener('ended', function(){ track('video_complete', { video: 'intro_v2' }); }, { once: true });
+      mv.addEventListener('play', function(){ track('video_play', { video: 'intro_v3' }); }, { once: true });
+      mv.addEventListener('ended', function(){ track('video_complete', { video: 'intro_v3' }); }, { once: true });
     })();
 
     // 声サンプルの再生（各audioが再生開始された時、1回だけ）

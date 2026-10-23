@@ -6,6 +6,7 @@
 // 使い方: node tools/shift-sync.mjs      （リポジトリのルートで実行）
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { parseSchedule } from './shift-parser.mjs';
 
 const SOURCE_URL = 'https://tokyo-m-seikan.com/s/honten/therapist/48/';
 const TARGET = 'index.html';
@@ -14,12 +15,6 @@ const MIN_ROWS = 5; // これ未満しか取れなかったら店側の構造変
 function jstNow() {
   return new Date(Date.now() + 9 * 3600 * 1000); // UTCメソッドで読むためのJSTシフト
 }
-
-function fmtDate(d) {
-  return `${d.getUTCMonth() + 1}月${d.getUTCDate()}日`;
-}
-
-const DOW = ['日', '月', '火', '水', '木', '金', '土'];
 
 function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -34,63 +29,17 @@ if (!res.ok) {
 }
 const html = await res.text();
 
-const ulMatch = html.match(/<ul id="pfschedule">([\s\S]*?)<\/ul>/);
-if (!ulMatch) {
-  console.error('出勤表（#pfschedule）が見つからない。店ページの構造が変わった可能性。');
-  process.exit(1);
-}
-
-// <li class="...">日付</li> と <li>本文</li> の交互構造を順に読む
-const liRe = /<li[^>]*>([\s\S]*?)<\/li>/g;
-const cells = [];
-let m;
-while ((m = liRe.exec(ulMatch[1])) !== null) {
-  cells.push(
-    m[1]
-      .replace(/<a[\s\S]*?<\/a>/g, '') // 「空き状況」リンクを除去
-      .replace(/<[^>]+>/g, '')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/\s+/g, ' ')
-      .trim()
-  );
-}
-
-const rows = [];
-for (let i = 0; i + 1 < cells.length; i += 2) {
-  const rawDate = cells[i];
-  const rawBody = cells[i + 1];
-
-  let dateLabel; let dowLabel;
-  if (rawDate === '本日') {
-    const now = jstNow();
-    dateLabel = fmtDate(now);
-    dowLabel = DOW[now.getUTCDay()];
-  } else {
-    const dm = rawDate.match(/^(\d{1,2})月(\d{1,2})日\((.)\)$/);
-    if (!dm) {
-      console.error(`日付の形式が想定外: "${rawDate}"`);
-      process.exit(1);
-    }
-    dateLabel = `${Number(dm[1])}月${Number(dm[2])}日`;
-    dowLabel = dm[3];
-  }
-
-  if (rawBody === '-' || rawBody === '') {
-    rows.push(
-      `        <div class="shift-row is-off"><span class="shift-date">${dateLabel}<span class="shift-dow">(${dowLabel})</span></span><span class="shift-time">お休み</span></div>`
-    );
-  } else {
-    let body = rawBody;
-    let tag = '';
-    if (body.includes('DM予約のみ')) {
-      body = body.replace('DM予約のみ', '').trim();
-      tag = '<span class="shift-tag">DM予約のみ</span>';
-    }
-    rows.push(
-      `        <div class="shift-row"><span class="shift-date">${dateLabel}<span class="shift-dow">(${dowLabel})</span></span><span class="shift-time">${esc(body)}${tag}</span></div>`
-    );
-  }
-}
+// 「本日」の表示ではなく data-date の実日付を優先する。
+// 同日の重複は統合し、異なる予定が衝突したら更新前に中断する。
+let schedule;
+try { schedule = parseSchedule(html); }
+catch (err) { console.error(err.message); process.exit(1); }
+const rows = schedule.map(({key, dateLabel, dowLabel, body: rawBody}) => {
+  const off = rawBody === '-' || rawBody === '';
+  const body = off ? 'お休み' : rawBody.replace('DM予約のみ', '').trim();
+  const tag = !off && rawBody.includes('DM予約のみ') ? '<span class="shift-tag">DM予約のみ</span>' : '';
+  return `        <div class="shift-row${off ? ' is-off' : ''}" data-shift-date="${key}"><span class="shift-date">${dateLabel}<span class="shift-dow">(${dowLabel})</span></span><span class="shift-time">${esc(body)}${tag}</span></div>`;
+});
 
 if (rows.length < MIN_ROWS) {
   console.error(`取得できた日数が少なすぎる（${rows.length}件）。中断。`);

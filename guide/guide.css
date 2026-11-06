@@ -1,9 +1,9 @@
 /* SHUNSUKE ガイド共通スタイル — LP（index.html）のデザイントークンを踏襲 */
 :root{
-  --black:#0D0D0D; --navy:#0A0F1E; --navy-mid:#111827;
-  --gold:#B8963E; --gold-light:#E8D5A0; --gold-dim:#7A6128;
-  --offwhite:#F0EDE6; --grey:#6B6B6B; --grey-light:#A0A0A0;
-  --border:rgba(184,150,62,0.25);
+  --black:#f5fbff; --navy:#eff7fd; --navy-mid:#e2f1fb;
+  --gold:#528fbb; --gold-light:#28577c; --gold-dim:#6797b9;
+  --offwhite:#183b5e; --grey:#5a748c; --grey-light:#536f89;
+  --border:rgba(82,143,187,0.25);
   --font-display:'Cormorant Garamond','Noto Serif JP',serif;
   --font-body:'Noto Serif JP',serif;
   --font-ui:'Noto Sans JP',sans-serif;
@@ -22,7 +22,7 @@ img{max-width:100%;height:auto}
 .g-nav{
   display:flex; align-items:center; justify-content:space-between;
   padding:1rem 1.4rem; border-bottom:1px solid var(--border);
-  position:sticky; top:0; background:rgba(10,15,30,0.92);
+  position:sticky; top:0; background:rgba(205,230,247,0.92);
   backdrop-filter:blur(6px); z-index:20;
 }
 .g-nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.15em;color:var(--offwhite);text-decoration:none}
@@ -30,7 +30,7 @@ img{max-width:100%;height:auto}
 .g-nav-cta:hover{background:var(--gold-light)}
 /* menu bar（ナビの2段目・トップページと同じ項目・2026-10-17） */
 .g-nav{flex-wrap:wrap;padding-bottom:0}
-.g-nav > .g-menubar{flex:0 0 100%;min-width:0;max-width:100%;margin-top:0.8rem;border-top:1px solid rgba(184,150,62,0.14)}
+.g-nav > .g-menubar{flex:0 0 100%;min-width:0;max-width:100%;margin-top:0.8rem;border-top:1px solid rgba(82,143,187,0.14)}
 .g-menubar > ul{display:flex;gap:1.5rem;list-style:none;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-right:1.2rem;-webkit-mask-image:linear-gradient(to right,#000 88%,transparent 100%);mask-image:linear-gradient(to right,#000 88%,transparent 100%)}
 .g-menubar > ul::-webkit-scrollbar{display:none}
 .g-menubar a{display:block;padding:0.6rem 0 0.55rem;font-family:var(--font-ui);font-size:0.72rem;letter-spacing:0.06em;color:var(--grey-light);text-decoration:none}
@@ -48,7 +48,7 @@ html{scroll-padding-top:7.5rem}
 .g-breadcrumb > ol{display:flex;flex-wrap:wrap;gap:0.3rem 0.5rem;list-style:none;margin:0}
 .g-breadcrumb li{margin:0}
 /* ヘッダーの真下に置く帯（2026-10-17） */
-.g-breadcrumb{margin-bottom:0;padding:0.5rem 1.4rem;border-bottom:1px solid rgba(184,150,62,0.14);background:rgba(10,15,30,0.6)}
+.g-breadcrumb{margin-bottom:0;padding:0.5rem 1.4rem;border-bottom:1px solid rgba(82,143,187,0.14);background:rgba(205,230,247,0.6)}
 .g-breadcrumb li + li::before{content:"›";margin-right:0.5rem;color:var(--gold-dim)}
 .g-breadcrumb a{border-bottom:1px solid rgba(160,160,160,0.35)}
 .g-eyebrow{font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.28em;color:var(--gold);text-transform:uppercase;margin-bottom:0.9rem}
@@ -86,7 +86,7 @@ strong{color:var(--gold-light);font-weight:500}
 .g-btn-primary{background:var(--gold);color:var(--navy)}
 .g-btn-primary:hover{background:var(--gold-light)}
 .g-btn-outline{border:1px solid var(--border);color:var(--offwhite)}
-.g-btn-outline:hover{background:rgba(184,150,62,0.1);border-color:var(--gold)}
+.g-btn-outline:hover{background:rgba(82,143,187,0.1);border-color:var(--gold)}
 
 /* related */
 .g-related{margin-top:2.6rem}

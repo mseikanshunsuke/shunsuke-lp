@@ -2097,7 +2097,7 @@
     #for-you .section-lead + .targets-grid { margin-top: 0; }
   </style>
 <link as="image" fetchpriority="high" href="/assets/design-blue-20261107/shunsuke.png" rel="preload"/><link href="/assets/design-blue-20261107/fonts.css" rel="stylesheet"/><link href="/assets/design-blue-20261107/site-theme.css" rel="stylesheet"/><link href="/assets/design-blue-20261107/finishing.css" rel="stylesheet"/><link href="/assets/design-blue-20261107/refinements.css?v=20261111-home" rel="stylesheet"/></head>
-<body class="u-home">
+<body class="u-home" data-source-page="home">
 <!-- NAV -->
 <header class="site-nav">
 <button aria-controls="navDrawer" aria-expanded="false" aria-label="メニューを開く" class="nav-menu-btn" id="navMenuBtn" type="button">
@@ -2105,7 +2105,7 @@
 </button>
 <a class="nav-logo" href="#hero">SHUNSUKE</a>
 <div class="nav-actions">
-<a class="nav-dm-btn" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">
+<a class="nav-dm-btn" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="header" data-cta-id="nav-dm">
 <svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
       DMご予約はこちら
     </a>
@@ -2165,7 +2165,7 @@
 <li><a href="#contact">ご予約</a></li>
 </ul>
 <div class="nav-drawer-cta">
-<a class="nav-drawer-dm" href="#" id="navDrawerDm">DMご予約はこちら</a>
+<a class="nav-drawer-dm" href="#" id="navDrawerDm" data-cta-location="header" data-cta-id="drawer-dm">DMご予約はこちら</a>
 <a class="nav-drawer-official" href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" rel="noopener" target="_blank">公式ページで空き状況を見る</a>
 </div>
 </aside>
@@ -2184,7 +2184,7 @@
 <h1 class="h1-first">はじめての一歩を、<br/>あなたの<em>ペースで。</em></h1>
 <p class="r-hero-lead">ご自宅で、ホテルと同じプレイを楽しめます。<br/><a href="#home-visit">自宅に呼ぶメリットとQ&amp;Aを見る</a></p><p class="hero-subtitle">東京M性感 正規キャスト · SHUNSUKE<br/>初めての方向け「ゆるふわコース」</p>
 <div>
-<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">DM・ご予約はこちら</a>
+<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="hero">DM・ご予約はこちら</a>
 <a class="btn-secondary" href="#first">初めての方へ</a>
 </div>
 </div>
@@ -2275,7 +2275,7 @@
 </div>
 </details>
 <p class="home-visit-start">最初のご相談は、エリアだけで大丈夫です。</p>
-<p class="home-visit-action"><a class="btn-primary" href="#contact">自宅への訪問を相談する</a></p>
+<p class="home-visit-action"><a class="btn-primary" data-cta-location="home-visit" data-cta-action="navigate" href="#contact">自宅への訪問を相談する</a></p>
 </div>
 </section>
 <!-- ▼▼▼ 実績（お店からのコメントと同じ構成・2026-10-17） ▼▼▼ -->
@@ -2362,7 +2362,7 @@
 </div>
 <div class="fear-close">
 <p class="fear-close-text">予約のDMは、「初めてです」「ゆるふわで」と書くだけで通じます。<br/>不安なことがあれば、候補日と一緒に送ってください。</p>
-<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">DMで予約を相談する</a>
+<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="first" data-cta-id="first-dm">DMで予約を相談する</a>
 <a class="btn-secondary" href="guide/josefu-hajimete.html">予約から当日までの流れを読む</a>
 </div>
 </div>
@@ -2708,7 +2708,7 @@
 </div>
 <p class="experience-source"><a href="https://tokyo-m-seikan.com/honten/review/therapist/48">店舗でシュンスケの口コミを読む</a></p>
 <p style="text-align:center; margin-top:3rem;">
-<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">DMで予約を相談する</a>
+<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="for-you" data-cta-id="for-you-dm">DMで予約を相談する</a>
 </p>
 </div>
 </section>
@@ -2751,7 +2751,7 @@
 </div>
 </div>
 <p style="text-align:center; margin-top:3rem;">
-<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">まずはDMで相談する</a>
+<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="guide">まずはDMで相談する</a>
 </p>
 <!-- 詳しく知る（コラム／内部リンク） -->
 <nav aria-label="関連ガイド" style="max-width:640px; margin:3.5rem auto 0; border-top:1px solid var(--border); padding-top:2rem;">
@@ -3197,7 +3197,7 @@
 </div>
 <p class="shift-note">お休みの日や掲載のない日でも、希望日があればDMで相談できます。予定が合わない時期は、テレフォンコースという選択肢もあります。</p>
 <div class="shift-actions">
-<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;">DMで予約の相談をする</a>
+<a class="btn-primary" href="#" onclick="document.getElementById('dmModal').classList.add('active'); return false;" data-cta-location="shift">DMで予約の相談をする</a>
 <a class="btn-secondary" href="https://tokyo-m-seikan.com/s/honten/therapist/48/#schedule" rel="noopener" target="_blank">公式ページで空き状況を見る</a>
 </div>
 </div>
@@ -3213,7 +3213,7 @@
         守秘義務厳守。個人情報は一切外部に漏れません。
       </p>
 <div class="contact-methods">
-<a class="contact-method" href="https://x.com/Shunver7" target="_blank">
+<a class="contact-method" data-cta-location="contact" data-method="x_dm" href="https://x.com/Shunver7" target="_blank">
 <span class="contact-method-icon"><svg aria-hidden="true" fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></span>
 <span class="contact-method-label">
             X（旧Twitter）DM
@@ -3221,7 +3221,7 @@
 </span>
 <span style="color:var(--gold); font-size:0.8rem;">→</span>
 </a>
-<a class="contact-method" href="https://www.instagram.com/shunsuke_mtokyo" target="_blank">
+<a class="contact-method" data-cta-location="contact" data-method="instagram_dm" href="https://www.instagram.com/shunsuke_mtokyo" target="_blank">
 <span class="contact-method-icon"><svg aria-hidden="true" fill="currentColor" height="20" viewbox="0 0 24 24" width="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></span>
 <span class="contact-method-label">
             Instagram DM
@@ -3229,7 +3229,7 @@
 </span>
 <span style="color:var(--gold); font-size:0.8rem;">→</span>
 </a>
-<a class="contact-method" href="https://tokyo-m-seikan.com/honten/therapist/48/" target="_blank">
+<a class="contact-method" data-cta-location="contact" data-method="store" href="https://tokyo-m-seikan.com/honten/therapist/48/" target="_blank">
 <span class="contact-method-icon"><svg aria-hidden="true" fill="currentColor" height="22" viewbox="0 0 24 24" width="22"><path d="M22 7.5c-1.6-.6-3.6-.9-5.4-.5-1.3.3-2.4.9-3.1 1.5-.4.3-.6.5-.7.6h-1.6c-.1-.1-.3-.3-.7-.6-.7-.6-1.8-1.2-3.1-1.5C3.6 6.6 1.6 6.9 0 7.5c.2 1.4.3 3.6 1.2 5.5.5 1.1 1.3 2.1 2.6 2.7 1 .5 2.2.7 3.5.4 1.4-.3 2.4-1 3.1-1.8.4-.5.7-1 .9-1.4h1.4c.2.4.5.9.9 1.4.7.8 1.7 1.5 3.1 1.8 1.3.3 2.5.1 3.5-.4 1.3-.6 2.1-1.6 2.6-2.7.9-1.9 1-4.1 1.2-5.5zM7 13.2c-1.4.3-2.7-.5-3.1-1.8-.4-1.3.4-2.6 1.7-2.9 1.4-.3 2.7.5 3.1 1.8.4 1.3-.4 2.6-1.7 2.9zm10 0c-1.3-.3-2.1-1.6-1.7-2.9.4-1.3 1.7-2.1 3.1-1.8 1.3.3 2.1 1.6 1.7 2.9-.4 1.3-1.7 2.1-3.1 1.8z"></path></svg></span>
 <span class="contact-method-label">
             お店チャット・電話
@@ -3273,7 +3273,7 @@
 <button aria-label="予約案内を閉じる" class="dm-modal-close" onclick="document.getElementById('dmModal').classList.remove('active')">✕</button>
 <div class="dm-modal-title" id="dmTitle">まずはDMへ</div>
 <div class="dm-modal-sub">希望の日にちがあれば、添えて送ってください。ご予約前の不安も、あわせてお答えします。</div>
-<a class="dm-modal-btn" href="https://x.com/Shunver7" target="_blank">
+<a class="dm-modal-btn" data-cta-location="dialog" data-method="x_dm" href="https://x.com/Shunver7" target="_blank">
 <span class="dm-modal-btn-icon"><svg aria-hidden="true" fill="currentColor" height="21" viewbox="0 0 24 24" width="21"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></span>
 <span class="dm-modal-btn-label">
           X（旧Twitter）でDM
@@ -3281,7 +3281,7 @@
 </span>
 <span style="color:var(--gold);">→</span>
 </a>
-<a class="dm-modal-btn" href="https://www.instagram.com/shunsuke_mtokyo" target="_blank">
+<a class="dm-modal-btn" data-cta-location="dialog" data-method="instagram_dm" href="https://www.instagram.com/shunsuke_mtokyo" target="_blank">
 <span class="dm-modal-btn-icon"><svg aria-hidden="true" fill="currentColor" height="21" viewbox="0 0 24 24" width="21"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></span>
 <span class="dm-modal-btn-label">
           InstagramでDM
@@ -3315,7 +3315,7 @@
       links.forEach(function(a){
         var t = document.querySelector(a.hash);
         if (t) map[a.hash.slice(1)] = a;
-        a.addEventListener('click', function(){ track('menubar_jump', { destination: a.hash }); });
+        a.addEventListener('click', function(){ track('menubar_jump', { destination: a.hash, cta_location: 'header', cta_origin: 'header', cta_id: 'menubar-' + a.hash.slice(1), source_page: 'home', measurement_version: '2026-11-11-m2' }); });
       });
       var current = null;
       function setCurrent(a){
@@ -3378,7 +3378,7 @@
               if (history.pushState) history.pushState(null, '', a.hash);
             }, 0);
           }
-          track('menu_jump', { destination: a.hash });
+          track('menu_jump', { destination: a.hash, cta_location: 'header', cta_origin: 'header', cta_id: 'drawer-' + a.hash.slice(1), source_page: 'home', measurement_version: '2026-11-11-m2' });
         }
       });
       // ドロワー内のDMボタンはモーダルを開く
@@ -3386,7 +3386,7 @@
       if (dm) dm.addEventListener('click', function(e){
         e.preventDefault();
         document.getElementById('dmModal').classList.add('active');
-        track('dm_open', { source: 'drawer' });
+        // dm_open is recorded by the shared measurement handler after opening.
       });
     })();
 
@@ -3461,36 +3461,11 @@
       if (typeof gtag === 'function') { gtag('event', name, params || {}); }
     }
 
-    // DM・ご予約ボタンのクリック（モーダルを開いた時）
-    document.querySelectorAll('a.btn-primary').forEach(function(btn){
-      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').indexOf('dmModal') !== -1) {
-        btn.addEventListener('click', function(){
-          track('dm_open', { source: btn.textContent.trim() });
-        });
-      }
-    });
-
-    // DMモーダル内・連絡先リンクのクリック（X / Instagram / お店）
-    document.querySelectorAll('.dm-modal-btn, .contact-method').forEach(function(link){
-      link.addEventListener('click', function(){
-        track('contact_click', { destination: link.href });
-        // GA4推奨CVイベント: 申込/連絡導線への実クリックをリードとして計上（GA4管理画面でキーイベント化推奨）
-        if (typeof gtag === 'function') {
-          gtag('event', 'generate_lead', { method: (link.dataset.method || 'dm'), link_url: link.href });
-        }
-      });
-    });
-
-    // ナビのDMご予約ボタン
-    document.querySelectorAll('.nav-dm-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        track('dm_open', { source: 'nav' });
-      });
-    });
+    // 相談先クリックとDM表示は finishing.js の共通処理で計測します。
 
     // ナビの出勤予定ボタン（ページ内の #shift へジャンプ。外部公式ページへの送客は schedule_click 側で計測）
     document.querySelectorAll('.nav-schedule-btn').forEach(function(btn){
-      btn.addEventListener('click', function(){ track('menu_jump', { destination: '#shift' }); });
+      btn.addEventListener('click', function(){ track('menu_jump', { destination: '#shift', cta_location: 'header', cta_origin: 'header', cta_id: 'nav-schedule', source_page: 'home', measurement_version: '2026-11-11-m2' }); });
     });
 
     // ===== 冒頭の写真 → スクロールで文字が出る =====
@@ -5196,16 +5171,7 @@
 
     function init(){
       logEl=el('sbot-log');chipsEl=el('sbot-chips');textEl=el('sbot-text');rootEl=el('sbot');
-      // チャット内の連絡ボタン(.sbot-ct-btn)クリック＝チャット由来CV（委譲リスナはlogEl限定・ページCTAは対象外）
-      logEl.addEventListener('click',function(e){
-        var a=e.target && e.target.closest ? e.target.closest('.sbot-ct-btn') : null;
-        if(!a||!logEl.contains(a))return;
-        var block=a.closest('.sbot-cta');
-        if(block && block.getAttribute('data-cta-nomeasure'))return;   // 安全相談CTAは計測しない
-        var href=a.getAttribute('href')||'';
-        var ch=href.indexOf('line.me')>-1?'line':(href.indexOf('instagram')>-1?'instagram':'x');
-        bt('chat_contact_click',{chat_channel:ch, chat_cta_trigger:((block&&block.getAttribute('data-cta-trigger'))||'answer')});
-      });
+      // 動的な相談リンクは finishing.js のイベント委譲で計測します。
       el('sbot-launch').addEventListener('click',function(){SBot.toggle();});
       el('sbot-send').addEventListener('click',send);
       textEl.addEventListener('keydown',function(e){

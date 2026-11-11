@@ -1,5 +1,76 @@
 /* Small, local usability refinements shared by the homepage and the guides. */
 (() => {
+  const measurementVersion='2026-11-11-m2';
+  const sourcePage=document.body.dataset.sourcePage;
+  const dialogOrigins=new WeakMap();
+  const send=(name,params)=>{
+    if(typeof gtag==='function')gtag('event',name,{
+      ...params,source_page:sourcePage,measurement_version:measurementVersion
+    });
+  };
+  const position=(element,location=element.dataset.ctaLocation)=>{
+    const params={cta_location:location,cta_origin:location};
+    if(element.dataset.ctaId)params.cta_id=element.dataset.ctaId;
+    return params;
+  };
+  const opened=(modal,button,extra={})=>{
+    const params=position(button);
+    dialogOrigins.set(modal,params);
+    send('dm_open',{...params,...extra});
+  };
+  const homeModal=document.getElementById('dmModal');
+  const homeOpener='a[onclick*="dmModal"],#navDrawerDm';
+  let homeWasOpen=false;
+  // Inline handlers open the homepage modal before the bubbling listener runs.
+  document.addEventListener('click',event=>{
+    if(event.target.closest(homeOpener))homeWasOpen=homeModal?.classList.contains('active');
+  },true);
+  if(homeModal){
+    const clearClosedOrigin=()=>{
+      if(!homeModal.classList.contains('active'))dialogOrigins.delete(homeModal);
+    };
+    new MutationObserver(clearClosedOrigin).observe(homeModal,{attributes:true,attributeFilter:['class']});
+    document.addEventListener('keydown',clearClosedOrigin);
+  }
+  // Delegation also covers guide choices parsed later and dynamically inserted chat cards.
+  document.addEventListener('click',event=>{
+    const target=event.target;
+    if(target.closest('[data-cta-nomeasure]'))return;
+    if(homeModal&&!homeModal.classList.contains('active'))dialogOrigins.delete(homeModal);
+    const opener=target.closest(homeOpener);
+    if(opener&&homeModal?.classList.contains('active')&&!homeWasOpen){
+      const source=opener.id==='navDrawerDm'?'drawer':opener.classList.contains('nav-dm-btn')?'nav':opener.textContent.trim();
+      opened(homeModal,opener,{source});
+    }
+    const navigation=target.closest('a[data-cta-action="navigate"]');
+    if(navigation){
+      send('cta_click',{...position(navigation),cta_action:'navigate',destination:navigation.href});
+    }
+    const link=target.closest('a.contact-method,a.dm-modal-btn,a.u-consult-choice,#sbot-log a.sbot-ct-btn');
+    if(!link)return;
+    const chat=link.matches('#sbot-log a.sbot-ct-btn');
+    const location=chat?'chat':link.dataset.ctaLocation;
+    const params=position(link,location);
+    if(location==='dialog'){
+      const modal=link.closest('#consultDialog,#dmModal');
+      if(!modal||(modal.id==='consultDialog'?!modal.open:!modal.classList.contains('active')))return;
+      const origin=dialogOrigins.get(modal);
+      // Never guess an entrance if the modal was opened by an untracked operation.
+      params.cta_origin=origin?.cta_origin||'dialog';
+      if(origin?.cta_id)params.cta_id=origin.cta_id;
+    }
+    const host=new URL(link.href).hostname;
+    const channel=host==='line.me'?'line':host==='www.instagram.com'?'instagram':'x';
+    params.method=link.dataset.method||(channel==='line'?'store':channel==='instagram'?'instagram_dm':'x_dm');
+    params.destination=link.href;
+    if(chat){
+      params.chat_channel=channel;
+      params.chat_cta_trigger=link.closest('.sbot-cta')?.dataset.ctaTrigger||'answer';
+    }
+    send('contact_click',params);
+    send('generate_lead',{...params,link_url:link.href});
+  });
+
   const reduce=matchMedia('(prefers-reduced-motion: reduce)');
   document.querySelectorAll('.voice-card').forEach(card=>{
     const audio=card.querySelector('audio');
@@ -70,7 +141,11 @@
     });
   });
   document.querySelectorAll('[data-consult-open]').forEach(button=>button.addEventListener('click',()=>{
-    returningFocus=button;dialog.showModal();bar.hidden=true;
+    if(dialog.open)return;
+    try{dialog.showModal()}catch{return}
+    if(!dialog.open)return;
+    returningFocus=button;bar.hidden=true;
+    opened(dialog,button);
   }));
   document.querySelector('.u-consult-close').addEventListener('click',()=>dialog.close());
   dialog.addEventListener('click',event=>{
@@ -78,5 +153,9 @@
     const rect=dialog.getBoundingClientRect();
     if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
   });
-  dialog.addEventListener('close',()=>{returningFocus?.focus({preventScroll:true});schedule()});
+  dialog.addEventListener('close',()=>{
+    if(dialog.open)return;
+    dialogOrigins.delete(dialog);
+    returningFocus?.focus({preventScroll:true});returningFocus=null;schedule();
+  });
 })();
